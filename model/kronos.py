@@ -348,8 +348,7 @@ def top_k_top_p_filtering(
         top_k = min(max(top_k, min_tokens_to_keep), logits.size(-1))  # Safety check
         # Remove all tokens with a probability less than the last token of the top-k
         indices_to_remove = logits < torch.topk(logits, top_k)[0][..., -1, None]
-        logits[indices_to_remove] = filter_value
-        return logits
+        return logits.masked_fill(indices_to_remove, filter_value)
 
     if top_p < 1.0:
         sorted_logits, sorted_indices = torch.sort(logits, descending=True)
@@ -366,8 +365,7 @@ def top_k_top_p_filtering(
 
         # scatter sorted tensors to original indexing
         indices_to_remove = sorted_indices_to_remove.scatter(1, sorted_indices, sorted_indices_to_remove)
-        logits[indices_to_remove] = filter_value
-        return logits
+        return logits.masked_fill(indices_to_remove, filter_value)
 
 
 def sample_from_logits(logits, temperature=1.0, top_k=None, top_p=None, sample_logits=True):
@@ -386,7 +384,22 @@ def sample_from_logits(logits, temperature=1.0, top_k=None, top_p=None, sample_l
     return x
 
 
-def auto_regressive_inference(tokenizer, model, x, x_stamp, y_stamp, max_context, pred_len, clip=5, T=1.0, top_k=0, top_p=0.99, sample_count=5, verbose=False):
+def auto_regressive_inference(
+        tokenizer,
+        model,
+        x,
+        x_stamp,
+        y_stamp,
+        max_context,
+        pred_len,
+        clip=5,
+        T=1.0,
+        top_k=0,
+        top_p=0.99,
+        sample_count=5,
+        verbose=False,
+        return_samples=False,
+):
     with torch.no_grad():
         x = torch.clip(x, -clip, clip)
 
@@ -463,10 +476,10 @@ def auto_regressive_inference(tokenizer, model, x, x_stamp, y_stamp, max_context
         ]
         z = tokenizer.decode(input_tokens, half=True)
         z = z.reshape(-1, sample_count, z.size(1), z.size(2))
-        preds = z.cpu().numpy()
-        preds = np.mean(preds, axis=1)
-
-        return preds
+        sample_preds = z.cpu().numpy()
+        if return_samples:
+            return sample_preds
+        return np.mean(sample_preds, axis=1)
 
 
 def calc_time_stamps(x_timestamp):
@@ -659,4 +672,3 @@ class KronosPredictor:
             pred_dfs.append(pred_df)
 
         return pred_dfs
-

@@ -74,3 +74,7 @@ venv.bak/
 temp/
 tmp/
 .python-version
+
+# Futures experiment artifacts and downloaded model cache
+csj/artifacts/
+csj/runs/

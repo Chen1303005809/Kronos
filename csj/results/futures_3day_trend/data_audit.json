@@ -1,0 +1,266 @@
+{
+  "task": "three_complete_trading_days",
+  "lookback": 256,
+  "allowed_pred_lengths": [
+    15,
+    17,
+    19,
+    21
+  ],
+  "contract_audit": [
+    {
+      "instrument": "rb8888",
+      "raw_bars": 4999,
+      "clean_bars": 4988,
+      "raw_trading_days": 721,
+      "clean_trading_days": 718,
+      "valid_day_counts": {
+        "5": 19,
+        "7": 699
+      },
+      "removed_days": [
+        {
+          "trading_day": "2023-08-11",
+          "bars": 4
+        },
+        {
+          "trading_day": "2024-04-04",
+          "bars": 1
+        },
+        {
+          "trading_day": "2024-04-30",
+          "bars": 6
+        }
+      ],
+      "first_timestamp": "2023-08-11T21:00:00",
+      "last_timestamp": "2026-08-03T14:00:00"
+    },
+    {
+      "instrument": "i8888",
+      "raw_bars": 4999,
+      "clean_bars": 4993,
+      "raw_trading_days": 720,
+      "clean_trading_days": 719,
+      "valid_day_counts": {
+        "5": 20,
+        "7": 699
+      },
+      "removed_days": [
+        {
+          "trading_day": "2024-04-30",
+          "bars": 6
+        }
+      ],
+      "first_timestamp": "2023-08-11T09:00:00",
+      "last_timestamp": "2026-08-03T14:00:00"
+    }
+  ],
+  "chronological_boundaries": {
+    "first_day": "2023-08-11T00:00:00",
+    "train_end": "2025-09-08T00:00:00",
+    "val_end": "2026-02-24T00:00:00",
+    "last_day": "2026-08-03T00:00:00"
+  },
+  "split_cases": {
+    "train": {
+      "total": 926,
+      "by_instrument": {
+        "i8888": 463,
+        "rb8888": 463
+      },
+      "by_pred_len": {
+        "19": 72,
+        "21": 854
+      },
+      "by_bar_pattern": {
+        "5-7-7": 24,
+        "7-5-7": 24,
+        "7-7-5": 24,
+        "7-7-7": 854
+      },
+      "first_target_day": "2023-10-12T00:00:00",
+      "last_target_day": "2025-09-08T00:00:00"
+    },
+    "val": {
+      "total": 210,
+      "by_instrument": {
+        "i8888": 105,
+        "rb8888": 105
+      },
+      "by_pred_len": {
+        "19": 14,
+        "21": 196
+      },
+      "by_bar_pattern": {
+        "5-7-7": 4,
+        "7-5-7": 4,
+        "7-7-5": 6,
+        "7-7-7": 196
+      },
+      "first_target_day": "2025-09-09T00:00:00",
+      "last_target_day": "2026-02-24T00:00:00"
+    },
+    "test": {
+      "total": 214,
+      "by_instrument": {
+        "i8888": 107,
+        "rb8888": 107
+      },
+      "by_pred_len": {
+        "19": 18,
+        "21": 196
+      },
+      "by_bar_pattern": {
+        "5-7-7": 6,
+        "7-5-7": 6,
+        "7-7-5": 6,
+        "7-7-7": 196
+      },
+      "first_target_day": "2026-02-25T00:00:00",
+      "last_target_day": "2026-08-03T00:00:00"
+    }
+  },
+  "integrity": {
+    "context_length": 256,
+    "all_contexts_exact": true,
+    "all_contexts_strictly_before_targets": true,
+    "all_targets_have_three_days": true,
+    "all_pred_lengths_allowed": true,
+    "instrument_leakage_cases": 0,
+    "split_or_fold_leakage_cases": 0
+  },
+  "clipping": {
+    "i8888": {
+      "context": {
+        "open": {
+          "clipped_values": 1,
+          "total_values": 172800,
+          "rate": 5.787037037037037e-06
+        },
+        "high": {
+          "clipped_values": 1,
+          "total_values": 172800,
+          "rate": 5.787037037037037e-06
+        },
+        "low": {
+          "clipped_values": 1,
+          "total_values": 172800,
+          "rate": 5.787037037037037e-06
+        },
+        "close": {
+          "clipped_values": 1,
+          "total_values": 172800,
+          "rate": 5.787037037037037e-06
+        },
+        "volume": {
+          "clipped_values": 301,
+          "total_values": 172800,
+          "rate": 0.0017418981481481482
+        },
+        "amount": {
+          "clipped_values": 300,
+          "total_values": 172800,
+          "rate": 0.001736111111111111
+        }
+      },
+      "target": {
+        "open": {
+          "clipped_values": 2,
+          "total_values": 14071,
+          "rate": 0.00014213630872006254
+        },
+        "high": {
+          "clipped_values": 1,
+          "total_values": 14071,
+          "rate": 7.106815436003127e-05
+        },
+        "low": {
+          "clipped_values": 1,
+          "total_values": 14071,
+          "rate": 7.106815436003127e-05
+        },
+        "close": {
+          "clipped_values": 3,
+          "total_values": 14071,
+          "rate": 0.00021320446308009382
+        },
+        "volume": {
+          "clipped_values": 38,
+          "total_values": 14071,
+          "rate": 0.0027005898656811884
+        },
+        "amount": {
+          "clipped_values": 35,
+          "total_values": 14071,
+          "rate": 0.0024873854026010943
+        }
+      }
+    },
+    "rb8888": {
+      "context": {
+        "open": {
+          "clipped_values": 0,
+          "total_values": 172800,
+          "rate": 0.0
+        },
+        "high": {
+          "clipped_values": 1,
+          "total_values": 172800,
+          "rate": 5.787037037037037e-06
+        },
+        "low": {
+          "clipped_values": 0,
+          "total_values": 172800,
+          "rate": 0.0
+        },
+        "close": {
+          "clipped_values": 0,
+          "total_values": 172800,
+          "rate": 0.0
+        },
+        "volume": {
+          "clipped_values": 431,
+          "total_values": 172800,
+          "rate": 0.002494212962962963
+        },
+        "amount": {
+          "clipped_values": 403,
+          "total_values": 172800,
+          "rate": 0.002332175925925926
+        }
+      },
+      "target": {
+        "open": {
+          "clipped_values": 5,
+          "total_values": 14071,
+          "rate": 0.00035534077180015633
+        },
+        "high": {
+          "clipped_values": 7,
+          "total_values": 14071,
+          "rate": 0.0004974770805202189
+        },
+        "low": {
+          "clipped_values": 2,
+          "total_values": 14071,
+          "rate": 0.00014213630872006254
+        },
+        "close": {
+          "clipped_values": 2,
+          "total_values": 14071,
+          "rate": 0.00014213630872006254
+        },
+        "volume": {
+          "clipped_values": 58,
+          "total_values": 14071,
+          "rate": 0.004121952952881813
+        },
+        "amount": {
+          "clipped_values": 62,
+          "total_values": 14071,
+          "rate": 0.004406225570321939
+        }
+      }
+    }
+  }
+}

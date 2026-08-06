@@ -1,0 +1,32 @@
+{
+  "stage": "phase2_ce_only_smoke",
+  "fold_id": "fold_00",
+  "learning_rate": 3e-06,
+  "seed": 42,
+  "lambda_dir": 0.0,
+  "max_train_batches": 2,
+  "results": {
+    "i8888": {
+      "checkpoint": "/Users/eurus/Code/kronos/Kronos/csj/runs/futures_3day_trend/phase0/phase2_smoke/fold_00/i8888/lr_3e-06_seed_42/best_model.pt",
+      "best_epoch": 1,
+      "day3_balanced_accuracy": 1.0,
+      "day3_return_mae": 0.027993501381243013,
+      "z_normalized_dtw": 0.5193296396263724,
+      "elapsed_seconds": 4.173119958024472,
+      "dense_windows": 1813,
+      "validation_cases": 2,
+      "device": "mps"
+    },
+    "rb8888": {
+      "checkpoint": "/Users/eurus/Code/kronos/Kronos/csj/runs/futures_3day_trend/phase0/phase2_smoke/fold_00/rb8888/lr_3e-06_seed_42/best_model.pt",
+      "best_epoch": 1,
+      "day3_balanced_accuracy": 0.5,
+      "day3_return_mae": 0.025985264993795165,
+      "z_normalized_dtw": 0.6027001161879213,
+      "elapsed_seconds": 3.7272938329260796,
+      "dense_windows": 1808,
+      "validation_cases": 2,
+      "device": "mps"
+    }
+  }
+}
