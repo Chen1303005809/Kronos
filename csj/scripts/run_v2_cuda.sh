@@ -41,27 +41,15 @@ fi
 
 cd "$REPO_ROOT"
 
-PYTHON_BIN="${PYTHON_BIN:-${REPO_ROOT}/.venv/bin/python}"
+PYTHON_BIN="/mnt/RohonDev1/miniconda3/envs/kronos/bin/python"
 CONFIG="${CONFIG:-csj/configs/futures_3day_trend.yaml}"
 RUN_ID="${RUN_ID:-cuda_v2}"
-
-if [[ ! -x "$PYTHON_BIN" ]]; then
-  echo "Python virtualenv not found: $PYTHON_BIN" >&2
-  echo "Create a Python 3.12 virtualenv and install requirements first." >&2
-  exit 2
-fi
 
 export HF_HUB_CACHE="${HF_HUB_CACHE:-${REPO_ROOT}/csj/artifacts/hf_cache}"
 export MPLCONFIGDIR="${MPLCONFIGDIR:-/tmp/kronos-matplotlib}"
 export TOKENIZERS_PARALLELISM="${TOKENIZERS_PARALLELISM:-false}"
 
-DOWNLOAD_ARGS=()
-if [[ "${ALLOW_MODEL_DOWNLOAD:-0}" == "1" ]]; then
-  unset HF_HUB_OFFLINE || true
-  DOWNLOAD_ARGS+=(--allow-model-download)
-else
-  export HF_HUB_OFFLINE=1
-fi
+
 
 "$PYTHON_BIN" -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
 "$PYTHON_BIN" -c 'import torch; assert torch.cuda.is_available(), "CUDA unavailable"; print({"torch": torch.__version__, "cuda_runtime": torch.version.cuda, "device": torch.cuda.get_device_name(0), "device_count": torch.cuda.device_count()})'
