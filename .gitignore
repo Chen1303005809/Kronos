@@ -78,3 +78,6 @@ tmp/
 # Futures experiment artifacts and downloaded model cache
 csj/artifacts/
 csj/runs/
+
+
+*.pt
