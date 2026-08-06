@@ -15,10 +15,11 @@ import pandas as pd
 import torch
 
 from csj.config import load_config
-from csj.evaluation import resolve_device
+from csj.evaluation import resolve_device, set_seed
 from csj.futures_data import (
     CasePeriod,
     DenseInstrumentWindowDataset,
+    ThreeDayDirectionDataset,
     ThreeTradingDayCase,
     build_expanding_walk_forward_folds,
     build_three_trading_day_cases,
@@ -28,7 +29,7 @@ from csj.futures_data import (
     load_contracts,
     split_case_period,
 )
-from csj.metrics import three_day_metrics_with_instruments
+from csj.metrics import paired_block_bootstrap_improvement, three_day_metrics_with_instruments
 from csj.three_day_evaluation import (
     make_three_day_baselines,
     predict_three_day_cases,
@@ -36,12 +37,19 @@ from csj.three_day_evaluation import (
 from csj.three_day_reporting import (
     plot_three_day_return_examples,
     write_phase1_report,
+    write_phase3_report,
 )
 from csj.three_day_training import (
+    auxiliary_direction_metrics_with_instruments,
     load_ce_only_checkpoint,
     load_ce_only_training_result,
+    load_direction_checkpoint,
+    load_direction_training_result,
+    predict_auxiliary_direction_cases,
     train_ce_only_predictor,
+    train_direction_predictor,
 )
+from csj.trend_model import KronosTrendWrapper
 from csj.utils.tool import MODEL_FEATURES
 from model import Kronos, KronosPredictor, KronosTokenizer
 from model.kronos import auto_regressive_inference
@@ -86,6 +94,127 @@ def _load_records(path: Path) -> pd.DataFrame:
         if column in records:
             records[column] = pd.to_datetime(records[column])
     return records
+
+
+def _path_record_cache_is_current(
+    records: pd.DataFrame,
+    *,
+    device: torch.device,
+) -> bool:
+    required_columns = {"raw_sample_paths", "sampling_seed", "inference_device"}
+    return required_columns.issubset(records.columns) and bool(
+        (records["inference_device"] == str(device)).all()
+    )
+
+
+def _auxiliary_record_cache_is_current(
+    records: pd.DataFrame,
+    *,
+    device: torch.device,
+) -> bool:
+    required_columns = {
+        "day3_actual_direction",
+        "aux_day3_logit",
+        "aux_day3_up_probability",
+        "aux_day3_direction",
+        "inference_device",
+    }
+    return required_columns.issubset(records.columns) and bool(
+        (records["inference_device"] == str(device)).all()
+    )
+
+
+def _reference_path_records_are_compatible(
+    records: pd.DataFrame,
+    *,
+    expected_keys: set[tuple[str, pd.Timestamp]],
+) -> tuple[bool, str]:
+    """Check that an existing Phase 1/2 cache can support paired Phase 3 metrics."""
+
+    required_columns = {
+        "instrument",
+        "target_day",
+        "day1_actual_return",
+        "day1_actual_direction",
+        "day1_predicted_return",
+        "day1_path_direction",
+        "day1_up_probability",
+        "day2_actual_return",
+        "day2_actual_direction",
+        "day2_predicted_return",
+        "day2_path_direction",
+        "day2_up_probability",
+        "day3_actual_return",
+        "day3_actual_direction",
+        "day3_predicted_return",
+        "day3_path_direction",
+        "day3_up_probability",
+    }
+    missing_columns = sorted(required_columns.difference(records.columns))
+    if missing_columns:
+        return False, f"missing columns: {', '.join(missing_columns)}"
+
+    observed_keys = {
+        (str(instrument), pd.Timestamp(target_day))
+        for instrument, target_day in records[["instrument", "target_day"]].itertuples(
+            index=False,
+            name=None,
+        )
+    }
+    missing_keys = expected_keys.difference(observed_keys)
+    extra_keys = observed_keys.difference(expected_keys)
+    if missing_keys or extra_keys:
+        return (
+            False,
+            "case keys differ "
+            f"(expected={len(expected_keys)}, observed={len(observed_keys)}, "
+            f"missing={len(missing_keys)}, extra={len(extra_keys)})",
+        )
+    if len(records) != len(observed_keys):
+        return False, "duplicate instrument/target_day records"
+    return True, ""
+
+
+def _day3_direction_records(records: pd.DataFrame) -> pd.DataFrame:
+    required_columns = {
+        "instrument",
+        "target_day",
+        "day3_actual_direction",
+        "day3_path_direction",
+    }
+    missing = required_columns.difference(records.columns)
+    if missing:
+        raise ValueError(f"Path records are missing day3 direction columns: {missing}")
+    return records[
+        ["instrument", "target_day", "day3_actual_direction", "day3_path_direction"]
+    ].rename(
+        columns={
+            "day3_actual_direction": "actual_direction",
+            "day3_path_direction": "predicted_direction",
+        }
+    )
+
+
+def _phase3_bootstrap(
+    model_records: pd.DataFrame,
+    baseline_records: pd.DataFrame,
+    *,
+    iterations: int,
+    block_days: Sequence[int],
+    seed: int,
+) -> dict[str, dict[str, float | int]]:
+    model = _day3_direction_records(model_records)
+    baseline = _day3_direction_records(baseline_records)
+    return {
+        f"block_{int(block_size)}": paired_block_bootstrap_improvement(
+            model,
+            baseline,
+            iterations=iterations,
+            block_days=int(block_size),
+            seed=seed + int(block_size),
+        )
+        for block_size in block_days
+    }
 
 
 def _case_summary(cases: Sequence[ThreeTradingDayCase]) -> dict[str, Any]:
@@ -513,6 +642,74 @@ class ThreeDayExperiment:
             selected,
             key=lambda case: (case.target_days[0], case.instrument, case.pred_len),
         )
+
+    def _assert_phase3_reference_caches(
+        self,
+        folds: Sequence[Any],
+        *,
+        pilot: bool,
+    ) -> None:
+        """Fail before training if strict Phase 3 reference records are unavailable."""
+
+        phase1_stage = (
+            f"phase1_pilot_{self.evaluation_device.type}"
+            if pilot
+            else f"phase1_{self.evaluation_device.type}"
+        )
+        failures: list[str] = []
+        for fold in folds:
+            for instrument in sorted(self.frames):
+                cases = build_three_trading_day_cases(
+                    {instrument: self.frames[instrument]},
+                    fold.evaluation_period,
+                    lookback=self.lookback,
+                )
+                expected_keys = {
+                    (case.instrument, pd.Timestamp(case.target_days[0]))
+                    for case in cases
+                }
+                reference_paths = {
+                    "Phase 1 zero-shot": (
+                        self.run_dir
+                        / phase1_stage
+                        / "zero_shot"
+                        / f"{fold.fold_id}_{instrument}.json"
+                    ),
+                    "Phase 2 CE-only": (
+                        self.run_dir
+                        / "phase2"
+                        / "evaluation"
+                        / f"{fold.fold_id}_{instrument}.json"
+                    ),
+                }
+                for label, path in reference_paths.items():
+                    if not path.exists():
+                        failures.append(f"{label}: missing {path}")
+                        continue
+                    try:
+                        records = _load_records(path)
+                        compatible, reason = _reference_path_records_are_compatible(
+                            records,
+                            expected_keys=expected_keys,
+                        )
+                    except (OSError, ValueError, json.JSONDecodeError) as error:
+                        failures.append(f"{label}: unreadable {path} ({error})")
+                        continue
+                    if not compatible:
+                        failures.append(f"{label}: incompatible {path} ({reason})")
+
+        if failures:
+            preview = "\n".join(f"- {failure}" for failure in failures[:8])
+            more = "" if len(failures) <= 8 else f"\n- ... plus {len(failures) - 8} more"
+            raise RuntimeError(
+                "Phase 3 was not started because paired Phase 1/2 reference "
+                "records are missing or incompatible. Results/*_metrics.json alone "
+                "is insufficient: copy the matching raw run directory, keep the same "
+                "RUN_ID, then rerun. Required examples:\n"
+                f"  {self.run_dir / phase1_stage / 'zero_shot'}\n"
+                f"  {self.run_dir / 'phase2' / 'evaluation'}\n"
+                f"Problems:\n{preview}{more}"
+            )
 
     def phase1(self, *, smoke: bool = False, pilot: bool = False) -> Path:
         if smoke and pilot:
@@ -1255,6 +1452,714 @@ class ThreeDayExperiment:
         )
         return metrics_path
 
+    def phase3_smoke(self) -> Path:
+        """Run a two-batch Phase 3 smoke test for both contract-specific streams."""
+
+        fold = self.folds[0]
+        training = self.config["training"]
+        evaluation = self.config["evaluation"]
+        data = self.config["data"]
+        model_config = self.config["model"]
+        learning_rate = float(training["learning_rates"][0])
+        seed = int(training["seeds"][0])
+        lambda_dir = float(training["direction_smoke_lambda"])
+        stage_dir = self.run_dir / "phase3_smoke" / fold.fold_id
+        stage_dir.mkdir(parents=True, exist_ok=True)
+        tokenizer = self._load_tokenizer()
+        results: dict[str, Any] = {}
+        try:
+            for instrument in sorted(self.frames):
+                dense_dataset = DenseInstrumentWindowDataset(
+                    self.frames[instrument],
+                    fold.fit_period,
+                    instrument=instrument,
+                    lookback=self.lookback,
+                    horizon=int(data["dense_horizon"]),
+                    clip=float(data["clip"]),
+                    epsilon=float(data["normalization_epsilon"]),
+                )
+                direction_cases = build_three_trading_day_cases(
+                    {instrument: self.frames[instrument]},
+                    fold.fit_period,
+                    lookback=self.lookback,
+                )
+                direction_dataset = ThreeDayDirectionDataset(
+                    direction_cases,
+                    lookback=self.lookback,
+                    clip=float(data["clip"]),
+                    epsilon=float(data["normalization_epsilon"]),
+                )
+                validation_cases = self._select_smoke_cases(
+                    build_three_trading_day_cases(
+                        {instrument: self.frames[instrument]},
+                        fold.inner_validation_period,
+                        lookback=self.lookback,
+                    )
+                )
+                output_dir = (
+                    stage_dir
+                    / instrument
+                    / f"lr_{learning_rate:.0e}_seed_{seed}"
+                )
+                print(
+                    f"phase3 smoke model_source={model_config['predictor_id']}@"
+                    f"{model_config['predictor_revision']} instrument={instrument} "
+                    f"fold={fold.fold_id} lr={learning_rate:.1e} seed={seed} "
+                    f"lambda_dir={lambda_dir:.3f} dense_windows={len(dense_dataset)} "
+                    f"direction_cases={len(direction_dataset)} "
+                    f"validation_cases={len(validation_cases)} max_batches=2 "
+                    f"device={self.device}"
+                )
+                set_seed(seed)
+                wrapper = KronosTrendWrapper(self._load_predictor())
+                metadata = {
+                    "phase": "phase3_ce_direction_smoke",
+                    "model_source": {
+                        "predictor_id": model_config["predictor_id"],
+                        "predictor_revision": model_config["predictor_revision"],
+                        "tokenizer_id": model_config["tokenizer_id"],
+                        "tokenizer_revision": model_config["tokenizer_revision"],
+                    },
+                    "instrument": instrument,
+                    "fold_id": fold.fold_id,
+                    "fit_start": fold.fit_period.start_day,
+                    "fit_end": fold.fit_period.end_day,
+                    "inner_validation_start": fold.inner_validation_period.start_day,
+                    "inner_validation_end": fold.inner_validation_period.end_day,
+                    "normalization": {
+                        "context_only": True,
+                        "lookback": self.lookback,
+                        "clip": float(data["clip"]),
+                        "epsilon": float(data["normalization_epsilon"]),
+                    },
+                    "dense_horizon": int(data["dense_horizon"]),
+                    "dense_windows": len(dense_dataset),
+                    "direction_cases": len(direction_dataset),
+                    "direction_cases_dropped_all_zero": (
+                        direction_dataset.dropped_all_zero_cases
+                    ),
+                    "lambda_dir": lambda_dir,
+                    "stream_ratio": {
+                        "dense_batches_per_direction_batch": int(
+                            training["dense_batches_per_direction_batch"]
+                        ),
+                    },
+                    "smoke_max_batches": 2,
+                }
+                try:
+                    result = train_direction_predictor(
+                        wrapper,
+                        tokenizer,
+                        dense_dataset,
+                        direction_dataset,
+                        validation_cases,
+                        device=self.device,
+                        output_dir=output_dir,
+                        learning_rate=learning_rate,
+                        seed=seed,
+                        lambda_dir=lambda_dir,
+                        max_epochs=1,
+                        early_stopping_patience=1,
+                        batch_size=int(training["batch_size"]),
+                        direction_batch_size=int(training["direction_batch_size"]),
+                        dense_batches_per_direction_batch=int(
+                            training["dense_batches_per_direction_batch"]
+                        ),
+                        num_workers=int(training["num_workers"]),
+                        weight_decay=float(training["weight_decay"]),
+                        gradient_clip=float(training["gradient_clip"]),
+                        warmup_ratio=float(training["warmup_ratio"]),
+                        evaluation_config={
+                            **evaluation,
+                            "sample_count": int(
+                                evaluation["smoke_sample_count"]
+                            ),
+                            "max_context": int(model_config["max_context"]),
+                            "clip": float(data["clip"]),
+                            "normalization_epsilon": float(
+                                data["normalization_epsilon"]
+                            ),
+                        },
+                        checkpoint_metadata=metadata,
+                        max_train_batches=2,
+                    )
+                    results[instrument] = {
+                        "checkpoint": result.checkpoint_path,
+                        "best_epoch": result.best_epoch,
+                        "day3_path_balanced_accuracy": (
+                            result.best_day3_balanced_accuracy
+                        ),
+                        "day3_return_mae": result.best_day3_return_mae,
+                        "z_normalized_dtw": result.best_z_normalized_dtw,
+                        "auxiliary_metrics": result.best_auxiliary_metrics,
+                        "elapsed_seconds": result.elapsed_seconds,
+                        "dense_windows": len(dense_dataset),
+                        "direction_cases": len(direction_dataset),
+                        "device": str(self.device),
+                    }
+                finally:
+                    wrapper.to("cpu")
+                    del wrapper
+                    gc.collect()
+                    if self.device.type == "mps":
+                        torch.mps.empty_cache()
+                    elif self.device.type == "cuda":
+                        torch.cuda.empty_cache()
+        finally:
+            tokenizer.to("cpu")
+            del tokenizer
+            gc.collect()
+
+        output_path = self.results_dir / "phase3_smoke_summary.json"
+        payload = {
+            "stage": "phase3_ce_direction_smoke",
+            "fold_id": fold.fold_id,
+            "learning_rate": learning_rate,
+            "seed": seed,
+            "lambda_dir": lambda_dir,
+            "max_train_batches": 2,
+            "results": results,
+        }
+        _write_json(output_path, payload)
+        _write_json(self.run_dir / "phase3_smoke" / "summary.json", payload)
+        print(json.dumps(_json_safe(payload), ensure_ascii=False, indent=2))
+        return output_path
+
+    def phase3(self, *, pilot: bool = False) -> Path:
+        """Run the fixed-lambda Phase 3 direction-loss ablation on locked folds."""
+
+        stage_name = (
+            f"phase3_pilot_{self.evaluation_device.type}"
+            if pilot
+            else f"phase3_{self.evaluation_device.type}"
+        )
+        folds = self.folds[:1] if pilot else self.folds
+        training = self.config["training"]
+        evaluation = self.config["evaluation"]
+        data = self.config["data"]
+        model_config = self.config["model"]
+        seed = int(training["seeds"][0])
+        lambda_dir = float(training["direction_smoke_lambda"])
+        learning_rates = [float(value) for value in training["learning_rates"]]
+        base_seed = int(evaluation["random_seed"])
+        self._assert_phase3_reference_caches(folds, pilot=pilot)
+        started_at = time.monotonic()
+        tokenizer = self._load_tokenizer()
+        selected_runs: dict[str, dict[str, Any]] = {}
+        ce_direction_records_by_fold: dict[str, list[pd.DataFrame]] = {}
+        auxiliary_records_by_fold: dict[str, list[pd.DataFrame]] = {}
+        phase2_records_by_fold: dict[str, list[pd.DataFrame]] = {}
+        zero_records_by_fold: dict[str, list[pd.DataFrame]] = {}
+        try:
+            for fold_index, fold in enumerate(folds):
+                selected_runs[fold.fold_id] = {}
+                ce_direction_records_by_fold[fold.fold_id] = []
+                auxiliary_records_by_fold[fold.fold_id] = []
+                phase2_records_by_fold[fold.fold_id] = []
+                zero_records_by_fold[fold.fold_id] = []
+                for instrument_index, instrument in enumerate(sorted(self.frames)):
+                    dense_dataset = DenseInstrumentWindowDataset(
+                        self.frames[instrument],
+                        fold.fit_period,
+                        instrument=instrument,
+                        lookback=self.lookback,
+                        horizon=int(data["dense_horizon"]),
+                        clip=float(data["clip"]),
+                        epsilon=float(data["normalization_epsilon"]),
+                    )
+                    direction_cases = build_three_trading_day_cases(
+                        {instrument: self.frames[instrument]},
+                        fold.fit_period,
+                        lookback=self.lookback,
+                    )
+                    direction_dataset = ThreeDayDirectionDataset(
+                        direction_cases,
+                        lookback=self.lookback,
+                        clip=float(data["clip"]),
+                        epsilon=float(data["normalization_epsilon"]),
+                    )
+                    validation_cases = build_three_trading_day_cases(
+                        {instrument: self.frames[instrument]},
+                        fold.inner_validation_period,
+                        lookback=self.lookback,
+                    )
+                    run_results: dict[float, Any] = {}
+                    validation_seed = base_seed + fold_index * 10 + instrument_index
+                    for learning_rate in learning_rates:
+                        output_dir = (
+                            self.run_dir
+                            / "phase3"
+                            / "training"
+                            / fold.fold_id
+                            / instrument
+                            / f"lr_{learning_rate:.0e}_seed_{seed}"
+                        )
+                        existing = load_direction_training_result(output_dir)
+                        if existing is not None:
+                            print(
+                                "resuming completed direction run: "
+                                f"{output_dir}"
+                            )
+                            run_results[learning_rate] = existing
+                            continue
+                        print(
+                            f"phase3 model_source={model_config['predictor_id']}@"
+                            f"{model_config['predictor_revision']} "
+                            f"instrument={instrument} fold={fold.fold_id} "
+                            f"lr={learning_rate:.1e} seed={seed} "
+                            f"lambda_dir={lambda_dir:.3f} "
+                            f"dense_windows={len(dense_dataset)} "
+                            f"direction_cases={len(direction_dataset)} "
+                            f"validation_cases={len(validation_cases)} "
+                            f"batches={int(np.ceil(len(dense_dataset) / int(training['batch_size'])))} "
+                            f"device={self.device}"
+                        )
+                        set_seed(seed)
+                        wrapper = KronosTrendWrapper(self._load_predictor())
+                        metadata = {
+                            "phase": "phase3_ce_direction",
+                            "model_source": {
+                                "predictor_id": model_config["predictor_id"],
+                                "predictor_revision": model_config[
+                                    "predictor_revision"
+                                ],
+                                "tokenizer_id": model_config["tokenizer_id"],
+                                "tokenizer_revision": model_config[
+                                    "tokenizer_revision"
+                                ],
+                            },
+                            "instrument": instrument,
+                            "fold_id": fold.fold_id,
+                            "fit_start": fold.fit_period.start_day,
+                            "fit_end": fold.fit_period.end_day,
+                            "inner_validation_start": (
+                                fold.inner_validation_period.start_day
+                            ),
+                            "inner_validation_end": (
+                                fold.inner_validation_period.end_day
+                            ),
+                            "evaluation_start": fold.evaluation_period.start_day,
+                            "evaluation_end": fold.evaluation_period.end_day,
+                            "normalization": {
+                                "context_only": True,
+                                "lookback": self.lookback,
+                                "clip": float(data["clip"]),
+                                "epsilon": float(data["normalization_epsilon"]),
+                            },
+                            "dense_horizon": int(data["dense_horizon"]),
+                            "dense_windows": len(dense_dataset),
+                            "direction_cases": len(direction_dataset),
+                            "direction_cases_dropped_all_zero": (
+                                direction_dataset.dropped_all_zero_cases
+                            ),
+                            "lambda_dir": lambda_dir,
+                            "stream_ratio": {
+                                "dense_batches_per_direction_batch": int(
+                                    training["dense_batches_per_direction_batch"]
+                                ),
+                            },
+                            "devices": {
+                                "training": str(self.device),
+                                "inner_validation": str(
+                                    self.evaluation_device
+                                ),
+                                "evaluation": str(self.evaluation_device),
+                            },
+                            "selection_rule": [
+                                "maximize_day3_path_balanced_accuracy",
+                                "minimize_day3_return_mae",
+                                "minimize_z_normalized_dtw",
+                            ],
+                        }
+                        try:
+                            run_results[learning_rate] = train_direction_predictor(
+                                wrapper,
+                                tokenizer,
+                                dense_dataset,
+                                direction_dataset,
+                                validation_cases,
+                                device=self.device,
+                                output_dir=output_dir,
+                                learning_rate=learning_rate,
+                                seed=seed,
+                                lambda_dir=lambda_dir,
+                                max_epochs=int(training["max_epochs"]),
+                                early_stopping_patience=int(
+                                    training["early_stopping_patience"]
+                                ),
+                                batch_size=int(training["batch_size"]),
+                                direction_batch_size=int(
+                                    training["direction_batch_size"]
+                                ),
+                                dense_batches_per_direction_batch=int(
+                                    training["dense_batches_per_direction_batch"]
+                                ),
+                                num_workers=int(training["num_workers"]),
+                                weight_decay=float(training["weight_decay"]),
+                                gradient_clip=float(training["gradient_clip"]),
+                                warmup_ratio=float(training["warmup_ratio"]),
+                                evaluation_config={
+                                    **evaluation,
+                                    "random_seed": validation_seed,
+                                    "max_context": int(
+                                        model_config["max_context"]
+                                    ),
+                                    "clip": float(data["clip"]),
+                                    "normalization_epsilon": float(
+                                        data["normalization_epsilon"]
+                                    ),
+                                },
+                                checkpoint_metadata=metadata,
+                                validation_device=self.evaluation_device,
+                            )
+                        finally:
+                            wrapper.to("cpu")
+                            del wrapper
+                            gc.collect()
+                            if self.device.type == "mps":
+                                torch.mps.empty_cache()
+                            elif self.device.type == "cuda":
+                                torch.cuda.empty_cache()
+
+                    selected_lr, selected_result = max(
+                        run_results.items(),
+                        key=lambda item: (
+                            item[1].best_day3_balanced_accuracy,
+                            -item[1].best_day3_return_mae,
+                            -item[1].best_z_normalized_dtw,
+                        ),
+                    )
+                    selected_runs[fold.fold_id][instrument] = {
+                        "learning_rate": selected_lr,
+                        "seed": seed,
+                        "lambda_dir": lambda_dir,
+                        "best_epoch": selected_result.best_epoch,
+                        "validation_day3_path_balanced_accuracy": (
+                            selected_result.best_day3_balanced_accuracy
+                        ),
+                        "validation_day3_return_mae": (
+                            selected_result.best_day3_return_mae
+                        ),
+                        "validation_z_normalized_dtw": (
+                            selected_result.best_z_normalized_dtw
+                        ),
+                        "validation_auxiliary_metrics": (
+                            selected_result.best_auxiliary_metrics
+                        ),
+                        "checkpoint": selected_result.checkpoint_path,
+                        "candidate_runs": {
+                            f"{candidate_lr:.0e}": {
+                                "best_epoch": candidate_result.best_epoch,
+                                "day3_path_balanced_accuracy": (
+                                    candidate_result.best_day3_balanced_accuracy
+                                ),
+                                "day3_return_mae": (
+                                    candidate_result.best_day3_return_mae
+                                ),
+                                "z_normalized_dtw": (
+                                    candidate_result.best_z_normalized_dtw
+                                ),
+                                "auxiliary_day3_balanced_accuracy": (
+                                    candidate_result.best_auxiliary_metrics.get(
+                                        "endpoints", {}
+                                    )
+                                    .get("day3", {})
+                                    .get("aux_direction_balanced_accuracy")
+                                ),
+                                "elapsed_seconds": (
+                                    candidate_result.elapsed_seconds
+                                ),
+                            }
+                            for candidate_lr, candidate_result in run_results.items()
+                        },
+                    }
+
+                    evaluation_cases = build_three_trading_day_cases(
+                        {instrument: self.frames[instrument]},
+                        fold.evaluation_period,
+                        lookback=self.lookback,
+                    )
+                    evaluation_path = (
+                        self.run_dir
+                        / "phase3"
+                        / "evaluation"
+                        / f"{fold.fold_id}_{instrument}.json"
+                    )
+                    auxiliary_path = (
+                        self.run_dir
+                        / "phase3"
+                        / "auxiliary_evaluation"
+                        / f"{fold.fold_id}_{instrument}.json"
+                    )
+                    ce_direction_records = (
+                        _load_records(evaluation_path)
+                        if evaluation_path.exists()
+                        else pd.DataFrame()
+                    )
+                    auxiliary_records = (
+                        _load_records(auxiliary_path)
+                        if auxiliary_path.exists()
+                        else pd.DataFrame()
+                    )
+                    path_cache_is_current = (
+                        not ce_direction_records.empty
+                        and _path_record_cache_is_current(
+                            ce_direction_records,
+                            device=self.evaluation_device,
+                        )
+                    )
+                    auxiliary_cache_is_current = (
+                        not auxiliary_records.empty
+                        and _auxiliary_record_cache_is_current(
+                            auxiliary_records,
+                            device=self.evaluation_device,
+                        )
+                    )
+                    if not path_cache_is_current or not auxiliary_cache_is_current:
+                        set_seed(seed)
+                        wrapper = KronosTrendWrapper(self._load_predictor())
+                        try:
+                            load_direction_checkpoint(
+                                wrapper, selected_result.checkpoint_path
+                            )
+                            if not path_cache_is_current:
+                                ce_direction_records = predict_three_day_cases(
+                                    wrapper.predictor,
+                                    tokenizer,
+                                    evaluation_cases,
+                                    device=self.evaluation_device,
+                                    max_context=int(model_config["max_context"]),
+                                    clip=float(data["clip"]),
+                                    normalization_epsilon=float(
+                                        data["normalization_epsilon"]
+                                    ),
+                                    sample_count=int(evaluation["sample_count"]),
+                                    temperature=float(evaluation["temperature"]),
+                                    top_k=int(evaluation["top_k"]),
+                                    top_p=float(evaluation["top_p"]),
+                                    batch_size=int(
+                                        evaluation["inference_batch_size"]
+                                    ),
+                                    seed=validation_seed,
+                                    point_estimate=str(
+                                        evaluation["path_point_estimate"]
+                                    ),
+                                    turning_point_threshold=float(
+                                        evaluation[
+                                            "turning_point_return_threshold"
+                                        ]
+                                    ),
+                                    model_name="ce_direction",
+                                )
+                                _save_records(
+                                    ce_direction_records, evaluation_path
+                                )
+                            if not auxiliary_cache_is_current:
+                                auxiliary_records = (
+                                    predict_auxiliary_direction_cases(
+                                        wrapper,
+                                        tokenizer,
+                                        evaluation_cases,
+                                        device=self.evaluation_device,
+                                        clip=float(data["clip"]),
+                                        normalization_epsilon=float(
+                                            data["normalization_epsilon"]
+                                        ),
+                                        batch_size=int(
+                                            evaluation["inference_batch_size"]
+                                        ),
+                                    )
+                                )
+                                _save_records(auxiliary_records, auxiliary_path)
+                        finally:
+                            wrapper.to("cpu")
+                            del wrapper
+                            gc.collect()
+                            if self.device.type == "mps":
+                                torch.mps.empty_cache()
+                            elif self.device.type == "cuda":
+                                torch.cuda.empty_cache()
+                    ce_direction_records_by_fold[fold.fold_id].append(
+                        ce_direction_records
+                    )
+                    auxiliary_records_by_fold[fold.fold_id].append(auxiliary_records)
+
+                    phase2_path = (
+                        self.run_dir
+                        / "phase2"
+                        / "evaluation"
+                        / f"{fold.fold_id}_{instrument}.json"
+                    )
+                    if not phase2_path.exists():
+                        raise RuntimeError(
+                            "Phase 3 requires the matching Phase 2 record cache: "
+                            f"{phase2_path}"
+                        )
+                    phase2_records_by_fold[fold.fold_id].append(
+                        _load_records(phase2_path)
+                    )
+
+                    phase1_stage = (
+                        f"phase1_pilot_{self.evaluation_device.type}"
+                        if pilot
+                        else f"phase1_{self.evaluation_device.type}"
+                    )
+                    zero_path = (
+                        self.run_dir
+                        / phase1_stage
+                        / "zero_shot"
+                        / f"{fold.fold_id}_{instrument}.json"
+                    )
+                    if not zero_path.exists():
+                        raise RuntimeError(
+                            "Phase 3 requires the matching Phase 1 zero-shot cache: "
+                            f"{zero_path}"
+                        )
+                    zero_records_by_fold[fold.fold_id].append(
+                        _load_records(zero_path)
+                    )
+        finally:
+            tokenizer.to("cpu")
+            del tokenizer
+            gc.collect()
+            if self.device.type == "mps":
+                torch.mps.empty_cache()
+            elif self.device.type == "cuda":
+                torch.cuda.empty_cache()
+
+        ce_direction_by_fold = {
+            fold_id: pd.concat(records, ignore_index=True)
+            for fold_id, records in ce_direction_records_by_fold.items()
+        }
+        auxiliary_by_fold = {
+            fold_id: pd.concat(records, ignore_index=True)
+            for fold_id, records in auxiliary_records_by_fold.items()
+        }
+        phase2_by_fold = {
+            fold_id: pd.concat(records, ignore_index=True)
+            for fold_id, records in phase2_records_by_fold.items()
+        }
+        zero_by_fold = {
+            fold_id: pd.concat(records, ignore_index=True)
+            for fold_id, records in zero_records_by_fold.items()
+        }
+        combined_ce_direction = pd.concat(
+            ce_direction_by_fold.values(), ignore_index=True
+        )
+        combined_auxiliary = pd.concat(auxiliary_by_fold.values(), ignore_index=True)
+        combined_phase2 = pd.concat(phase2_by_fold.values(), ignore_index=True)
+        combined_zero = pd.concat(zero_by_fold.values(), ignore_index=True)
+        path_metrics = {
+            "ce_direction": three_day_metrics_with_instruments(
+                combined_ce_direction
+            ),
+            "phase2_ce_only": three_day_metrics_with_instruments(combined_phase2),
+            "zero_shot": three_day_metrics_with_instruments(combined_zero),
+        }
+        auxiliary_metrics = auxiliary_direction_metrics_with_instruments(
+            combined_auxiliary
+        )
+        by_fold = {
+            fold_id: {
+                "ce_direction": three_day_metrics_with_instruments(
+                    ce_direction_by_fold[fold_id]
+                ),
+                "phase2_ce_only": three_day_metrics_with_instruments(
+                    phase2_by_fold[fold_id]
+                ),
+                "zero_shot": three_day_metrics_with_instruments(
+                    zero_by_fold[fold_id]
+                ),
+                "auxiliary_direction": auxiliary_direction_metrics_with_instruments(
+                    auxiliary_by_fold[fold_id]
+                ),
+            }
+            for fold_id in ce_direction_by_fold
+        }
+        bootstrap = {
+            "vs_phase2_ce_only": _phase3_bootstrap(
+                combined_ce_direction,
+                combined_phase2,
+                iterations=int(evaluation["bootstrap_iterations"]),
+                block_days=[int(value) for value in evaluation["bootstrap_block_days"]],
+                seed=base_seed,
+            ),
+            "vs_zero_shot": _phase3_bootstrap(
+                combined_ce_direction,
+                combined_zero,
+                iterations=int(evaluation["bootstrap_iterations"]),
+                block_days=[int(value) for value in evaluation["bootstrap_block_days"]],
+                seed=base_seed + 100,
+            ),
+        }
+        elapsed_seconds = time.monotonic() - started_at
+        payload = {
+            "stage": stage_name,
+            "historical_evidence": "retrospective expanding walk-forward development",
+            "folds": [fold.fold_id for fold in folds],
+            "seed": seed,
+            "lambda_dir": lambda_dir,
+            "devices": {
+                "training": str(self.device),
+                "inner_validation": str(self.evaluation_device),
+                "evaluation": str(self.evaluation_device),
+            },
+            "learning_rate_candidates": learning_rates,
+            "selection_rule": [
+                "maximize_day3_path_balanced_accuracy",
+                "minimize_day3_return_mae",
+                "minimize_z_normalized_dtw",
+            ],
+            "selected_runs": selected_runs,
+            "record_counts": {
+                "ce_direction": len(combined_ce_direction),
+                "auxiliary_direction": len(combined_auxiliary),
+                "phase2_ce_only": len(combined_phase2),
+                "zero_shot": len(combined_zero),
+            },
+            "elapsed_seconds": elapsed_seconds,
+            "path_metrics": path_metrics,
+            "auxiliary_metrics": auxiliary_metrics,
+            "bootstrap": bootstrap,
+            "by_fold": by_fold,
+        }
+        metrics_path = self.results_dir / f"{stage_name}_metrics.json"
+        _write_json(metrics_path, payload)
+        _write_json(self.run_dir / "phase3" / f"{stage_name}_metrics.json", payload)
+        figure_path = self.results_dir / f"{stage_name}_path_examples.png"
+        plot_three_day_return_examples(combined_ce_direction, figure_path)
+        report_label = "PILOT_" if pilot else ""
+        report_path = self.results_dir / (
+            f"PHASE3_{report_label}{self.evaluation_device.type.upper()}_REPORT.md"
+        )
+        write_phase3_report(
+            path_metrics,
+            auxiliary_metrics=auxiliary_metrics,
+            by_fold_metrics=by_fold,
+            bootstrap=bootstrap,
+            output_path=report_path,
+            elapsed_seconds=elapsed_seconds,
+            record_counts=payload["record_counts"],
+            figure_name=figure_path.name,
+            metrics_name=metrics_path.name,
+            pilot=pilot,
+        )
+        print(
+            json.dumps(
+                {
+                    "stage": stage_name,
+                    "metrics": str(metrics_path),
+                    "report": str(report_path),
+                    "records": payload["record_counts"],
+                    "elapsed_seconds": elapsed_seconds,
+                    "selected_runs": _json_safe(selected_runs),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+        return metrics_path
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Kronos three-trading-day V2")
@@ -1270,6 +2175,9 @@ def main() -> None:
             "phase2_smoke",
             "phase2_pilot",
             "phase2",
+            "phase3_smoke",
+            "phase3_pilot",
+            "phase3",
         ),
     )
     parser.add_argument(
@@ -1312,6 +2220,12 @@ def main() -> None:
         experiment.phase2(pilot=True)
     if args.stage == "phase2":
         experiment.phase2(pilot=False)
+    if args.stage == "phase3_smoke":
+        experiment.phase3_smoke()
+    if args.stage == "phase3_pilot":
+        experiment.phase3(pilot=True)
+    if args.stage == "phase3":
+        experiment.phase3(pilot=False)
 
 
 if __name__ == "__main__":

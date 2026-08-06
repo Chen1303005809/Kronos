@@ -22,8 +22,12 @@ usage() {
 #   full     Run check, all-fold baseline, smoke, and all-fold Phase 2 train.
 #   phase1  Run only the all-fold CUDA zero-shot baseline.
 #   phase2  Run only all-fold Phase 2; requires matching Phase 1 cache.
+#   phase3-smoke  Run the two-batch CE + direction-head smoke test.
+#   phase3-pilot  Run fold-00 Phase 3; requires matching Phase 1/2 caches.
+#   phase3  Run all-fold Phase 3; requires matching Phase 1/2 caches.
 #   resume-pilot  Resume an interrupted fold-00 Phase 2 pilot.
 #   resume  Resume an interrupted all-fold Phase 2 run.
+#   resume-phase3  Resume an interrupted all-fold Phase 3 run.
 #   help     Show this message.
 #
 # Environment:
@@ -41,7 +45,7 @@ fi
 
 cd "$REPO_ROOT"
 
-PYTHON_BIN="/mnt/RohonDev1/miniconda3/envs/kronos/bin/python"
+PYTHON_BIN="${PYTHON_BIN:-${REPO_ROOT}/.venv/bin/python}"
 CONFIG="${CONFIG:-csj/configs/futures_3day_trend.yaml}"
 RUN_ID="${RUN_ID:-cuda_v2}"
 
@@ -49,6 +53,10 @@ export HF_HUB_CACHE="${HF_HUB_CACHE:-${REPO_ROOT}/csj/artifacts/hf_cache}"
 export MPLCONFIGDIR="${MPLCONFIGDIR:-/tmp/kronos-matplotlib}"
 export TOKENIZERS_PARALLELISM="${TOKENIZERS_PARALLELISM:-false}"
 
+DOWNLOAD_ARGS=()
+if [[ "${ALLOW_MODEL_DOWNLOAD:-0}" == "1" ]]; then
+  DOWNLOAD_ARGS=(--allow-model-download)
+fi
 
 
 "$PYTHON_BIN" -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
@@ -101,6 +109,15 @@ case "$MODE" in
     ;;
   phase2|resume)
     run_stage phase2
+    ;;
+  phase3-smoke)
+    run_stage phase3_smoke
+    ;;
+  phase3-pilot)
+    run_stage phase3_pilot
+    ;;
+  phase3|resume-phase3)
+    run_stage phase3
     ;;
   resume-pilot)
     run_stage phase2_pilot

@@ -670,6 +670,89 @@ class DenseInstrumentWindowDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]):
         return torch.from_numpy(normalized), torch.from_numpy(stamps)
 
 
+class ThreeDayDirectionDataset(
+    Dataset[tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]]
+):
+    """Context-only samples and three endpoint-direction labels for Phase 3.
+
+    The model input deliberately contains only the 256-bar context.  Target bars
+    are read once to construct labels, but are never returned by the dataset, so
+    the auxiliary direction head cannot receive target-token information.
+    """
+
+    def __init__(
+        self,
+        cases: Sequence[ThreeTradingDayCase],
+        *,
+        lookback: int = 256,
+        clip: float = 5.0,
+        epsilon: float = 1e-5,
+    ) -> None:
+        if not cases:
+            raise ValueError("Direction stream requires at least one case")
+        if lookback < 1:
+            raise ValueError("lookback must be positive")
+
+        instruments = {case.instrument for case in cases}
+        if len(instruments) != 1:
+            raise ValueError(
+                "A direction stream must contain exactly one instrument"
+            )
+
+        self.instrument = next(iter(instruments))
+        self.lookback = int(lookback)
+        self.clip = float(clip)
+        self.epsilon = float(epsilon)
+        self.cases: list[ThreeTradingDayCase] = []
+        self.labels: list[np.ndarray] = []
+        self.valid_masks: list[np.ndarray] = []
+        self.dropped_all_zero_cases = 0
+
+        for case in cases:
+            if len(case.context) != self.lookback:
+                raise ValueError(
+                    "Direction case context length does not match lookback"
+                )
+            origin_close = float(case.context["close"].iloc[-1])
+            endpoint_close = case.target["close"].to_numpy(dtype=np.float64)[
+                list(case.day_end_indices)
+            ]
+            endpoint_returns = endpoint_close / origin_close - 1.0
+            valid_mask = endpoint_returns != 0.0
+            if not bool(valid_mask.any()):
+                self.dropped_all_zero_cases += 1
+                continue
+            self.cases.append(case)
+            self.labels.append((endpoint_returns > 0.0).astype(np.float32))
+            self.valid_masks.append(valid_mask.astype(np.bool_))
+
+        if not self.cases:
+            raise ValueError("Direction stream has no non-zero endpoint labels")
+
+    def __len__(self) -> int:
+        return len(self.cases)
+
+    def __getitem__(
+        self,
+        index: int,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        case = self.cases[index]
+        stats = fit_context_normalization(
+            case.context,
+            clip=self.clip,
+            epsilon=self.epsilon,
+        )
+        context = case.context[MODEL_FEATURES].to_numpy(dtype=np.float64)
+        normalized = stats.transform(context).astype(np.float32)
+        stamps = case.context[TIME_FEATURES].to_numpy(dtype=np.float32)
+        return (
+            torch.from_numpy(normalized),
+            torch.from_numpy(stamps),
+            torch.from_numpy(self.labels[index].copy()),
+            torch.from_numpy(self.valid_masks[index].copy()),
+        )
+
+
 def describe_splits(
     frames: Mapping[str, DataFrame],
     boundaries: SplitBoundaries,

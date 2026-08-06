@@ -242,3 +242,183 @@ def write_phase1_report(
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return destination
+
+
+def write_phase3_report(
+    path_metrics: Mapping[str, Any],
+    *,
+    auxiliary_metrics: Mapping[str, Any],
+    by_fold_metrics: Mapping[str, Any],
+    bootstrap: Mapping[str, Any],
+    output_path: str | Path,
+    elapsed_seconds: float,
+    record_counts: Mapping[str, int],
+    figure_name: str,
+    metrics_name: str,
+    pilot: bool = False,
+) -> Path:
+    """Write the Phase 3 ablation report without conflating head and path metrics."""
+
+    lines = [
+        "# V2 Phase 3 Pilot：方向辅助损失消融"
+        if pilot
+        else "# V2 Phase 3：方向辅助损失消融",
+        "",
+        "本阶段固定 `lambda_dir=0.2`、seed 42；checkpoint 仍由完整生成路径的第三日指标选择。",
+        "方向头指标与生成路径指标分开报告，方向头本身变好不等于 K 线路径方向变好。",
+        "",
+        "## Pooled 生成路径对照",
+        "",
+        "| Model | Cases | Day1 bal. acc. | Day2 bal. acc. | Day3 bal. acc. | Day3 return MAE | Return-path corr. | Z-DTW |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for model_name in ("ce_direction", "phase2_ce_only", "zero_shot"):
+        pooled = path_metrics[model_name]["pooled"]
+        endpoints = pooled["endpoints"]
+        path = pooled["path"]
+        lines.append(
+            "| {model} | {cases} | {day1} | {day2} | {day3} | {mae} | {corr} | {dtw} |".format(
+                model=model_name,
+                cases=record_counts[model_name],
+                day1=_percent(endpoints["day1"]["path_direction_balanced_accuracy"]),
+                day2=_percent(endpoints["day2"]["path_direction_balanced_accuracy"]),
+                day3=_percent(endpoints["day3"]["path_direction_balanced_accuracy"]),
+                mae=_number(endpoints["day3"]["endpoint_return_mae"]),
+                corr=_number(path.get("mean_return_path_correlation"), 4),
+                dtw=_number(path.get("mean_z_normalized_dtw_distance"), 6),
+            )
+        )
+
+    lines.extend(
+        [
+            "",
+            "## 辅助方向头（非主结果）",
+            "",
+            "| Scope | Cases | Day1 aux bal. acc. | Day2 aux bal. acc. | Day3 aux bal. acc. | Day3 BCE |",
+            "|---|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for scope in ["pooled", *sorted(key for key in auxiliary_metrics if key != "pooled")]:
+        metrics = auxiliary_metrics[scope]
+        endpoints = metrics["endpoints"]
+        lines.append(
+            "| {scope} | {cases} | {day1} | {day2} | {day3} | {bce} |".format(
+                scope=scope,
+                cases=metrics["samples"],
+                day1=_percent(
+                    endpoints["day1"]["aux_direction_balanced_accuracy"]
+                ),
+                day2=_percent(
+                    endpoints["day2"]["aux_direction_balanced_accuracy"]
+                ),
+                day3=_percent(
+                    endpoints["day3"]["aux_direction_balanced_accuracy"]
+                ),
+                bce=_number(endpoints["day3"]["mean_bce"]),
+            )
+        )
+
+    lines.extend(
+        [
+            "",
+            "## 分合约第三日生成路径",
+            "",
+            "| Instrument | CE + direction | Phase 2 CE-only | Zero-shot |",
+            "|---|---:|---:|---:|",
+        ]
+    )
+    instruments = sorted(
+        key for key in path_metrics["ce_direction"] if key != "pooled"
+    )
+    for instrument in instruments:
+        lines.append(
+            "| {instrument} | {phase3} | {phase2} | {zero} |".format(
+                instrument=instrument,
+                phase3=_percent(
+                    path_metrics["ce_direction"][instrument]["endpoints"][
+                        "day3"
+                    ]["path_direction_balanced_accuracy"]
+                ),
+                phase2=_percent(
+                    path_metrics["phase2_ce_only"][instrument]["endpoints"][
+                        "day3"
+                    ]["path_direction_balanced_accuracy"]
+                ),
+                zero=_percent(
+                    path_metrics["zero_shot"][instrument]["endpoints"]["day3"][
+                        "path_direction_balanced_accuracy"
+                    ]
+                ),
+            )
+        )
+
+    lines.extend(
+        [
+            "",
+            "## 配对 moving-block bootstrap（day3 generated-path direction）",
+            "",
+            "| Comparison | Block days | Point estimate | 95% CI | P(improvement > 0) |",
+            "|---|---:|---:|---:|---:|",
+        ]
+    )
+    for comparison, blocks in bootstrap.items():
+        for block_name, result in blocks.items():
+            lines.append(
+                "| {comparison} | {days} | {point} | [{lower}, {upper}] | {positive} |".format(
+                    comparison=comparison,
+                    days=result["block_days"],
+                    point=_percent(result["point_estimate"]),
+                    lower=_percent(result["ci_lower_95"]),
+                    upper=_percent(result["ci_upper_95"]),
+                    positive=_percent(result["probability_improvement_positive"]),
+                )
+            )
+
+    lines.extend(
+        [
+            "",
+            "## 逐 fold 路径方向变化",
+            "",
+            "| Fold | CE + direction | Phase 2 CE-only | Zero-shot | Δ vs Phase 2 | Δ vs zero-shot |",
+            "|---|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for fold_id, fold_metrics in sorted(by_fold_metrics.items()):
+        phase3_value = fold_metrics["ce_direction"]["pooled"]["endpoints"][
+            "day3"
+        ]["path_direction_balanced_accuracy"]
+        phase2_value = fold_metrics["phase2_ce_only"]["pooled"]["endpoints"][
+            "day3"
+        ]["path_direction_balanced_accuracy"]
+        zero_value = fold_metrics["zero_shot"]["pooled"]["endpoints"]["day3"][
+            "path_direction_balanced_accuracy"
+        ]
+        lines.append(
+            "| {fold} | {phase3} | {phase2} | {zero} | {delta_phase2} | {delta_zero} |".format(
+                fold=fold_id,
+                phase3=_percent(phase3_value),
+                phase2=_percent(phase2_value),
+                zero=_percent(zero_value),
+                delta_phase2=_percent(phase3_value - phase2_value),
+                delta_zero=_percent(phase3_value - zero_value),
+            )
+        )
+
+    lines.extend(
+        [
+            "",
+            f"![Phase 3 return-space 路径示例]({figure_name})",
+            "",
+            "## 运行信息",
+            "",
+            f"- Elapsed seconds: `{elapsed_seconds:.2f}`",
+            "- 只有生成路径的第三日方向、路径相关性和 DTW 同时改善，才可考虑后续 lambda 或多 seed。",
+            "- 结果仍是已观察历史上的 walk-forward 开发证据；不得作为独立前瞻或可交易结论。",
+            "",
+            f"完整机器可读指标：`{metrics_name}`。",
+        ]
+    )
+    destination = Path(output_path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return destination

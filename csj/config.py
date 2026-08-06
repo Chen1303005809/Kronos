@@ -71,7 +71,13 @@ def validate_config(config: dict[str, Any]) -> None:
         if len(learning_rates) != 2:
             raise ValueError("V2 Phase 2 locks two learning-rate candidates")
         if float(training["direction_smoke_lambda"]) != 0.2:
-            raise ValueError("V2 direction smoke must use lambda_dir=0.2")
+            raise ValueError("V2 Phase 3 direction loss must use lambda_dir=0.2")
+        if int(training.get("direction_batch_size", 0)) < 1:
+            raise ValueError("V2 Phase 3 direction_batch_size must be positive")
+        if int(training.get("dense_batches_per_direction_batch", 0)) < 1:
+            raise ValueError(
+                "V2 Phase 3 dense_batches_per_direction_batch must be positive"
+            )
         walk_forward = config["walk_forward"]
         if int(walk_forward["minimum_train_days"]) != 360:
             raise ValueError("V2 walk-forward minimum_train_days must be 360")
