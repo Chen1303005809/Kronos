@@ -637,9 +637,13 @@ def paired_block_bootstrap_improvement(
             model_actual, model_predicted
         ) - balanced_direction_accuracy(model_actual, baseline_predicted)
 
-    point_estimate = float(
-        compute_metrics(model.reset_index())["direction_balanced_accuracy"]
-    ) - float(compute_metrics(baseline.reset_index())["direction_balanced_accuracy"])
+    point_estimate = balanced_direction_accuracy(
+        model["actual_direction"].to_numpy(dtype=np.int8),
+        model["predicted_direction"].to_numpy(dtype=np.int8),
+    ) - balanced_direction_accuracy(
+        model["actual_direction"].to_numpy(dtype=np.int8),
+        baseline["predicted_direction"].to_numpy(dtype=np.int8),
+    )
     return {
         "samples": int(len(common_index)),
         "unique_days": int(len(dates)),
