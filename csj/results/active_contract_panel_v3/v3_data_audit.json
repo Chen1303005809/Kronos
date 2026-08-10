@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "task": "active_concrete_contract_panel_v3",
+  "archive_root": "/Users/eurus/Code/kronos/Kronos/csj/data/active_contract_snapshots",
+  "snapshot_audit": {
+    "20260810T111948+0800": {
+      "snapshot_at": "2026-08-10T11:19:48",
+      "panel_completeness": "partial_panel",
+      "succeeded_contracts": 32,
+      "failed_contracts": 4,
+      "listed_contracts": 36
+    }
+  },
+  "loaded_contracts": {
+    "i2609": {
+      "product": "i",
+      "bars": 1505,
+      "first_available_bar": "2025-09-12T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2610": {
+      "product": "i",
+      "bars": 1353,
+      "first_available_bar": "2025-10-22T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2611": {
+      "product": "i",
+      "bars": 1234,
+      "first_available_bar": "2025-11-14T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2612": {
+      "product": "i",
+      "bars": 1094,
+      "first_available_bar": "2025-12-12T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2701": {
+      "product": "i",
+      "bars": 935,
+      "first_available_bar": "2026-01-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2702": {
+      "product": "i",
+      "bars": 795,
+      "first_available_bar": "2026-02-24T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2703": {
+      "product": "i",
+      "bars": 699,
+      "first_available_bar": "2026-03-13T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "i2704": {
+      "product": "i",
+      "bars": 547,
+      "first_available_bar": "2026-04-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2609": {
+      "product": "j",
+      "bars": 1492,
+      "first_available_bar": "2025-09-12T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2610": {
+      "product": "j",
+      "bars": 737,
+      "first_available_bar": "2025-10-24T13:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2611": {
+      "product": "j",
+      "bars": 507,
+      "first_available_bar": "2025-11-27T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2612": {
+      "product": "j",
+      "bars": 542,
+      "first_available_bar": "2025-12-29T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2701": {
+      "product": "j",
+      "bars": 930,
+      "first_available_bar": "2026-01-16T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2702": {
+      "product": "j",
+      "bars": 329,
+      "first_available_bar": "2026-02-24T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "j2703": {
+      "product": "j",
+      "bars": 213,
+      "first_available_bar": "2026-03-18T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2608": {
+      "product": "jm",
+      "bars": 1648,
+      "first_available_bar": "2025-08-14T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2609": {
+      "product": "jm",
+      "bars": 1505,
+      "first_available_bar": "2025-09-12T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2610": {
+      "product": "jm",
+      "bars": 1349,
+      "first_available_bar": "2025-10-23T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2611": {
+      "product": "jm",
+      "bars": 1233,
+      "first_available_bar": "2025-11-14T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2612": {
+      "product": "jm",
+      "bars": 1088,
+      "first_available_bar": "2025-12-12T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2701": {
+      "product": "jm",
+      "bars": 935,
+      "first_available_bar": "2026-01-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2702": {
+      "product": "jm",
+      "bars": 787,
+      "first_available_bar": "2026-02-24T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2703": {
+      "product": "jm",
+      "bars": 687,
+      "first_available_bar": "2026-03-16T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "jm2704": {
+      "product": "jm",
+      "bars": 533,
+      "first_available_bar": "2026-04-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2609": {
+      "product": "rb",
+      "bars": 1498,
+      "first_available_bar": "2025-09-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2610": {
+      "product": "rb",
+      "bars": 1388,
+      "first_available_bar": "2025-10-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2611": {
+      "product": "rb",
+      "bars": 1218,
+      "first_available_bar": "2025-11-17T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2612": {
+      "product": "rb",
+      "bars": 1074,
+      "first_available_bar": "2025-12-16T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2701": {
+      "product": "rb",
+      "bars": 942,
+      "first_available_bar": "2026-01-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2702": {
+      "product": "rb",
+      "bars": 769,
+      "first_available_bar": "2026-02-24T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2703": {
+      "product": "rb",
+      "bars": 683,
+      "first_available_bar": "2026-03-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    },
+    "rb2704": {
+      "product": "rb",
+      "bars": 540,
+      "first_available_bar": "2026-04-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "source_snapshots": [
+        "20260810T111948+0800"
+      ]
+    }
+  },
+  "walk_forward": {
+    "minimum_fit_days": 60,
+    "inner_validation_days": 20,
+    "evaluation_days": 20,
+    "step_days": 20,
+    "purge_days": 3,
+    "fold_count": 5
+  },
+  "coverage_by_lookback": {
+    "256": {
+      "lookback": 256,
+      "target_cases": 3071,
+      "strict_pair_cases": 0,
+      "exploratory_partial_pair_cases": 1590,
+      "target_cases_by_product": {
+        "i": 864,
+        "j": 369,
+        "jm": 1032,
+        "rb": 806
+      },
+      "strict_pair_cases_by_product": {},
+      "exploratory_partial_pair_cases_by_product": {
+        "i": 726,
+        "jm": 552,
+        "rb": 312
+      },
+      "strict_pair_cases_by_neighbor_direction": {
+        "earlier": 0,
+        "later": 0
+      },
+      "exploratory_partial_pair_cases_by_neighbor_direction": {
+        "earlier": 40,
+        "later": 1550
+      },
+      "target_rejections": {
+        "target_lacks_context": 996,
+        "target_requires_three_complete_days": 396
+      },
+      "pair_rejections": {
+        "nearest_neighbor_context_timestamp_mismatch": 856,
+        "nearest_neighbor_lacks_context": 623,
+        "selected_stream_has_nonstandard_context_day": 2
+      },
+      "folds": [
+        {
+          "fold_id": "fold_00",
+          "fit_end_day": "2026-01-12T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-01-16T00:00:00",
+            "end_day": "2026-02-12T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-02-26T00:00:00",
+            "end_day": "2026-03-25T00:00:00"
+          },
+          "target_cases": 297,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 123,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_01",
+          "fit_end_day": "2026-02-09T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-02-13T00:00:00",
+            "end_day": "2026-03-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-03-26T00:00:00",
+            "end_day": "2026-04-23T00:00:00"
+          },
+          "target_cases": 359,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 184,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_02",
+          "fit_end_day": "2026-03-17T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-03-23T00:00:00",
+            "end_day": "2026-04-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-04-24T00:00:00",
+            "end_day": "2026-05-26T00:00:00"
+          },
+          "target_cases": 428,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 248,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_03",
+          "fit_end_day": "2026-04-15T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-04-21T00:00:00",
+            "end_day": "2026-05-21T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-05-27T00:00:00",
+            "end_day": "2026-06-24T00:00:00"
+          },
+          "target_cases": 485,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 275,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_04",
+          "fit_end_day": "2026-05-18T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-05-22T00:00:00",
+            "end_day": "2026-06-18T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-06-25T00:00:00",
+            "end_day": "2026-07-22T00:00:00"
+          },
+          "target_cases": 554,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 300,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        }
+      ]
+    },
+    "512": {
+      "lookback": 512,
+      "target_cases": 2057,
+      "strict_pair_cases": 0,
+      "exploratory_partial_pair_cases": 945,
+      "target_cases_by_product": {
+        "i": 570,
+        "j": 219,
+        "jm": 722,
+        "rb": 546
+      },
+      "strict_pair_cases_by_product": {},
+      "exploratory_partial_pair_cases_by_product": {
+        "i": 432,
+        "jm": 303,
+        "rb": 210
+      },
+      "strict_pair_cases_by_neighbor_direction": {
+        "earlier": 0,
+        "later": 0
+      },
+      "exploratory_partial_pair_cases_by_neighbor_direction": {
+        "earlier": 3,
+        "later": 942
+      },
+      "target_rejections": {
+        "target_lacks_context": 2010,
+        "target_requires_three_complete_days": 396
+      },
+      "pair_rejections": {
+        "nearest_neighbor_context_timestamp_mismatch": 499,
+        "nearest_neighbor_lacks_context": 612,
+        "selected_stream_has_nonstandard_context_day": 1
+      },
+      "folds": [
+        {
+          "fold_id": "fold_00",
+          "fit_end_day": "2026-01-12T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-01-16T00:00:00",
+            "end_day": "2026-02-12T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-02-26T00:00:00",
+            "end_day": "2026-03-25T00:00:00"
+          },
+          "target_cases": 185,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 69,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_01",
+          "fit_end_day": "2026-02-09T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-02-13T00:00:00",
+            "end_day": "2026-03-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-03-26T00:00:00",
+            "end_day": "2026-04-23T00:00:00"
+          },
+          "target_cases": 241,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 102,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_02",
+          "fit_end_day": "2026-03-17T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-03-23T00:00:00",
+            "end_day": "2026-04-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-04-24T00:00:00",
+            "end_day": "2026-05-26T00:00:00"
+          },
+          "target_cases": 304,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 126,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_03",
+          "fit_end_day": "2026-04-15T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-04-21T00:00:00",
+            "end_day": "2026-05-21T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-05-27T00:00:00",
+            "end_day": "2026-06-24T00:00:00"
+          },
+          "target_cases": 367,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 172,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        },
+        {
+          "fold_id": "fold_04",
+          "fit_end_day": "2026-05-18T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-05-22T00:00:00",
+            "end_day": "2026-06-18T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-06-25T00:00:00",
+            "end_day": "2026-07-22T00:00:00"
+          },
+          "target_cases": 450,
+          "strict_pair_cases": 0,
+          "exploratory_partial_pair_cases": 252,
+          "strict_pair_cases_by_neighbor_direction": {
+            "earlier": 0,
+            "later": 0
+          }
+        }
+      ]
+    }
+  },
+  "context_length_decision": {
+    "primary_context_length": 256,
+    "rule": "512 requires >=80% strict-pair retention and both directions in every fold",
+    "folds": [
+      {
+        "fold_id": "fold_00",
+        "strict_pair_cases_256": 0,
+        "strict_pair_cases_512": 0,
+        "retention_512_vs_256": null,
+        "directions_512": {
+          "earlier": 0,
+          "later": 0
+        },
+        "passes_512_primary_rule": false
+      },
+      {
+        "fold_id": "fold_01",
+        "strict_pair_cases_256": 0,
+        "strict_pair_cases_512": 0,
+        "retention_512_vs_256": null,
+        "directions_512": {
+          "earlier": 0,
+          "later": 0
+        },
+        "passes_512_primary_rule": false
+      },
+      {
+        "fold_id": "fold_02",
+        "strict_pair_cases_256": 0,
+        "strict_pair_cases_512": 0,
+        "retention_512_vs_256": null,
+        "directions_512": {
+          "earlier": 0,
+          "later": 0
+        },
+        "passes_512_primary_rule": false
+      },
+      {
+        "fold_id": "fold_03",
+        "strict_pair_cases_256": 0,
+        "strict_pair_cases_512": 0,
+        "retention_512_vs_256": null,
+        "directions_512": {
+          "earlier": 0,
+          "later": 0
+        },
+        "passes_512_primary_rule": false
+      },
+      {
+        "fold_id": "fold_04",
+        "strict_pair_cases_256": 0,
+        "strict_pair_cases_512": 0,
+        "retention_512_vs_256": null,
+        "directions_512": {
+          "earlier": 0,
+          "later": 0
+        },
+        "passes_512_primary_rule": false
+      }
+    ],
+    "rationale": "No strict pair cases are available; partial-panel cases remain exploratory and cannot choose the primary context length."
+  }
+}
