@@ -1,0 +1,43 @@
+{
+  "instrument": "i8888",
+  "target_days": [
+    "2025-09-09T00:00:00",
+    "2025-09-10T00:00:00",
+    "2025-09-11T00:00:00"
+  ],
+  "pred_len": 21,
+  "day_end_indices": [
+    6,
+    13,
+    20
+  ],
+  "max_abs_diff": 221.00034141540527,
+  "max_rel_diff": 1.300115012831821e-07,
+  "normalization_roundtrip_max_abs": 2.384185791015625e-07,
+  "per_feature": {
+    "open": {
+      "max_abs_diff": 2.7880284733328153e-05,
+      "max_rel_diff": 3.5240928172512515e-08
+    },
+    "high": {
+      "max_abs_diff": 2.981102772992017e-05,
+      "max_rel_diff": 3.758965130892107e-08
+    },
+    "low": {
+      "max_abs_diff": 2.6897924385593797e-05,
+      "max_rel_diff": 3.407775397390781e-08
+    },
+    "close": {
+      "max_abs_diff": 2.9802663220834802e-05,
+      "max_rel_diff": 3.758195898877689e-08
+    },
+    "volume": {
+      "max_abs_diff": 0.0012285326920391526,
+      "max_rel_diff": 4.272156280212163e-08
+    },
+    "amount": {
+      "max_abs_diff": 221.00034141540527,
+      "max_rel_diff": 1.300115012831821e-07
+    }
+  }
+}

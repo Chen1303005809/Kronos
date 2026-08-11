@@ -1,0 +1,92 @@
+[
+  {
+    "epoch": 1,
+    "train_token_ce": 3.2423287346249534,
+    "validation": {
+      "samples": 97,
+      "direction_samples": 96,
+      "day3_path_balanced_accuracy": 0.5573549257759784,
+      "day3_return_mae": 0.006518031882313568,
+      "mean_return_path_correlation": 0.04730566003698801,
+      "mean_z_normalized_dtw": 0.8361955597128324,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.997504415536154e-06
+  },
+  {
+    "epoch": 2,
+    "train_token_ce": 3.19869035198575,
+    "validation": {
+      "samples": 97,
+      "direction_samples": 96,
+      "day3_path_balanced_accuracy": 0.5748987854251013,
+      "day3_return_mae": 0.006388291510304596,
+      "mean_return_path_correlation": 0.0796821213875134,
+      "mean_z_normalized_dtw": 0.8065653948045232,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.942421427969701e-06
+  },
+  {
+    "epoch": 3,
+    "train_token_ce": 3.1576599450338456,
+    "validation": {
+      "samples": 97,
+      "direction_samples": 96,
+      "day3_path_balanced_accuracy": 0.5836707152496626,
+      "day3_return_mae": 0.00647598937333875,
+      "mean_return_path_correlation": 0.08435341194272557,
+      "mean_z_normalized_dtw": 0.7988055973974448,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.8176308545550703e-06
+  },
+  {
+    "epoch": 4,
+    "train_token_ce": 3.1291623456137523,
+    "validation": {
+      "samples": 97,
+      "direction_samples": 96,
+      "day3_path_balanced_accuracy": 0.5452091767881242,
+      "day3_return_mae": 0.006581927430152189,
+      "mean_return_path_correlation": 0.06118140387681031,
+      "mean_z_normalized_dtw": 0.8122297906956447,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.6291634221247034e-06
+  },
+  {
+    "epoch": 5,
+    "train_token_ce": 3.1065945511772517,
+    "validation": {
+      "samples": 97,
+      "direction_samples": 96,
+      "day3_path_balanced_accuracy": 0.5668016194331984,
+      "day3_return_mae": 0.00657573155065272,
+      "mean_return_path_correlation": 0.08797401077698255,
+      "mean_z_normalized_dtw": 0.8080224645307477,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.3861271551927786e-06
+  },
+  {
+    "epoch": 6,
+    "train_token_ce": 3.085395864077977,
+    "validation": {
+      "samples": 97,
+      "direction_samples": 96,
+      "day3_path_balanced_accuracy": 0.5242914979757085,
+      "day3_return_mae": 0.006528761737381013,
+      "mean_return_path_correlation": 0.09135303062154344,
+      "mean_z_normalized_dtw": 0.8060342145801489,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.1002672144404054e-06
+  }
+]

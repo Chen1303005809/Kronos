@@ -31,7 +31,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
 MODE="${1:-help}"
-PYTHON_BIN="${PYTHON_BIN:-${REPO_ROOT}/.venv/bin/python}"
+PYTHON_BIN="/mnt/RohonDev1/miniconda3/envs/kronos/bin/python"
 CONFIG="${CONFIG:-csj/configs/active_contract_panel_v3.yaml}"
 RUN_ID="${RUN_ID:-v3_cuda}"
 

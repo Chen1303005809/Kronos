@@ -1,0 +1,137 @@
+[
+  {
+    "epoch": 1,
+    "train_token_ce": 3.108233872424351,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.42863247863247866,
+      "day3_return_mae": 0.019001963540943308,
+      "mean_return_path_correlation": 0.018134407885032355,
+      "mean_z_normalized_dtw": 0.8485273945429874,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.9975690496078484e-06
+  },
+  {
+    "epoch": 2,
+    "train_token_ce": 3.0293614569674716,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.4735042735042735,
+      "day3_return_mae": 0.018408132762025478,
+      "mean_return_path_correlation": 0.03979905979393267,
+      "mean_z_normalized_dtw": 0.8359296746490607,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.942708571571677e-06
+  },
+  {
+    "epoch": 3,
+    "train_token_ce": 2.9685205770342535,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.4950854700854701,
+      "day3_return_mae": 0.018008830834668442,
+      "mean_return_path_correlation": 0.046293300615590185,
+      "mean_z_normalized_dtw": 0.8393798069106974,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.8180927527909447e-06
+  },
+  {
+    "epoch": 4,
+    "train_token_ce": 2.929991004172336,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.48664529914529914,
+      "day3_return_mae": 0.018165239911467335,
+      "mean_return_path_correlation": 0.03624648036173291,
+      "mean_z_normalized_dtw": 0.8407710576209887,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.6297468010397646e-06
+  },
+  {
+    "epoch": 5,
+    "train_token_ce": 2.897190444924858,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.44967948717948714,
+      "day3_return_mae": 0.018682834989440764,
+      "mean_return_path_correlation": 0.06196294446237406,
+      "mean_z_normalized_dtw": 0.8281016525960799,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.386777292865297e-06
+  },
+  {
+    "epoch": 6,
+    "train_token_ce": 2.8658010048812694,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.5422008547008548,
+      "day3_return_mae": 0.018427774216420688,
+      "mean_return_path_correlation": 0.08375711977453555,
+      "mean_z_normalized_dtw": 0.8344875970396957,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.1009318682048194e-06
+  },
+  {
+    "epoch": 7,
+    "train_token_ce": 2.8433502336566367,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.5074786324786325,
+      "day3_return_mae": 0.018310486526706728,
+      "mean_return_path_correlation": 0.08306898835437826,
+      "mean_z_normalized_dtw": 0.8345177863813977,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 1.7860312288898487e-06
+  },
+  {
+    "epoch": 8,
+    "train_token_ce": 2.826586444726151,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.500534188034188,
+      "day3_return_mae": 0.018347315749639877,
+      "mean_return_path_correlation": 0.08029965944161808,
+      "mean_z_normalized_dtw": 0.8378369808047218,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 1.4573009040597632e-06
+  },
+  {
+    "epoch": 9,
+    "train_token_ce": 2.814206318908863,
+    "validation": {
+      "samples": 138,
+      "direction_samples": 137,
+      "day3_path_balanced_accuracy": 0.5221153846153846,
+      "day3_return_mae": 0.018582589703593614,
+      "mean_return_path_correlation": 0.06492061791388277,
+      "mean_z_normalized_dtw": 0.8422775225676848,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 1.1306350918037946e-06
+  }
+]

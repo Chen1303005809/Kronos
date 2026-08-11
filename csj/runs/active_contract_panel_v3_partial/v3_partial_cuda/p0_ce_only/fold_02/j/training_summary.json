@@ -1,0 +1,14 @@
+{
+  "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_cuda/p0_ce_only/fold_02/j/training/best_model.pt",
+  "best_epoch": 1,
+  "best_metrics": {
+    "samples": 37,
+    "direction_samples": 37,
+    "day3_path_balanced_accuracy": 0.49696969696969695,
+    "day3_return_mae": 0.023174849787494633,
+    "mean_return_path_correlation": 0.021923459353189432,
+    "mean_z_normalized_dtw": 0.8423251059335222,
+    "by_product": {}
+  },
+  "elapsed_seconds": 42.92643092293292
+}

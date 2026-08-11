@@ -1,0 +1,44 @@
+{
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_cuda/p1/fold_01/rb/target_only_probe/best_probe_head.pt",
+    "best_epoch": 15,
+    "best_balanced_accuracy": 0.7272727272727273,
+    "elapsed_seconds": 96.20204559201375
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_cuda/p1/fold_01/rb/pair_probe/best_probe_head.pt",
+    "best_epoch": 12,
+    "best_balanced_accuracy": 0.6332288401253918,
+    "elapsed_seconds": 173.61856178194284
+  },
+  "target_only_metrics": {
+    "samples": 68,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5690821256038647,
+    "accuracy": 0.5,
+    "positive_labels": 23,
+    "negative_labels": 45,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "later": {
+        "samples": 68,
+        "balanced_accuracy": 0.5690821256038647
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 68,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5067632850241546,
+    "accuracy": 0.5441176470588235,
+    "positive_labels": 23,
+    "negative_labels": 45,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "later": {
+        "samples": 68,
+        "balanced_accuracy": 0.5067632850241546
+      }
+    }
+  }
+}

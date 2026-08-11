@@ -1,0 +1,147 @@
+{
+  "checkpoint_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/futures_3day_trend/cuda_v2/phase3/training/fold_04/i8888/lr_3e-06_seed_42/best_model.pt",
+  "best_epoch": 1,
+  "best_day3_balanced_accuracy": 0.5574229691876751,
+  "best_day3_return_mae": 0.016877513668473718,
+  "best_z_normalized_dtw": 0.6370804675588958,
+  "best_auxiliary_metrics": {
+    "samples": 58,
+    "endpoints": {
+      "day1": {
+        "direction_samples": 57,
+        "excluded_zero_actual_returns": 1,
+        "aux_direction_balanced_accuracy": 0.5694789081885856,
+        "aux_direction_accuracy": 0.5789473684210527,
+        "actual_direction_counts": {
+          "-1": 26,
+          "0": 1,
+          "1": 31
+        },
+        "predicted_direction_counts": {
+          "-1": 23,
+          "0": 0,
+          "1": 35
+        },
+        "confusion_matrix": {
+          "-1": {
+            "-1": 12,
+            "0": 0,
+            "1": 14
+          },
+          "1": {
+            "-1": 10,
+            "0": 0,
+            "1": 21
+          }
+        },
+        "mean_up_probability": 0.5049781876391378,
+        "mean_bce": 0.6929872109178912
+      },
+      "day2": {
+        "direction_samples": 57,
+        "excluded_zero_actual_returns": 1,
+        "aux_direction_balanced_accuracy": 0.4185185185185185,
+        "aux_direction_accuracy": 0.40350877192982454,
+        "actual_direction_counts": {
+          "-1": 27,
+          "0": 1,
+          "1": 30
+        },
+        "predicted_direction_counts": {
+          "-1": 45,
+          "0": 0,
+          "1": 13
+        },
+        "confusion_matrix": {
+          "-1": {
+            "-1": 19,
+            "0": 0,
+            "1": 8
+          },
+          "1": {
+            "-1": 26,
+            "0": 0,
+            "1": 4
+          }
+        },
+        "mean_up_probability": 0.4750106365516268,
+        "mean_bce": 0.7113256130302161
+      },
+      "day3": {
+        "direction_samples": 55,
+        "excluded_zero_actual_returns": 3,
+        "aux_direction_balanced_accuracy": 0.5259103641456583,
+        "aux_direction_accuracy": 0.43636363636363634,
+        "actual_direction_counts": {
+          "-1": 21,
+          "0": 3,
+          "1": 34
+        },
+        "predicted_direction_counts": {
+          "-1": 50,
+          "0": 0,
+          "1": 8
+        },
+        "confusion_matrix": {
+          "-1": {
+            "-1": 19,
+            "0": 0,
+            "1": 2
+          },
+          "1": {
+            "-1": 29,
+            "0": 0,
+            "1": 5
+          }
+        },
+        "mean_up_probability": 0.46622635783820315,
+        "mean_bce": 0.7051399577747691
+      }
+    }
+  },
+  "elapsed_seconds": 87.4638044508174,
+  "learning_rate": 3e-06,
+  "seed": 42,
+  "lambda_dir": 0.2,
+  "metadata": {
+    "phase": "phase3_ce_direction",
+    "model_source": {
+      "predictor_id": "NeoQuasar/Kronos-small",
+      "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+      "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+      "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426"
+    },
+    "instrument": "i8888",
+    "fold_id": "fold_04",
+    "fit_start": "2023-08-14 00:00:00",
+    "fit_end": "2025-11-07 00:00:00",
+    "inner_validation_start": "2025-11-10 00:00:00",
+    "inner_validation_end": "2026-02-03 00:00:00",
+    "evaluation_start": "2026-02-04 00:00:00",
+    "evaluation_end": "2026-05-12 00:00:00",
+    "normalization": {
+      "context_only": true,
+      "lookback": 256,
+      "clip": 5.0,
+      "epsilon": 1e-05
+    },
+    "dense_horizon": 21,
+    "dense_windows": 3481,
+    "direction_cases": 501,
+    "direction_cases_dropped_all_zero": 0,
+    "lambda_dir": 0.2,
+    "stream_ratio": {
+      "dense_batches_per_direction_batch": 1
+    },
+    "devices": {
+      "training": "cuda",
+      "inner_validation": "cuda",
+      "evaluation": "cuda"
+    },
+    "selection_rule": [
+      "maximize_day3_path_balanced_accuracy",
+      "minimize_day3_return_mae",
+      "minimize_z_normalized_dtw"
+    ]
+  }
+}

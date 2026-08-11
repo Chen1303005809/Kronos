@@ -1,0 +1,136 @@
+{
+  "checkpoint_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/futures_3day_trend/cuda_v2/phase3_smoke/fold_00/i8888/lr_3e-06_seed_42/best_model.pt",
+  "best_epoch": 1,
+  "best_day3_balanced_accuracy": 0.5,
+  "best_day3_return_mae": 0.04251523385295081,
+  "best_z_normalized_dtw": 0.755400431236664,
+  "best_auxiliary_metrics": {
+    "samples": 2,
+    "endpoints": {
+      "day1": {
+        "direction_samples": 2,
+        "excluded_zero_actual_returns": 0,
+        "aux_direction_balanced_accuracy": 0.0,
+        "aux_direction_accuracy": 0.0,
+        "actual_direction_counts": {
+          "-1": 1,
+          "0": 0,
+          "1": 1
+        },
+        "predicted_direction_counts": {
+          "-1": 1,
+          "0": 0,
+          "1": 1
+        },
+        "confusion_matrix": {
+          "-1": {
+            "-1": 0,
+            "0": 0,
+            "1": 1
+          },
+          "1": {
+            "-1": 1,
+            "0": 0,
+            "1": 0
+          }
+        },
+        "mean_up_probability": 0.5031126588582993,
+        "mean_bce": 0.7304444313049316
+      },
+      "day2": {
+        "direction_samples": 2,
+        "excluded_zero_actual_returns": 0,
+        "aux_direction_balanced_accuracy": 0.5,
+        "aux_direction_accuracy": 0.5,
+        "actual_direction_counts": {
+          "-1": 1,
+          "0": 0,
+          "1": 1
+        },
+        "predicted_direction_counts": {
+          "-1": 2,
+          "0": 0,
+          "1": 0
+        },
+        "confusion_matrix": {
+          "-1": {
+            "-1": 1,
+            "0": 0,
+            "1": 0
+          },
+          "1": {
+            "-1": 1,
+            "0": 0,
+            "1": 0
+          }
+        },
+        "mean_up_probability": 0.4496714919805527,
+        "mean_bce": 0.7970584332942963
+      },
+      "day3": {
+        "direction_samples": 2,
+        "excluded_zero_actual_returns": 0,
+        "aux_direction_balanced_accuracy": 1.0,
+        "aux_direction_accuracy": 1.0,
+        "actual_direction_counts": {
+          "-1": 1,
+          "0": 0,
+          "1": 1
+        },
+        "predicted_direction_counts": {
+          "-1": 1,
+          "0": 0,
+          "1": 1
+        },
+        "confusion_matrix": {
+          "-1": {
+            "-1": 1,
+            "0": 0,
+            "1": 0
+          },
+          "1": {
+            "-1": 0,
+            "0": 0,
+            "1": 1
+          }
+        },
+        "mean_up_probability": 0.47733259201049805,
+        "mean_bce": 0.6337605714797974
+      }
+    }
+  },
+  "elapsed_seconds": 1.8482192251831293,
+  "learning_rate": 3e-06,
+  "seed": 42,
+  "lambda_dir": 0.2,
+  "metadata": {
+    "phase": "phase3_ce_direction_smoke",
+    "model_source": {
+      "predictor_id": "NeoQuasar/Kronos-small",
+      "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+      "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+      "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426"
+    },
+    "instrument": "i8888",
+    "fold_id": "fold_00",
+    "fit_start": "2023-08-14 00:00:00",
+    "fit_end": "2024-11-12 00:00:00",
+    "inner_validation_start": "2024-11-13 00:00:00",
+    "inner_validation_end": "2025-02-13 00:00:00",
+    "normalization": {
+      "context_only": true,
+      "lookback": 256,
+      "clip": 5.0,
+      "epsilon": 1e-05
+    },
+    "dense_horizon": 21,
+    "dense_windows": 1813,
+    "direction_cases": 261,
+    "direction_cases_dropped_all_zero": 0,
+    "lambda_dir": 0.2,
+    "stream_ratio": {
+      "dense_batches_per_direction_batch": 1
+    },
+    "smoke_max_batches": 2
+  }
+}

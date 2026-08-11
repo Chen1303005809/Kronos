@@ -1,0 +1,77 @@
+[
+  {
+    "epoch": 1,
+    "train_token_ce": 3.3670596458293773,
+    "validation": {
+      "samples": 41,
+      "direction_samples": 40,
+      "day3_path_balanced_accuracy": 0.510230179028133,
+      "day3_return_mae": 0.014112595804438138,
+      "mean_return_path_correlation": -0.01820758511816786,
+      "mean_z_normalized_dtw": 0.8693808600738304,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.9975536558892034e-06
+  },
+  {
+    "epoch": 2,
+    "train_token_ce": 3.3195706561759666,
+    "validation": {
+      "samples": 41,
+      "direction_samples": 40,
+      "day3_path_balanced_accuracy": 0.5319693094629157,
+      "day3_return_mae": 0.014080523513399418,
+      "mean_return_path_correlation": -0.024244038395446577,
+      "mean_z_normalized_dtw": 0.8688333328151897,
+      "by_product": {}
+    },
+    "improved": true,
+    "learning_rate": 2.942639904763454e-06
+  },
+  {
+    "epoch": 3,
+    "train_token_ce": 3.3025049721753157,
+    "validation": {
+      "samples": 41,
+      "direction_samples": 40,
+      "day3_path_balanced_accuracy": 0.45140664961636834,
+      "day3_return_mae": 0.014195037991704613,
+      "mean_return_path_correlation": -0.054717120364778,
+      "mean_z_normalized_dtw": 0.8983023378536815,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.817982242405877e-06
+  },
+  {
+    "epoch": 4,
+    "train_token_ce": 3.249986939960056,
+    "validation": {
+      "samples": 41,
+      "direction_samples": 40,
+      "day3_path_balanced_accuracy": 0.5242966751918159,
+      "day3_return_mae": 0.014140857078768575,
+      "mean_return_path_correlation": -0.013894416464107457,
+      "mean_z_normalized_dtw": 0.8833492772878417,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.6296071990054165e-06
+  },
+  {
+    "epoch": 5,
+    "train_token_ce": 3.239417455814503,
+    "validation": {
+      "samples": 41,
+      "direction_samples": 40,
+      "day3_path_balanced_accuracy": 0.5025575447570333,
+      "day3_return_mae": 0.014383940452644134,
+      "mean_return_path_correlation": -0.04434949904321185,
+      "mean_z_normalized_dtw": 0.8956751838858366,
+      "by_product": {}
+    },
+    "improved": false,
+    "learning_rate": 2.386621698793015e-06
+  }
+]
