@@ -26,6 +26,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from csj.evaluation_plotter import (
+    DirectionComparisonError,
+    EvaluationArtifacts as DirectionComparisonArtifacts,
+    render_fold_direction_comparison,
+    write_direction_stage_report,
+)
+
 from .p0 import target_path_metrics
 from .pair_probe import probe_metrics
 
@@ -459,6 +466,83 @@ def render_p1_evaluation_report(
     return _verify_artifacts(EvaluationArtifacts(report_path, (overview_path, strata_path)))
 
 
+def _v3_p1_direction_records(
+    records: pd.DataFrame,
+    *,
+    fold_id: str,
+    model: str,
+) -> pd.DataFrame:
+    """Adapt existing V3 probe records to the shared per-fold plot contract.
+
+    V3 predates the common renderer, so its historical records do not carry a
+    fold/model column and represented a zero-return label as ``-1``.  The
+    adapter changes only the in-memory plotting view: it never rewrites the
+    source predictions or their metrics.
+    """
+
+    required = {
+        "case_key",
+        "product",
+        "target_end_day",
+        "target_contract_id",
+        "actual_direction",
+        "predicted_direction",
+        "probability_up",
+        "valid_direction",
+    }
+    missing = sorted(required.difference(records.columns))
+    if missing:
+        raise EvaluationPlotError(
+            f"V3 P1 direction comparison records miss columns: {missing!r}"
+        )
+    adapted = records.copy()
+    invalid = ~adapted["valid_direction"].astype(bool)
+    adapted.loc[invalid, "actual_direction"] = 0
+    adapted.loc[invalid, "predicted_direction"] = 0
+    adapted["fold_id"] = str(fold_id)
+    adapted["model"] = str(model)
+    return adapted
+
+
+def render_p1_fold_direction_comparison(
+    pair_records: pd.DataFrame,
+    target_only_records: pd.DataFrame,
+    *,
+    fold_id: str,
+    output_dir: str | Path,
+    stage: str,
+    metadata: Mapping[str, object],
+) -> DirectionComparisonArtifacts:
+    """Compatibility wrapper for V3's pair-probe per-fold comparison.
+
+    New V4 code imports :mod:`csj.evaluation_plotter` directly.  This wrapper
+    keeps the V3 record schema usable for historical backfills without making
+    V4 depend on the V3 plotting module.
+    """
+
+    try:
+        return render_fold_direction_comparison(
+            {
+                "pair_probe": _v3_p1_direction_records(
+                    pair_records, fold_id=fold_id, model="pair_probe"
+                ),
+                "target_only_probe": _v3_p1_direction_records(
+                    target_only_records,
+                    fold_id=fold_id,
+                    model="target_only_probe",
+                ),
+            },
+            fold_id=fold_id,
+            candidate_model="pair_probe",
+            baseline_model="target_only_probe",
+            output_dir=output_dir,
+            stage=stage,
+            metadata=metadata,
+        )
+    except DirectionComparisonError as exc:
+        raise EvaluationPlotError(str(exc)) from exc
+
+
 __all__ = [
     "EvaluationArtifacts",
     "EvaluationPlotError",
@@ -466,6 +550,8 @@ __all__ = [
     "METRIC_CONTRACT_VERSION",
     "P0_FIXED_METRICS",
     "P1_FIXED_METRICS",
+    "render_p1_fold_direction_comparison",
     "render_p0_evaluation_report",
     "render_p1_evaluation_report",
+    "write_direction_stage_report",
 ]

@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import math
 import time
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Literal, Sequence
@@ -307,9 +308,14 @@ class ProbeTrainingConfig:
             raise ValueError("P1 learning rate, batch size, and epochs must be positive")
         if self.early_stopping_patience < 1 or self.gradient_clip <= 0:
             raise ValueError("P1 early stopping and gradient clip must be positive")
-        if self.sampling_strategy not in {"case_uniform", "prediction_day_uniform"}:
+        if self.sampling_strategy not in {
+            "case_uniform",
+            "prediction_day_uniform",
+            "prediction_day_product_uniform",
+        }:
             raise ValueError(
-                "P1 sampling_strategy must be case_uniform or prediction_day_uniform"
+                "P1 sampling_strategy must be case_uniform, prediction_day_uniform, "
+                "or prediction_day_product_uniform"
             )
 
 
@@ -361,6 +367,20 @@ def prediction_day_uniform_weights(cases: Sequence[PanelCase]) -> torch.Tensor:
     return torch.tensor(weights, dtype=torch.double)
 
 
+def prediction_day_product_uniform_weights(cases: Sequence[PanelCase]) -> torch.Tensor:
+    """Return inverse day×product-count weights for V4 shared probe training."""
+
+    if not cases:
+        raise PairProbeError("Cannot build P1 day-product-balanced weights from zero cases")
+    groups = [
+        (pd.Timestamp(case.origin_trading_day).normalize(), str(case.product))
+        for case in cases
+    ]
+    counts = Counter(groups)
+    weights = [1.0 / float(counts[group]) for group in groups]
+    return torch.tensor(weights, dtype=torch.double)
+
+
 def prediction_day_sampling_summary(
     cases: Sequence[PanelCase],
     *,
@@ -368,7 +388,11 @@ def prediction_day_sampling_summary(
 ) -> dict[str, object]:
     """Persist enough sampler provenance to reproduce a P1 arm exactly."""
 
-    if strategy not in {"case_uniform", "prediction_day_uniform"}:
+    if strategy not in {
+        "case_uniform",
+        "prediction_day_uniform",
+        "prediction_day_product_uniform",
+    }:
         raise PairProbeError(f"Unsupported P1 sampling strategy: {strategy!r}")
     if not cases:
         raise PairProbeError("Cannot summarize P1 sampling from zero cases")
@@ -386,6 +410,17 @@ def prediction_day_sampling_summary(
         weights = prediction_day_uniform_weights(cases)
         day_mass = float(weights.sum().item() / len(counts))
         summary["per_prediction_day_sampling_mass"] = day_mass
+    elif strategy == "prediction_day_product_uniform":
+        groups = [
+            (pd.Timestamp(case.origin_trading_day).normalize(), str(case.product))
+            for case in cases
+        ]
+        group_counts = pd.Series(groups).value_counts()
+        weights = prediction_day_product_uniform_weights(cases)
+        summary["unique_prediction_day_product_groups"] = int(len(group_counts))
+        summary["per_prediction_day_product_sampling_mass"] = float(
+            weights.sum().item() / len(group_counts)
+        )
     return summary
 
 
@@ -398,13 +433,25 @@ def _loader(
     num_workers: int,
     sampling_strategy: str = "case_uniform",
 ) -> DataLoader[Any]:
-    if sampling_strategy not in {"case_uniform", "prediction_day_uniform"}:
+    if sampling_strategy not in {
+        "case_uniform",
+        "prediction_day_uniform",
+        "prediction_day_product_uniform",
+    }:
         raise PairProbeError(f"Unsupported P1 sampling strategy: {sampling_strategy!r}")
     generator = torch.Generator()
     generator.manual_seed(seed)
-    if shuffle and sampling_strategy == "prediction_day_uniform":
+    if shuffle and sampling_strategy in {
+        "prediction_day_uniform",
+        "prediction_day_product_uniform",
+    }:
+        weights = (
+            prediction_day_uniform_weights(dataset.cases)
+            if sampling_strategy == "prediction_day_uniform"
+            else prediction_day_product_uniform_weights(dataset.cases)
+        )
         sampler = WeightedRandomSampler(
-            prediction_day_uniform_weights(dataset.cases),
+            weights,
             num_samples=len(dataset),
             replacement=True,
             generator=generator,

@@ -1,0 +1,72 @@
+experiment:
+  name: observed_contract_cohort_research
+  version: 4
+  result_scope: retrospective_observed_cohort
+  production_eligible: false
+
+data:
+  snapshot_root: csj/data/active_contract_snapshots
+  products: [i, j, jm, rb]
+  # The primary granularity decision intentionally excludes j: it enters the
+  # shared-model transfer report only because its early independent history is
+  # insufficient for a fair per-product comparison.
+  primary_selection_products: [i, jm, rb]
+  transfer_products: [j]
+  lookbacks: [256, 512]
+  lookback: 256
+  valid_bar_counts: [5, 7]
+  clip: 5.0
+  normalization_epsilon: 0.00001
+  data_rule_version: observed-cohort-data-v1
+  selection_rule_version: nearest-available-observed-neighbor-v1
+
+model:
+  tokenizer_id: NeoQuasar/Kronos-Tokenizer-base
+  tokenizer_revision: 0e0117387f39004a9016484a186a908917e22426
+  predictor_id: NeoQuasar/Kronos-small
+  predictor_revision: 901c26c1332695a2a8f243eb2f37243a37bea320
+  max_context: 512
+  cache_dir: csj/artifacts/hf_cache
+
+walk_forward:
+  minimum_fit_days: 60
+  inner_validation_days: 20
+  evaluation_days: 20
+  step_days: 20
+  purge_days: 3
+
+runtime:
+  device: cuda
+
+p0:
+  # Phase 0 is an observed-cohort, paired-case zero-shot/majority baseline.
+  sample_count: 10
+
+p1:
+  seeds: [42, 43, 44]
+  fusion_hidden_dim: 256
+  dropout: 0.0
+  training:
+    learning_rate: 0.0003
+    batch_size: 64
+    max_epochs: 30
+    early_stopping_patience: 5
+    weight_decay: 0.01
+    gradient_clip: 3.0
+    num_workers: 0
+    shared_sampling_strategy: prediction_day_product_uniform
+    per_product_sampling_strategy: prediction_day_uniform
+
+evaluation:
+  sample_count: 10
+  temperature: 1.0
+  top_k: 0
+  top_p: 0.9
+  inference_batch_size: 2
+  random_seed: 20260811
+  bootstrap_iterations: 2000
+  bootstrap_block_days: [5, 10]
+
+output:
+  root: csj/runs/observed_contract_cohort_v4
+  results_root: csj/results/observed_contract_cohort_v4

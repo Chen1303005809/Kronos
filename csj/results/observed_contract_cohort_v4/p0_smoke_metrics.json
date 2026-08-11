@@ -1,0 +1,28 @@
+{
+  "strategy_version": 4,
+  "phase": "p0",
+  "run_id": "v4_cpu_smoke",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "run_mode": "cpu_smoke",
+  "record_count": 1,
+  "zero_shot": {
+    "cases": 1,
+    "valid_direction_cases": 1,
+    "balanced_accuracy": null,
+    "accuracy": 1.0
+  },
+  "majority": {
+    "cases": 1,
+    "valid_direction_cases": 1,
+    "balanced_accuracy": null,
+    "accuracy": 1.0
+  },
+  "direction_stage_report": "/Users/eurus/Code/kronos/Kronos/csj/runs/observed_contract_cohort_v4/v4_cpu_smoke/p0_smoke/evaluation/direction_comparison_report.json"
+}

@@ -1,0 +1,841 @@
+{
+  "strategy_version": 4,
+  "phase": "audit",
+  "run_id": "v4_local_audit",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "data_rule_version": "observed-cohort-data-v1",
+  "selection_rule_version": "nearest-available-observed-neighbor-v1",
+  "cohort": {
+    "manifest_path": "/Users/eurus/Code/kronos/Kronos/csj/data/active_contract_snapshots/20260810T111948+0800/manifest.json",
+    "manifest_sha256": "dea7b83d15c2c4688271f68ec7b4921cda6a464e79e5b4a7724aac0828821009",
+    "snapshot_id": "20260810T111948+0800",
+    "snapshot_at": "2026-08-10T11:19:48",
+    "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+    "payload_sha256": {
+      "i2609": "a33ffb8ac9b645b81226f96b880546572fa3348414dd8815760e47c3a13f5c10",
+      "i2610": "bebfae8ea3c6314348a4ce0246a1572eb54178a94c1169dd20c2157a6366ebba",
+      "i2611": "f706093cece69938cf7f40040036b5474bd4c07e624aa7d959c0ca3f4475c36e",
+      "i2612": "2276be6e7b74f7dfcf027c558ea9a3d893b2288e45ccd2d273428cd37505e6ef",
+      "i2701": "60d3d309716d47881d5b201b4e3b96b4548bb90b4b3ac94b3ed944abb4b00062",
+      "i2702": "5ce16dc62e6a0e6d8bd295a98506526144783af4a156e9cf6c546ce7ac44acae",
+      "i2703": "ca28b002484c029b6fca4b31cb0b9720179e42570e34d0e760d9465f27cbd743",
+      "i2704": "ca472a29ce0dba2fc4b7cd96005e644a04dbdd688ba38e079e628c03be8b68b6",
+      "j2609": "84e0c1bb5da6984e5afc563d1da90e29baf0f4a46d1361f47bb4c55a65dff033",
+      "j2610": "08deb99d002f0c23c91d31ac47667eb56315d6037148bd944a34884e8971d752",
+      "j2611": "e817560c4ac0e423f4b1dfac6f0d10b363ef6fe682ff47fddba1082894c1f55b",
+      "j2612": "30a910bae57a393025e951971d4754d92f6f9295619e6f05c08c350165df9f7f",
+      "j2701": "fa8c210c31c1f2594b544ff135450b6ba650770370645ee6985c4cacd152d0f7",
+      "j2702": "98b8b3def4608af788e5ca8cd2eae5a668354b11c83ac95b7973ab9474c0796a",
+      "j2703": "4f5d539c8e86d0fa926edd8b4b2b98397ffcc380b8d0c8be3aafb4980acae0a2",
+      "jm2608": "b81a470df0c9c0e2393575e31c73eb55702f67d6f4c19abcfd84d0eceebf6ad9",
+      "jm2609": "e4179134d6a50f0e4c64477e5ad8cbd641c3a311ba53f9c5577c27392bcec724",
+      "jm2610": "712b2f14565f7d2777d20c42268ce704831a382c4b1fa7c70c4216352fad8239",
+      "jm2611": "13875161d37efa5534ebb9955909a16f804cef7016339c1dd77afa9338b62f70",
+      "jm2612": "b14878dd918b85b2f20bd5feaa605069a6577cc98420f306c8d4e6f832f852b6",
+      "jm2701": "c66656fc5e0fa8990c891deb06471787e75a152424cb6d2cfcf89edec9ba3a12",
+      "jm2702": "bfbfbcc96fe8964b6a1ba0bab935868342066445c25b560d3659658adf45b437",
+      "jm2703": "f495944f623a6292b6d9105e6769b07df66beb12a1666d5df759504fd8a41fc0",
+      "jm2704": "44f53f0873c5b192de7f00a984db43d657638c5dcd42f71f2c34247f92c20ac5",
+      "rb2609": "f8202acc20cb90e0c47862718f2c630410a372c6338220a164e6a83f3e1fc728",
+      "rb2610": "7fa54d1cdc65108467bd8e8a9e43fde636cd88c7e431855bfa0de319e97d19b0",
+      "rb2611": "6189995d4ce6a8831646a6c620ee47633cb8e84de8890f6e39ab05107e72e57a",
+      "rb2612": "4b57bca0465ecfe3da739c36b8438a457f47e4bba70994b7e472b766b71feb3d",
+      "rb2701": "d3123795622ab23daca91fa050e85594139dd9b3f4d4b0251c664aa8b148c333",
+      "rb2702": "d46df3167ae6f16ab8cd4ed82daa1f0201aecede39e8b9cb9a57d3bd2d686e60",
+      "rb2703": "35f1b40d91fc9a55d4ec3fd6ebdf43b8e2d9326188c729a06a4e3534ac99c8ac",
+      "rb2704": "324d05c17cfa915c43a19aa166683fcb7047fa720a65a5bf328ebaccd1e5286c"
+    },
+    "contracts": {
+      "i2609": {
+        "product": "i",
+        "bars": 1505,
+        "first_available_bar": "2025-09-12T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2609.json",
+        "declared_raw_payload_sha256": "a33ffb8ac9b645b81226f96b880546572fa3348414dd8815760e47c3a13f5c10"
+      },
+      "i2610": {
+        "product": "i",
+        "bars": 1353,
+        "first_available_bar": "2025-10-22T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2610.json",
+        "declared_raw_payload_sha256": "bebfae8ea3c6314348a4ce0246a1572eb54178a94c1169dd20c2157a6366ebba"
+      },
+      "i2611": {
+        "product": "i",
+        "bars": 1234,
+        "first_available_bar": "2025-11-14T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2611.json",
+        "declared_raw_payload_sha256": "f706093cece69938cf7f40040036b5474bd4c07e624aa7d959c0ca3f4475c36e"
+      },
+      "i2612": {
+        "product": "i",
+        "bars": 1094,
+        "first_available_bar": "2025-12-12T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2612.json",
+        "declared_raw_payload_sha256": "2276be6e7b74f7dfcf027c558ea9a3d893b2288e45ccd2d273428cd37505e6ef"
+      },
+      "i2701": {
+        "product": "i",
+        "bars": 935,
+        "first_available_bar": "2026-01-16T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2701.json",
+        "declared_raw_payload_sha256": "60d3d309716d47881d5b201b4e3b96b4548bb90b4b3ac94b3ed944abb4b00062"
+      },
+      "i2702": {
+        "product": "i",
+        "bars": 795,
+        "first_available_bar": "2026-02-24T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2702.json",
+        "declared_raw_payload_sha256": "5ce16dc62e6a0e6d8bd295a98506526144783af4a156e9cf6c546ce7ac44acae"
+      },
+      "i2703": {
+        "product": "i",
+        "bars": 699,
+        "first_available_bar": "2026-03-13T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2703.json",
+        "declared_raw_payload_sha256": "ca28b002484c029b6fca4b31cb0b9720179e42570e34d0e760d9465f27cbd743"
+      },
+      "i2704": {
+        "product": "i",
+        "bars": 547,
+        "first_available_bar": "2026-04-15T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_i2704.json",
+        "declared_raw_payload_sha256": "ca472a29ce0dba2fc4b7cd96005e644a04dbdd688ba38e079e628c03be8b68b6"
+      },
+      "j2609": {
+        "product": "j",
+        "bars": 1492,
+        "first_available_bar": "2025-09-12T22:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2609.json",
+        "declared_raw_payload_sha256": "84e0c1bb5da6984e5afc563d1da90e29baf0f4a46d1361f47bb4c55a65dff033"
+      },
+      "j2610": {
+        "product": "j",
+        "bars": 737,
+        "first_available_bar": "2025-10-24T13:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2610.json",
+        "declared_raw_payload_sha256": "08deb99d002f0c23c91d31ac47667eb56315d6037148bd944a34884e8971d752"
+      },
+      "j2611": {
+        "product": "j",
+        "bars": 507,
+        "first_available_bar": "2025-11-27T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2611.json",
+        "declared_raw_payload_sha256": "e817560c4ac0e423f4b1dfac6f0d10b363ef6fe682ff47fddba1082894c1f55b"
+      },
+      "j2612": {
+        "product": "j",
+        "bars": 542,
+        "first_available_bar": "2025-12-29T22:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2612.json",
+        "declared_raw_payload_sha256": "30a910bae57a393025e951971d4754d92f6f9295619e6f05c08c350165df9f7f"
+      },
+      "j2701": {
+        "product": "j",
+        "bars": 930,
+        "first_available_bar": "2026-01-16T22:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2701.json",
+        "declared_raw_payload_sha256": "fa8c210c31c1f2594b544ff135450b6ba650770370645ee6985c4cacd152d0f7"
+      },
+      "j2702": {
+        "product": "j",
+        "bars": 329,
+        "first_available_bar": "2026-02-24T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2702.json",
+        "declared_raw_payload_sha256": "98b8b3def4608af788e5ca8cd2eae5a668354b11c83ac95b7973ab9474c0796a"
+      },
+      "j2703": {
+        "product": "j",
+        "bars": 213,
+        "first_available_bar": "2026-03-18T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_j2703.json",
+        "declared_raw_payload_sha256": "4f5d539c8e86d0fa926edd8b4b2b98397ffcc380b8d0c8be3aafb4980acae0a2"
+      },
+      "jm2608": {
+        "product": "jm",
+        "bars": 1648,
+        "first_available_bar": "2025-08-14T22:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2608.json",
+        "declared_raw_payload_sha256": "b81a470df0c9c0e2393575e31c73eb55702f67d6f4c19abcfd84d0eceebf6ad9"
+      },
+      "jm2609": {
+        "product": "jm",
+        "bars": 1505,
+        "first_available_bar": "2025-09-12T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2609.json",
+        "declared_raw_payload_sha256": "e4179134d6a50f0e4c64477e5ad8cbd641c3a311ba53f9c5577c27392bcec724"
+      },
+      "jm2610": {
+        "product": "jm",
+        "bars": 1349,
+        "first_available_bar": "2025-10-23T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2610.json",
+        "declared_raw_payload_sha256": "712b2f14565f7d2777d20c42268ce704831a382c4b1fa7c70c4216352fad8239"
+      },
+      "jm2611": {
+        "product": "jm",
+        "bars": 1233,
+        "first_available_bar": "2025-11-14T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2611.json",
+        "declared_raw_payload_sha256": "13875161d37efa5534ebb9955909a16f804cef7016339c1dd77afa9338b62f70"
+      },
+      "jm2612": {
+        "product": "jm",
+        "bars": 1088,
+        "first_available_bar": "2025-12-12T22:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2612.json",
+        "declared_raw_payload_sha256": "b14878dd918b85b2f20bd5feaa605069a6577cc98420f306c8d4e6f832f852b6"
+      },
+      "jm2701": {
+        "product": "jm",
+        "bars": 935,
+        "first_available_bar": "2026-01-16T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2701.json",
+        "declared_raw_payload_sha256": "c66656fc5e0fa8990c891deb06471787e75a152424cb6d2cfcf89edec9ba3a12"
+      },
+      "jm2702": {
+        "product": "jm",
+        "bars": 787,
+        "first_available_bar": "2026-02-24T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2702.json",
+        "declared_raw_payload_sha256": "bfbfbcc96fe8964b6a1ba0bab935868342066445c25b560d3659658adf45b437"
+      },
+      "jm2703": {
+        "product": "jm",
+        "bars": 687,
+        "first_available_bar": "2026-03-16T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2703.json",
+        "declared_raw_payload_sha256": "f495944f623a6292b6d9105e6769b07df66beb12a1666d5df759504fd8a41fc0"
+      },
+      "jm2704": {
+        "product": "jm",
+        "bars": 533,
+        "first_available_bar": "2026-04-16T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_jm2704.json",
+        "declared_raw_payload_sha256": "44f53f0873c5b192de7f00a984db43d657638c5dcd42f71f2c34247f92c20ac5"
+      },
+      "rb2609": {
+        "product": "rb",
+        "bars": 1498,
+        "first_available_bar": "2025-09-15T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2609.json",
+        "declared_raw_payload_sha256": "f8202acc20cb90e0c47862718f2c630410a372c6338220a164e6a83f3e1fc728"
+      },
+      "rb2610": {
+        "product": "rb",
+        "bars": 1388,
+        "first_available_bar": "2025-10-15T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2610.json",
+        "declared_raw_payload_sha256": "7fa54d1cdc65108467bd8e8a9e43fde636cd88c7e431855bfa0de319e97d19b0"
+      },
+      "rb2611": {
+        "product": "rb",
+        "bars": 1218,
+        "first_available_bar": "2025-11-17T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2611.json",
+        "declared_raw_payload_sha256": "6189995d4ce6a8831646a6c620ee47633cb8e84de8890f6e39ab05107e72e57a"
+      },
+      "rb2612": {
+        "product": "rb",
+        "bars": 1074,
+        "first_available_bar": "2025-12-16T09:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2612.json",
+        "declared_raw_payload_sha256": "4b57bca0465ecfe3da739c36b8438a457f47e4bba70994b7e472b766b71feb3d"
+      },
+      "rb2701": {
+        "product": "rb",
+        "bars": 942,
+        "first_available_bar": "2026-01-15T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2701.json",
+        "declared_raw_payload_sha256": "d3123795622ab23daca91fa050e85594139dd9b3f4d4b0251c664aa8b148c333"
+      },
+      "rb2702": {
+        "product": "rb",
+        "bars": 769,
+        "first_available_bar": "2026-02-24T22:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2702.json",
+        "declared_raw_payload_sha256": "d46df3167ae6f16ab8cd4ed82daa1f0201aecede39e8b9cb9a57d3bd2d686e60"
+      },
+      "rb2703": {
+        "product": "rb",
+        "bars": 683,
+        "first_available_bar": "2026-03-16T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2703.json",
+        "declared_raw_payload_sha256": "35f1b40d91fc9a55d4ec3fd6ebdf43b8e2d9326188c729a06a4e3534ac99c8ac"
+      },
+      "rb2704": {
+        "product": "rb",
+        "bars": 540,
+        "first_available_bar": "2026-04-15T21:00:00",
+        "last_available_bar": "2026-08-10T11:00:00",
+        "status": "ok",
+        "error": null,
+        "error_type": null,
+        "raw_payload_path": "raw/kline_rb2704.json",
+        "declared_raw_payload_sha256": "324d05c17cfa915c43a19aa166683fcb7047fa720a65a5bf328ebaccd1e5286c"
+      }
+    },
+    "failed_contracts": {
+      "i2608": {
+        "product": "i",
+        "status": "failed",
+        "error": "i2608: provider returned no K-line bars",
+        "error_type": "ActiveContractDataError",
+        "raw_payload_path": "raw/kline_i2608.json",
+        "declared_raw_payload_sha256": "c2af1e3c9ac0b0c4bdfa6e880367bccb004bec1f5a9a36a0a963161b81165ccd"
+      },
+      "j2608": {
+        "product": "j",
+        "status": "failed",
+        "error": "j2608: provider returned no K-line bars",
+        "error_type": "ActiveContractDataError",
+        "raw_payload_path": "raw/kline_j2608.json",
+        "declared_raw_payload_sha256": "bd292d58830b7ad7d08969cdee30330e074a6abba7b07c1407d8abc993470a3a"
+      },
+      "j2704": {
+        "product": "j",
+        "status": "failed",
+        "error": "j2704: provider returned no K-line bars",
+        "error_type": "ActiveContractDataError",
+        "raw_payload_path": "raw/kline_j2704.json",
+        "declared_raw_payload_sha256": "29e2601c279b9698ceb96dcc26acd496843e873b1d573e26ec94ea5358f3f2ef"
+      },
+      "rb2608": {
+        "product": "rb",
+        "status": "failed",
+        "error": "rb2608: provider returned no K-line bars",
+        "error_type": "ActiveContractDataError",
+        "raw_payload_path": "raw/kline_rb2608.json",
+        "declared_raw_payload_sha256": "8aa2bd7713a28a007581d95628ce4f146532247d870c10567302daee86aa1d50"
+      }
+    }
+  },
+  "data_provenance": {
+    "lookback": 256,
+    "clip": 5.0,
+    "normalization_epsilon": 1e-05
+  },
+  "model_provenance": {
+    "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+    "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+    "predictor_id": "NeoQuasar/Kronos-small",
+    "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320"
+  },
+  "walk_forward": {
+    "minimum_fit_days": 60,
+    "inner_validation_days": 20,
+    "evaluation_days": 20,
+    "step_days": 20,
+    "purge_days": 3,
+    "fold_count": 5
+  },
+  "coverage_by_lookback": {
+    "256": {
+      "lookback": 256,
+      "target_cases": 3071,
+      "pair_cases": 2269,
+      "pair_retention_vs_target": 0.7388472810159558,
+      "target_cases_by_product": {
+        "i": 864,
+        "j": 369,
+        "jm": 1032,
+        "rb": 806
+      },
+      "pair_cases_by_product": {
+        "i": 842,
+        "j": 106,
+        "jm": 768,
+        "rb": 553
+      },
+      "pair_cases_by_neighbor_direction": {
+        "earlier": 666,
+        "later": 1603
+      },
+      "target_rejections": {
+        "target_lacks_context": 996,
+        "target_requires_three_complete_days": 396
+      },
+      "pair_rejections": {
+        "candidate_context_timestamp_mismatch": 533,
+        "candidate_lacks_context_at_origin": 267,
+        "context_has_nonstandard_complete_trading_day": 2
+      },
+      "folds": [
+        {
+          "fold_id": "fold_00",
+          "fit_end_day": "2026-01-12T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-01-16T00:00:00",
+            "end_day": "2026-02-12T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-02-26T00:00:00",
+            "end_day": "2026-03-25T00:00:00"
+          },
+          "target_cases": 297,
+          "pair_cases": 190,
+          "pair_cases_by_product": {
+            "i": 83,
+            "jm": 43,
+            "rb": 64
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 67,
+            "later": 123
+          }
+        },
+        {
+          "fold_id": "fold_01",
+          "fit_end_day": "2026-02-09T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-02-13T00:00:00",
+            "end_day": "2026-03-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-03-26T00:00:00",
+            "end_day": "2026-04-23T00:00:00"
+          },
+          "target_cases": 359,
+          "pair_cases": 265,
+          "pair_cases_by_product": {
+            "i": 102,
+            "jm": 71,
+            "rb": 92
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 81,
+            "later": 184
+          }
+        },
+        {
+          "fold_id": "fold_02",
+          "fit_end_day": "2026-03-17T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-03-23T00:00:00",
+            "end_day": "2026-04-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-04-24T00:00:00",
+            "end_day": "2026-05-26T00:00:00"
+          },
+          "target_cases": 428,
+          "pair_cases": 328,
+          "pair_cases_by_product": {
+            "i": 128,
+            "jm": 120,
+            "rb": 80
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 80,
+            "later": 248
+          }
+        },
+        {
+          "fold_id": "fold_03",
+          "fit_end_day": "2026-04-15T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-04-21T00:00:00",
+            "end_day": "2026-05-21T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-05-27T00:00:00",
+            "end_day": "2026-06-24T00:00:00"
+          },
+          "target_cases": 485,
+          "pair_cases": 402,
+          "pair_cases_by_product": {
+            "i": 147,
+            "j": 40,
+            "jm": 135,
+            "rb": 80
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 114,
+            "later": 288
+          }
+        },
+        {
+          "fold_id": "fold_04",
+          "fit_end_day": "2026-05-18T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-05-22T00:00:00",
+            "end_day": "2026-06-18T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-06-25T00:00:00",
+            "end_day": "2026-07-22T00:00:00"
+          },
+          "target_cases": 554,
+          "pair_cases": 408,
+          "pair_cases_by_product": {
+            "i": 160,
+            "j": 40,
+            "jm": 128,
+            "rb": 80
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 108,
+            "later": 300
+          }
+        }
+      ]
+    },
+    "512": {
+      "lookback": 512,
+      "target_cases": 2057,
+      "pair_cases": 1438,
+      "pair_retention_vs_target": 0.699076324744774,
+      "target_cases_by_product": {
+        "i": 570,
+        "j": 219,
+        "jm": 722,
+        "rb": 546
+      },
+      "pair_cases_by_product": {
+        "i": 548,
+        "j": 32,
+        "jm": 464,
+        "rb": 394
+      },
+      "pair_cases_by_neighbor_direction": {
+        "earlier": 480,
+        "later": 958
+      },
+      "target_rejections": {
+        "target_lacks_context": 2010,
+        "target_requires_three_complete_days": 396
+      },
+      "pair_rejections": {
+        "candidate_context_timestamp_mismatch": 291,
+        "candidate_lacks_context_at_origin": 328
+      },
+      "folds": [
+        {
+          "fold_id": "fold_00",
+          "fit_end_day": "2026-01-12T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-01-16T00:00:00",
+            "end_day": "2026-02-12T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-02-26T00:00:00",
+            "end_day": "2026-03-25T00:00:00"
+          },
+          "target_cases": 185,
+          "pair_cases": 129,
+          "pair_cases_by_product": {
+            "i": 49,
+            "jm": 40,
+            "rb": 40
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 60,
+            "later": 69
+          }
+        },
+        {
+          "fold_id": "fold_01",
+          "fit_end_day": "2026-02-09T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-02-13T00:00:00",
+            "end_day": "2026-03-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-03-26T00:00:00",
+            "end_day": "2026-04-23T00:00:00"
+          },
+          "target_cases": 241,
+          "pair_cases": 162,
+          "pair_cases_by_product": {
+            "i": 69,
+            "jm": 40,
+            "rb": 53
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 60,
+            "later": 102
+          }
+        },
+        {
+          "fold_id": "fold_02",
+          "fit_end_day": "2026-03-17T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-03-23T00:00:00",
+            "end_day": "2026-04-20T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-04-24T00:00:00",
+            "end_day": "2026-05-26T00:00:00"
+          },
+          "target_cases": 304,
+          "pair_cases": 199,
+          "pair_cases_by_product": {
+            "i": 86,
+            "jm": 46,
+            "rb": 67
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 73,
+            "later": 126
+          }
+        },
+        {
+          "fold_id": "fold_03",
+          "fit_end_day": "2026-04-15T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-04-21T00:00:00",
+            "end_day": "2026-05-21T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-05-27T00:00:00",
+            "end_day": "2026-06-24T00:00:00"
+          },
+          "target_cases": 367,
+          "pair_cases": 266,
+          "pair_cases_by_product": {
+            "i": 106,
+            "jm": 80,
+            "rb": 80
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 94,
+            "later": 172
+          }
+        },
+        {
+          "fold_id": "fold_04",
+          "fit_end_day": "2026-05-18T00:00:00",
+          "inner_validation": {
+            "start_day": "2026-05-22T00:00:00",
+            "end_day": "2026-06-18T00:00:00"
+          },
+          "evaluation": {
+            "start_day": "2026-06-25T00:00:00",
+            "end_day": "2026-07-22T00:00:00"
+          },
+          "target_cases": 450,
+          "pair_cases": 338,
+          "pair_cases_by_product": {
+            "i": 132,
+            "j": 6,
+            "jm": 120,
+            "rb": 80
+          },
+          "pair_cases_by_neighbor_direction": {
+            "earlier": 83,
+            "later": 255
+          }
+        }
+      ]
+    }
+  },
+  "context_length_decision": {
+    "primary_context_length": 256,
+    "rule": "V4 fixes 256 because observed-cohort 512 pair retention must be >=80%",
+    "overall_retention_512_vs_256": 0.6337593653591891,
+    "passes_512_retention_rule": false,
+    "folds": [
+      {
+        "fold_id": "fold_00",
+        "pair_cases_256": 190,
+        "pair_cases_512": 129,
+        "retention_512_vs_256": 0.6789473684210526,
+        "directions_256": {
+          "earlier": 67,
+          "later": 123
+        },
+        "directions_512": {
+          "earlier": 60,
+          "later": 69
+        }
+      },
+      {
+        "fold_id": "fold_01",
+        "pair_cases_256": 265,
+        "pair_cases_512": 162,
+        "retention_512_vs_256": 0.6113207547169811,
+        "directions_256": {
+          "earlier": 81,
+          "later": 184
+        },
+        "directions_512": {
+          "earlier": 60,
+          "later": 102
+        }
+      },
+      {
+        "fold_id": "fold_02",
+        "pair_cases_256": 328,
+        "pair_cases_512": 199,
+        "retention_512_vs_256": 0.6067073170731707,
+        "directions_256": {
+          "earlier": 80,
+          "later": 248
+        },
+        "directions_512": {
+          "earlier": 73,
+          "later": 126
+        }
+      },
+      {
+        "fold_id": "fold_03",
+        "pair_cases_256": 402,
+        "pair_cases_512": 266,
+        "retention_512_vs_256": 0.6616915422885572,
+        "directions_256": {
+          "earlier": 114,
+          "later": 288
+        },
+        "directions_512": {
+          "earlier": 94,
+          "later": 172
+        }
+      },
+      {
+        "fold_id": "fold_04",
+        "pair_cases_256": 408,
+        "pair_cases_512": 338,
+        "retention_512_vs_256": 0.8284313725490197,
+        "directions_256": {
+          "earlier": 108,
+          "later": 300
+        },
+        "directions_512": {
+          "earlier": 83,
+          "later": 255
+        }
+      }
+    ]
+  }
+}
