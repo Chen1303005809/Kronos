@@ -14,6 +14,8 @@ from csj.v3.pair_probe import (
     PanelProbeDataset,
     assert_same_case_keys,
     paired_block_bootstrap,
+    prediction_day_sampling_summary,
+    prediction_day_uniform_weights,
 )
 from csj.v3.config import load_v3_config
 from csj.v3.experiment import _p1_gate
@@ -216,6 +218,25 @@ def test_target_only_probe_never_encodes_neighbor_and_keeps_head_parameter_count
     assert probe.trainable_parameter_count == pair_probe.trainable_parameter_count
 
 
+def test_prediction_day_uniform_weights_prevent_multi_contract_days_from_dominating() -> None:
+    cases = build_panel_cases(
+        _archive(snapshot_at=pd.Timestamp("2024-01-02 08:00")),
+        lookback=35,
+        products=["rb"],
+    ).strict_pair_cases
+    assert cases
+
+    weights = prediction_day_uniform_weights(cases)
+    days = pd.Series([case.origin_trading_day.normalize() for case in cases])
+    masses = pd.DataFrame({"day": days, "weight": weights.numpy()}).groupby("day")["weight"].sum()
+    summary = prediction_day_sampling_summary(cases, strategy="prediction_day_uniform")
+
+    np.testing.assert_allclose(masses.to_numpy(), np.ones(len(masses)))
+    assert summary["strategy"] == "prediction_day_uniform"
+    assert summary["unique_prediction_days"] == len(masses)
+    assert summary["per_prediction_day_sampling_mass"] == pytest.approx(1.0)
+
+
 def test_paired_block_bootstrap_preserves_case_pairing() -> None:
     days = pd.bdate_range("2024-01-02", periods=6)
     labels = [0, 1, 0, 1, 0, 1]
@@ -282,8 +303,10 @@ def test_v3_config_is_cuda_first_and_disallows_partial_panel_training_by_default
     assert config["data"]["lookbacks"] == [256, 512]
     assert not config["data"]["allow_partial_panel_training"]
     assert config["evaluation"]["bootstrap_block_days"] == [5, 10]
+    assert config["p1"]["training"]["sampling_strategy"] == "prediction_day_uniform"
     assert exploratory["runtime"]["device"] == "cuda"
     assert exploratory["data"]["allow_partial_panel_training"]
+    assert exploratory["p1"]["training"]["sampling_strategy"] == "prediction_day_uniform"
     assert exploratory["output"]["root"].endswith("active_contract_panel_v3_partial")
 
 

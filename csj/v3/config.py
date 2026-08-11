@@ -76,3 +76,9 @@ def validate_v3_config(config: dict[str, Any]) -> None:
     blocks = [int(value) for value in evaluation.get("bootstrap_block_days", [])]
     if blocks != [5, 10]:
         raise ValueError("V3 P1 requires 5-day and 10-day bootstrap blocks")
+    p1_training = config.get("p1", {}).get("training", {})
+    sampling_strategy = str(p1_training.get("sampling_strategy", "prediction_day_uniform"))
+    if sampling_strategy not in {"case_uniform", "prediction_day_uniform"}:
+        raise ValueError(
+            "V3 p1.training.sampling_strategy must be case_uniform or prediction_day_uniform"
+        )

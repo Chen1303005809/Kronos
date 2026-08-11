@@ -13,6 +13,10 @@ import pandas as pd
 import torch
 
 from csj.v3.config import load_v3_config
+from csj.v3.evaluation_plotter import (
+    render_p0_evaluation_report,
+    render_p1_evaluation_report,
+)
 from csj.v3.p0 import (
     P0TrainingConfig,
     ProductDenseWindowDataset,
@@ -375,6 +379,13 @@ class V3Experiment:
                     all_outputs["ce_only"].append(ce_records)
                 finally:
                     self._release(tokenizer, predictor)
+        combined_outputs = {
+            name: pd.concat(records, ignore_index=True)
+            for name, records in all_outputs.items()
+            if records
+        }
+        if not combined_outputs:
+            raise RuntimeError("P0 produced no fold/product records")
         payload: dict[str, object] = {
             "stage": stage,
             "context_length": self.lookback,
@@ -383,15 +394,23 @@ class V3Experiment:
             "formal_panel_conclusion_eligible": not self.uses_partial_panel_training,
             "records": {},
         }
-        for name, records in all_outputs.items():
-            if records:
-                combined = pd.concat(records, ignore_index=True)
-                payload["records"][name] = {
-                    "count": len(combined),
-                    "metrics": target_path_metrics(combined),
-                }
-        if not payload["records"]:
-            raise RuntimeError("P0 produced no fold/product records")
+        for name, combined in combined_outputs.items():
+            payload["records"][name] = {
+                "count": len(combined),
+                "metrics": target_path_metrics(combined),
+            }
+        artifacts = render_p0_evaluation_report(
+            combined_outputs,
+            output_dir=self.run_dir / stage / "evaluation",
+            stage=stage,
+            metadata={
+                "context_length": self.lookback,
+                "device": str(self.device),
+                "result_scope": self.result_scope,
+                "formal_panel_conclusion_eligible": not self.uses_partial_panel_training,
+            },
+        )
+        payload["evaluation_artifacts"] = artifacts.as_dict()
         path = self.results_dir / f"{stage}_metrics.json"
         _write_json(path, payload)
         _write_json(self.run_dir / stage / "metrics.json", payload)
@@ -543,12 +562,14 @@ class V3Experiment:
                                 "checkpoint": target_result.checkpoint_path,
                                 "best_epoch": target_result.best_epoch,
                                 "best_balanced_accuracy": target_result.best_balanced_accuracy,
+                                "sampling": target_result.sampling_summary,
                                 "elapsed_seconds": target_result.elapsed_seconds,
                             },
                             "pair": {
                                 "checkpoint": pair_result.checkpoint_path,
                                 "best_epoch": pair_result.best_epoch,
                                 "best_balanced_accuracy": pair_result.best_balanced_accuracy,
+                                "sampling": pair_result.sampling_summary,
                                 "elapsed_seconds": pair_result.elapsed_seconds,
                             },
                             "target_only_metrics": probe_metrics(target_records),
@@ -606,11 +627,28 @@ class V3Experiment:
             "device": str(self.device),
             "result_scope": self.result_scope,
             "formal_p1_to_p2_eligible": not self.uses_partial_panel_training,
+            "sampling_strategy": training_config.sampling_strategy,
             "record_count": len(combined_pair),
             "folds": list(usable_folds),
             "bootstrap": bootstrap,
             "gate": gate,
         }
+        artifacts = render_p1_evaluation_report(
+            combined_pair,
+            combined_target,
+            bootstrap=bootstrap,
+            gate=gate,
+            output_dir=self.run_dir / "p1" / "evaluation",
+            stage="p1_pair_probe",
+            metadata={
+                "context_length": self.lookback,
+                "device": str(self.device),
+                "result_scope": self.result_scope,
+                "formal_p1_to_p2_eligible": not self.uses_partial_panel_training,
+                "sampling_strategy": training_config.sampling_strategy,
+            },
+        )
+        payload["evaluation_artifacts"] = artifacts.as_dict()
         path = self.results_dir / "p1_pair_probe_metrics.json"
         _write_json(path, payload)
         _write_json(self.run_dir / "p1" / "metrics.json", payload)

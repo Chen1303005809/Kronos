@@ -54,6 +54,9 @@ p1:
     gradient_clip: 3.0
     num_workers: 0
     seed: 42
+    # Equal total sampling mass per target prediction day; paired arms use the
+    # same seeded sampler so the P1 comparison remains controlled.
+    sampling_strategy: prediction_day_uniform
 
 evaluation:
   sample_count: 10

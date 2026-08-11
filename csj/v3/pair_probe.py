@@ -22,7 +22,7 @@ import pandas as pd
 import torch
 from torch import nn
 from torch.nn import functional as F
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 
 from csj.v3.panel_data import PanelCase, case_arrays, normalize_context
 
@@ -300,12 +300,17 @@ class ProbeTrainingConfig:
     gradient_clip: float = 3.0
     num_workers: int = 0
     seed: int = 42
+    sampling_strategy: str = "prediction_day_uniform"
 
     def __post_init__(self) -> None:
         if self.learning_rate <= 0 or self.batch_size < 1 or self.max_epochs < 1:
             raise ValueError("P1 learning rate, batch size, and epochs must be positive")
         if self.early_stopping_patience < 1 or self.gradient_clip <= 0:
             raise ValueError("P1 early stopping and gradient clip must be positive")
+        if self.sampling_strategy not in {"case_uniform", "prediction_day_uniform"}:
+            raise ValueError(
+                "P1 sampling_strategy must be case_uniform or prediction_day_uniform"
+            )
 
 
 @dataclass(frozen=True)
@@ -314,6 +319,7 @@ class ProbeTrainingResult:
     best_epoch: int
     best_balanced_accuracy: float
     history: list[dict[str, object]]
+    sampling_summary: dict[str, object]
     elapsed_seconds: float
 
 
@@ -338,6 +344,51 @@ def _balanced_accuracy(
     )
 
 
+def prediction_day_uniform_weights(cases: Sequence[PanelCase]) -> torch.Tensor:
+    """Return inverse-day-count weights so each prediction day has equal mass.
+
+    Multiple target contracts share a market shock on a prediction day.  Plain
+    case-level shuffling therefore overweights days with more active contracts.
+    This helper implements the V3 strategy's day-grouped sampling rule while
+    preserving equal treatment of cases within any one day.
+    """
+
+    if not cases:
+        raise PairProbeError("Cannot build P1 day-balanced weights from zero cases")
+    days = [pd.Timestamp(case.origin_trading_day).normalize() for case in cases]
+    counts = pd.Series(days).value_counts()
+    weights = [1.0 / float(counts.loc[day]) for day in days]
+    return torch.tensor(weights, dtype=torch.double)
+
+
+def prediction_day_sampling_summary(
+    cases: Sequence[PanelCase],
+    *,
+    strategy: str,
+) -> dict[str, object]:
+    """Persist enough sampler provenance to reproduce a P1 arm exactly."""
+
+    if strategy not in {"case_uniform", "prediction_day_uniform"}:
+        raise PairProbeError(f"Unsupported P1 sampling strategy: {strategy!r}")
+    if not cases:
+        raise PairProbeError("Cannot summarize P1 sampling from zero cases")
+    counts = pd.Series(
+        [pd.Timestamp(case.origin_trading_day).normalize() for case in cases]
+    ).value_counts()
+    summary: dict[str, object] = {
+        "strategy": strategy,
+        "cases": int(len(cases)),
+        "unique_prediction_days": int(len(counts)),
+        "min_cases_per_prediction_day": int(counts.min()),
+        "max_cases_per_prediction_day": int(counts.max()),
+    }
+    if strategy == "prediction_day_uniform":
+        weights = prediction_day_uniform_weights(cases)
+        day_mass = float(weights.sum().item() / len(counts))
+        summary["per_prediction_day_sampling_mass"] = day_mass
+    return summary
+
+
 def _loader(
     dataset: PanelProbeDataset,
     *,
@@ -345,9 +396,26 @@ def _loader(
     shuffle: bool,
     seed: int,
     num_workers: int,
+    sampling_strategy: str = "case_uniform",
 ) -> DataLoader[Any]:
+    if sampling_strategy not in {"case_uniform", "prediction_day_uniform"}:
+        raise PairProbeError(f"Unsupported P1 sampling strategy: {sampling_strategy!r}")
     generator = torch.Generator()
     generator.manual_seed(seed)
+    if shuffle and sampling_strategy == "prediction_day_uniform":
+        sampler = WeightedRandomSampler(
+            prediction_day_uniform_weights(dataset.cases),
+            num_samples=len(dataset),
+            replacement=True,
+            generator=generator,
+        )
+        return DataLoader(
+            dataset,
+            batch_size=batch_size,
+            sampler=sampler,
+            num_workers=num_workers,
+            pin_memory=False,
+        )
     return DataLoader(
         dataset,
         batch_size=batch_size,
@@ -513,11 +581,20 @@ def train_probe(
         shuffle=True,
         seed=config.seed,
         num_workers=config.num_workers,
+        sampling_strategy=config.sampling_strategy,
     )
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
     checkpoint_path = destination / "best_probe_head.pt"
     history_path = destination / "history.json"
+    sampling_summary = prediction_day_sampling_summary(
+        train_dataset.cases,
+        strategy=config.sampling_strategy,
+    )
+    (destination / "sampling.json").write_text(
+        json.dumps(sampling_summary, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
     history: list[dict[str, object]] = []
     best_epoch = 0
     best_score = -float("inf")
@@ -586,6 +663,7 @@ def train_probe(
                     "head_state": probe.head_state_dict(),
                     "validation": validation,
                     "config": config.__dict__,
+                    "sampling": sampling_summary,
                 },
                 checkpoint_path,
             )
@@ -612,6 +690,7 @@ def train_probe(
         best_epoch=best_epoch,
         best_balanced_accuracy=best_score,
         history=history,
+        sampling_summary=sampling_summary,
         elapsed_seconds=time.monotonic() - started_at,
     )
 

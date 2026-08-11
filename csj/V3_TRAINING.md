@@ -61,6 +61,14 @@ CONFIG=csj/configs/active_contract_panel_v3_partial.yaml RUN_ID=v3_partial_cuda 
 
 `full` 依次运行上述阶段。严格配置下，P1 若因数据门槛退出是正确行为：当前唯一快照是 `partial_panel`，且其活跃清单晚于大部分历史预测原点。partial 配置会运行 P1，但每份 P0/P1 输出都会带有 `result_scope: exploratory_partial_panel`；即使统计门槛通过，`passes_p1_to_p2_gate` 也会保持 `false`，不得据此实施 P2。
 
+P1 训练默认使用 `prediction_day_uniform`：每个目标预测日的总采样质量相同，避免同日存在更多活跃合约时被重复放大。target-only 与 pair 使用同一 seed 和同一日级采样协议；每个 arm 的 `sampling.json`、checkpoint 和 `summary.json` 都会记录该协议。当前轮只改变这一采样变量，不同时改变类别权重、分类阈值、融合结构或上下文长度。
+
+## 固化评估图（强制）
+
+每次 P0/P1 模型阶段结束时，训练入口都会强制调用
+`csj.v3.evaluation_plotter`，生成固定指标的 JSON 和 PNG；图表生成失败会使阶段失败。无需增加额外命令，也不能跳过。完整指标契约和产物路径见
+[`V3_EVALUATION_METRICS.md`](V3_EVALUATION_METRICS.md)。
+
 P1 通过所有预注册门槛前，不要实现或运行 P2 条件路径生成：
 
 - Day3 balanced accuracy 相对 target-only Probe 至少提升 2pp；
