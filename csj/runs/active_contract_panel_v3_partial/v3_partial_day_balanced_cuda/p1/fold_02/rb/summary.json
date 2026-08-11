@@ -1,0 +1,60 @@
+{
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/fold_02/rb/target_only_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 86,
+      "unique_prediction_days": 62,
+      "min_cases_per_prediction_day": 1,
+      "max_cases_per_prediction_day": 2,
+      "per_prediction_day_sampling_mass": 1.0
+    },
+    "elapsed_seconds": 50.02876400202513
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/fold_02/rb/pair_probe/best_probe_head.pt",
+    "best_epoch": 5,
+    "best_balanced_accuracy": 0.6009661835748792,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 86,
+      "unique_prediction_days": 62,
+      "min_cases_per_prediction_day": 1,
+      "max_cases_per_prediction_day": 2,
+      "per_prediction_day_sampling_mass": 1.0
+    },
+    "elapsed_seconds": 178.5955271520652
+  },
+  "target_only_metrics": {
+    "samples": 40,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.425,
+    "positive_labels": 17,
+    "negative_labels": 23,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "later": {
+        "samples": 40,
+        "balanced_accuracy": 0.5
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 40,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.3951406649616368,
+    "accuracy": 0.375,
+    "positive_labels": 17,
+    "negative_labels": 23,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "later": {
+        "samples": 40,
+        "balanced_accuracy": 0.3951406649616368
+      }
+    }
+  }
+}

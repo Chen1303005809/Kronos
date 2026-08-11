@@ -1,41 +1,84 @@
 {
-  "stage": "p1_pair_probe",
-  "context_length": 256,
-  "device": "cuda",
-  "result_scope": "exploratory_partial_panel",
-  "formal_p1_to_p2_eligible": false,
-  "sampling_strategy": "prediction_day_uniform",
-  "record_count": 1130,
-  "folds": [
-    "fold_00",
-    "fold_01",
-    "fold_02",
-    "fold_03",
-    "fold_04"
-  ],
-  "bootstrap": {
-    "block_5": {
-      "available": true,
-      "samples": 1116,
-      "unique_days": 100,
-      "iterations": 2000,
-      "block_days": 5,
-      "point_estimate": 0.08927950886134606,
-      "ci_lower_95": 0.015683645703476037,
-      "ci_upper_95": 0.1605528475976882,
-      "probability_improvement_positive": 0.992
+  "metric_contract": {
+    "version": "v3-evaluation-v1",
+    "stage": "p1_pair_probe",
+    "metrics": [
+      {
+        "key": "target_only_balanced_accuracy",
+        "label": "Target-only Day3 balanced accuracy",
+        "optimization": "maximize"
+      },
+      {
+        "key": "pair_balanced_accuracy",
+        "label": "Pair-probe Day3 balanced accuracy",
+        "optimization": "maximize"
+      },
+      {
+        "key": "balanced_accuracy_improvement",
+        "label": "Pair minus target-only balanced accuracy",
+        "optimization": "maximize"
+      },
+      {
+        "key": "bootstrap_5_day_probability_improvement_positive",
+        "label": "5-day block P(improvement > 0)",
+        "optimization": "maximize"
+      },
+      {
+        "key": "bootstrap_10_day_probability_improvement_positive",
+        "label": "10-day block P(improvement > 0)",
+        "optimization": "maximize"
+      }
+    ]
+  },
+  "metadata": {
+    "context_length": 256,
+    "device": "cuda",
+    "result_scope": "exploratory_partial_panel",
+    "formal_p1_to_p2_eligible": false,
+    "sampling_strategy": "prediction_day_uniform"
+  },
+  "coverage": {
+    "pair_cases": 1130,
+    "target_only_cases": 1130,
+    "pair_direction_cases": 1116,
+    "target_only_direction_cases": 1116
+  },
+  "overall": {
+    "target_only_balanced_accuracy": 0.4480578400710452,
+    "pair_balanced_accuracy": 0.5373373489323913,
+    "balanced_accuracy_improvement": 0.08927950886134606,
+    "bootstrap_5_day_probability_improvement_positive": 0.992,
+    "bootstrap_10_day_probability_improvement_positive": 0.9925
+  },
+  "by_product": {
+    "i": {
+      "target_only_balanced_accuracy": 0.5,
+      "pair_balanced_accuracy": 0.5752577319587628,
+      "balanced_accuracy_improvement": 0.07525773195876284,
+      "bootstrap_5_day_probability_improvement_positive": null,
+      "bootstrap_10_day_probability_improvement_positive": null
     },
-    "block_10": {
-      "available": true,
-      "samples": 1116,
-      "unique_days": 100,
-      "iterations": 2000,
-      "block_days": 10,
-      "point_estimate": 0.08927950886134606,
-      "ci_lower_95": 0.015422489884584192,
-      "ci_upper_95": 0.1595799260423581,
-      "probability_improvement_positive": 0.9925
+    "jm": {
+      "target_only_balanced_accuracy": 0.4604575163398693,
+      "pair_balanced_accuracy": 0.5299019607843137,
+      "balanced_accuracy_improvement": 0.06944444444444442,
+      "bootstrap_5_day_probability_improvement_positive": null,
+      "bootstrap_10_day_probability_improvement_positive": null
+    },
+    "rb": {
+      "target_only_balanced_accuracy": 0.37650985378258106,
+      "pair_balanced_accuracy": 0.4847027972027972,
+      "balanced_accuracy_improvement": 0.10819294342021613,
+      "bootstrap_5_day_probability_improvement_positive": null,
+      "bootstrap_10_day_probability_improvement_positive": null
     }
+  },
+  "by_fold": {
+    "fold_00": -0.014306676449009459,
+    "fold_01": 0.02654232424677183,
+    "fold_02": -0.018424352187238813,
+    "fold_03": 0.06242496998799518,
+    "fold_04": 0.03911619539646666
   },
   "gate": {
     "pair_probe": {
@@ -200,12 +243,8 @@
     "formal_complete_panel_provenance": false,
     "passes_p1_to_p2_gate": false
   },
-  "evaluation_artifacts": {
-    "metric_contract_version": "v3-evaluation-v1",
-    "report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/evaluation/evaluation_report.json",
-    "figures": [
-      "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/evaluation/fixed_metrics_overview.png",
-      "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/evaluation/fixed_metrics_strata.png"
-    ]
+  "artifacts": {
+    "overview": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/evaluation/fixed_metrics_overview.png",
+    "strata": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/evaluation/fixed_metrics_strata.png"
   }
 }

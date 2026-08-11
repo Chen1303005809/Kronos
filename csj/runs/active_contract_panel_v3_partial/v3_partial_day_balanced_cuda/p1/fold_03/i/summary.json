@@ -1,0 +1,68 @@
+{
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/fold_03/i/target_only_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5140350877192983,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 194,
+      "unique_prediction_days": 77,
+      "min_cases_per_prediction_day": 1,
+      "max_cases_per_prediction_day": 4,
+      "per_prediction_day_sampling_mass": 1.0000000000000002
+    },
+    "elapsed_seconds": 88.82274867687374
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/fold_03/i/pair_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5157894736842106,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 194,
+      "unique_prediction_days": 77,
+      "min_cases_per_prediction_day": 1,
+      "max_cases_per_prediction_day": 4,
+      "per_prediction_day_sampling_mass": 1.0000000000000002
+    },
+    "elapsed_seconds": 188.62638986110687
+  },
+  "target_only_metrics": {
+    "samples": 130,
+    "excluded_zero_day3_returns": 4,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.2692307692307692,
+    "positive_labels": 35,
+    "negative_labels": 95,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 6,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 124,
+        "balanced_accuracy": 0.5
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 130,
+    "excluded_zero_day3_returns": 4,
+    "balanced_accuracy": 0.5030075187969925,
+    "accuracy": 0.5769230769230769,
+    "positive_labels": 35,
+    "negative_labels": 95,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 6,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 124,
+        "balanced_accuracy": 0.49869281045751634
+      }
+    }
+  }
+}

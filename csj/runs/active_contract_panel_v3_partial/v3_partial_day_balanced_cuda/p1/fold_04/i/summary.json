@@ -1,0 +1,68 @@
+{
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/fold_04/i/target_only_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 292,
+      "unique_prediction_days": 97,
+      "min_cases_per_prediction_day": 1,
+      "max_cases_per_prediction_day": 6,
+      "per_prediction_day_sampling_mass": 1.0000000000000002
+    },
+    "elapsed_seconds": 120.43380469223484
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/active_contract_panel_v3_partial/v3_partial_day_balanced_cuda/p1/fold_04/i/pair_probe/best_probe_head.pt",
+    "best_epoch": 2,
+    "best_balanced_accuracy": 0.5,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 292,
+      "unique_prediction_days": 97,
+      "min_cases_per_prediction_day": 1,
+      "max_cases_per_prediction_day": 6,
+      "per_prediction_day_sampling_mass": 1.0000000000000002
+    },
+    "elapsed_seconds": 293.9792577903718
+  },
+  "target_only_metrics": {
+    "samples": 160,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.55,
+    "positive_labels": 88,
+    "negative_labels": 72,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 20,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 140,
+        "balanced_accuracy": 0.5
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 160,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.55,
+    "positive_labels": 88,
+    "negative_labels": 72,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 20,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 140,
+        "balanced_accuracy": 0.5
+      }
+    }
+  }
+}
