@@ -1,0 +1,96 @@
+{
+  "experiment": {
+    "name": "active_concrete_contract_panel",
+    "version": 3
+  },
+  "data": {
+    "snapshot_root": "/Users/eurus/Code/kronos/Kronos/csj/data/active_contract_snapshots",
+    "products": [
+      "i",
+      "j",
+      "jm",
+      "rb"
+    ],
+    "lookbacks": [
+      256,
+      512
+    ],
+    "valid_bar_counts": [
+      5,
+      7
+    ],
+    "clip": 5.0,
+    "normalization_epsilon": 1e-05,
+    "allow_partial_panel_training": false
+  },
+  "model": {
+    "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+    "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+    "predictor_id": "NeoQuasar/Kronos-small",
+    "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+    "max_context": 512,
+    "cache_dir": "/Users/eurus/Code/kronos/Kronos/csj/artifacts/hf_cache"
+  },
+  "walk_forward": {
+    "minimum_fit_days": 60,
+    "inner_validation_days": 20,
+    "evaluation_days": 20,
+    "step_days": 20,
+    "purge_days": 3
+  },
+  "runtime": {
+    "device": "cpu"
+  },
+  "p0": {
+    "training": {
+      "learning_rate": 3e-06,
+      "batch_size": 32,
+      "max_epochs": 15,
+      "early_stopping_patience": 3,
+      "weight_decay": 0.1,
+      "gradient_clip": 3.0,
+      "warmup_ratio": 0.05,
+      "num_workers": 0,
+      "seed": 42
+    }
+  },
+  "p1": {
+    "fusion_hidden_dim": 256,
+    "dropout": 0.0,
+    "training": {
+      "learning_rate": 0.0003,
+      "batch_size": 64,
+      "max_epochs": 30,
+      "early_stopping_patience": 5,
+      "weight_decay": 0.01,
+      "gradient_clip": 3.0,
+      "num_workers": 0,
+      "seed": 42
+    }
+  },
+  "evaluation": {
+    "sample_count": 10,
+    "temperature": 1.0,
+    "top_k": 0,
+    "top_p": 0.9,
+    "inference_batch_size": 2,
+    "random_seed": 20260810,
+    "bootstrap_iterations": 2000,
+    "bootstrap_block_days": [
+      5,
+      10
+    ]
+  },
+  "output": {
+    "root": "/Users/eurus/Code/kronos/Kronos/csj/runs/active_contract_panel_v3",
+    "results_root": "/Users/eurus/Code/kronos/Kronos/csj/results/active_contract_panel_v3"
+  },
+  "runtime_resolved": {
+    "device": "cpu",
+    "torch": "2.13.0",
+    "cuda_runtime": null,
+    "cuda_device": null,
+    "model_download_allowed": false,
+    "primary_context_length": 256
+  }
+}

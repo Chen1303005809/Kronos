@@ -1,0 +1,78 @@
+[
+  {
+    "epoch": 1,
+    "train_loss": 2.738191755691377,
+    "validation": {
+      "samples": 214,
+      "direction_samples": 211,
+      "direction_balanced_accuracy": 0.5316432937792162,
+      "direction_accuracy": 0.5260663507109005,
+      "return_mae": 0.007078949979600918,
+      "return_bias": -0.0010583336030474532,
+      "return_correlation": 0.01912145265598096,
+      "mean_close_path_correlation": 0.040158831197743196,
+      "mean_range_relative_error": 0.3331663788676326,
+      "mean_up_probability": 0.3962616822429907
+    },
+    "learning_rate": 9.992259220698077e-06,
+    "improved": true,
+    "epoch_seconds": 634.9014738751575
+  },
+  {
+    "epoch": 2,
+    "train_loss": 2.5797048004546967,
+    "validation": {
+      "samples": 214,
+      "direction_samples": 211,
+      "direction_balanced_accuracy": 0.49856166846458105,
+      "direction_accuracy": 0.4928909952606635,
+      "return_mae": 0.007228314082047233,
+      "return_bias": -0.0011587237522158208,
+      "return_correlation": -0.0492725845313023,
+      "mean_close_path_correlation": 0.03588624252152233,
+      "mean_range_relative_error": 0.33245040111977625,
+      "mean_up_probability": 0.3957943925233645
+    },
+    "learning_rate": 9.810662215195492e-06,
+    "improved": false,
+    "epoch_seconds": 535.810037124902
+  },
+  {
+    "epoch": 3,
+    "train_loss": 2.4979116597978197,
+    "validation": {
+      "samples": 214,
+      "direction_samples": 211,
+      "direction_balanced_accuracy": 0.5166307083782812,
+      "direction_accuracy": 0.5118483412322274,
+      "return_mae": 0.007058569991810077,
+      "return_bias": -0.0010101336690603712,
+      "return_correlation": -0.019219148260666622,
+      "mean_close_path_correlation": 0.011163520225160617,
+      "mean_range_relative_error": 0.33390082433883755,
+      "mean_up_probability": 0.3873831775700935
+    },
+    "learning_rate": 9.39627490582247e-06,
+    "improved": false,
+    "epoch_seconds": 518.408862958895
+  },
+  {
+    "epoch": 4,
+    "train_loss": 2.453408323892272,
+    "validation": {
+      "samples": 214,
+      "direction_samples": 211,
+      "direction_balanced_accuracy": 0.5168554476806904,
+      "direction_accuracy": 0.5118483412322274,
+      "return_mae": 0.007025015746493022,
+      "return_bias": -0.000937386600064135,
+      "return_correlation": 0.0003626316746394831,
+      "mean_close_path_correlation": 0.059717206354482355,
+      "mean_range_relative_error": 0.339263713598022,
+      "mean_up_probability": 0.3939252336448598
+    },
+    "learning_rate": 8.76914969770617e-06,
+    "improved": false,
+    "epoch_seconds": 553.5959035418928
+  }
+]

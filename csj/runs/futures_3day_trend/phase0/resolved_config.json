@@ -1,0 +1,96 @@
+{
+  "experiment": {
+    "name": "futures_3day_trend",
+    "version": 2
+  },
+  "data": {
+    "paths": [
+      "/Users/eurus/Code/kronos/Kronos/csj/data/kline_rb8888.json",
+      "/Users/eurus/Code/kronos/Kronos/csj/data/kline_i8888.json"
+    ],
+    "lookback": 256,
+    "dense_horizon": 21,
+    "target_trading_days": 3,
+    "possible_pred_lengths": [
+      15,
+      17,
+      19,
+      21
+    ],
+    "valid_bar_counts": [
+      5,
+      7
+    ],
+    "train_ratio": 0.7,
+    "val_ratio": 0.15,
+    "test_ratio": 0.15,
+    "clip": 5.0,
+    "normalization_epsilon": 1e-05
+  },
+  "model": {
+    "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+    "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+    "predictor_id": "NeoQuasar/Kronos-small",
+    "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+    "max_context": 512,
+    "cache_dir": "/Users/eurus/Code/kronos/Kronos/csj/artifacts/hf_cache"
+  },
+  "walk_forward": {
+    "minimum_train_days": 360,
+    "evaluation_days": 60,
+    "step_days": 60,
+    "inner_validation_days": 60,
+    "require_complete_folds": true
+  },
+  "training": {
+    "per_instrument": true,
+    "learning_rates": [
+      3e-06,
+      1e-05
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "max_epochs": 15,
+    "early_stopping_patience": 3,
+    "batch_size": 32,
+    "direction_batch_size": 32,
+    "num_workers": 0,
+    "weight_decay": 0.1,
+    "gradient_clip": 3.0,
+    "warmup_ratio": 0.05,
+    "dense_batches_per_direction_batch": 1,
+    "ce_only_lambda": 0.0,
+    "direction_smoke_lambda": 0.2,
+    "direction_ablation_lambdas": [
+      0.1,
+      0.3
+    ],
+    "device": "auto"
+  },
+  "evaluation": {
+    "device": "cpu",
+    "sample_count": 10,
+    "smoke_sample_count": 2,
+    "temperature": 1.0,
+    "top_k": 0,
+    "top_p": 0.9,
+    "inference_batch_size": 2,
+    "random_seed": 20260806,
+    "bootstrap_iterations": 2000,
+    "bootstrap_block_days": [
+      5,
+      10
+    ],
+    "path_point_estimate": "median",
+    "momentum_definition": "previous_complete_trading_day_compounded",
+    "turning_point_return_threshold": 0.0005,
+    "direction_threshold": 0.0
+  },
+  "output": {
+    "root": "/Users/eurus/Code/kronos/Kronos/csj/runs/futures_3day_trend",
+    "results_root": "/Users/eurus/Code/kronos/Kronos/csj/results/futures_3day_trend"
+  }
+}

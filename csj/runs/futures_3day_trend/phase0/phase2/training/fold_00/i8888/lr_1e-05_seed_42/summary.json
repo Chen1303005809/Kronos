@@ -1,0 +1,51 @@
+{
+  "checkpoint_path": "/Users/eurus/Code/kronos/Kronos/csj/runs/futures_3day_trend/phase0/phase2/training/fold_00/i8888/lr_1e-05_seed_42/best_model.pt",
+  "best_epoch": 1,
+  "best_day3_balanced_accuracy": 0.5534105534105535,
+  "best_day3_return_mae": 0.01935090871784403,
+  "best_z_normalized_dtw": 0.6215976686248644,
+  "elapsed_seconds": 1512.853907624958,
+  "learning_rate": 1e-05,
+  "seed": 42,
+  "lambda_dir": 0.0,
+  "metadata": {
+    "phase": "phase2_ce_only",
+    "model_source": {
+      "predictor_id": "NeoQuasar/Kronos-small",
+      "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+      "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+      "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426"
+    },
+    "instrument": "i8888",
+    "fold_id": "fold_00",
+    "fit_start": "2023-08-14 00:00:00",
+    "fit_end": "2024-11-12 00:00:00",
+    "inner_validation_start": "2024-11-13 00:00:00",
+    "inner_validation_end": "2025-02-13 00:00:00",
+    "evaluation_start": "2025-02-14 00:00:00",
+    "evaluation_end": "2025-05-14 00:00:00",
+    "normalization": {
+      "context_only": true,
+      "lookback": 256,
+      "clip": 5.0,
+      "epsilon": 1e-05
+    },
+    "dense_horizon": 21,
+    "dense_windows": 1813,
+    "lambda_dir": 0.0,
+    "stream_ratio": {
+      "dense_batches": 1,
+      "direction_batches": 0
+    },
+    "devices": {
+      "training": "mps",
+      "inner_validation": "cpu",
+      "evaluation": "cpu"
+    },
+    "selection_rule": [
+      "maximize_day3_path_balanced_accuracy",
+      "minimize_day3_return_mae",
+      "minimize_z_normalized_dtw"
+    ]
+  }
+}

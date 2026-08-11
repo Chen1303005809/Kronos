@@ -1,0 +1,32 @@
+{
+  "zero_shot": {
+    "samples": 214,
+    "direction_samples": 211,
+    "direction_balanced_accuracy": 0.4886281912980942,
+    "direction_accuracy": 0.4834123222748815,
+    "return_mae": 0.007230320881281668,
+    "return_bias": -0.0010654918940924496,
+    "return_correlation": 0.012699548065311954,
+    "mean_close_path_correlation": -0.04129919356782541,
+    "mean_range_relative_error": 0.3341803734050949,
+    "mean_up_probability": 0.3990654205607477
+  },
+  "majority": {
+    "samples": 214,
+    "direction_samples": 211,
+    "direction_balanced_accuracy": 0.5,
+    "direction_accuracy": 0.4881516587677725,
+    "return_mae": 0.006755639493326865,
+    "return_bias": 0.00043803111107338136,
+    "return_correlation": 0.0
+  },
+  "momentum": {
+    "samples": 214,
+    "direction_samples": 211,
+    "direction_balanced_accuracy": 0.5181139877741819,
+    "direction_accuracy": 0.5165876777251185,
+    "return_mae": 0.009455997938152995,
+    "return_bias": -0.00031094366756819196,
+    "return_correlation": -0.007155128695040571
+  }
+}

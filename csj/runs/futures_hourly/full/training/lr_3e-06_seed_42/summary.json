@@ -1,0 +1,9 @@
+{
+  "checkpoint_path": "/Users/eurus/Code/kronos/Kronos/csj/runs/futures_hourly/full/training/lr_3e-06_seed_42/best_model.pt",
+  "best_epoch": 4,
+  "best_score": 0.5177544048903272,
+  "best_return_mae": 0.007162223755836456,
+  "elapsed_seconds": 4148.11870812485,
+  "learning_rate": 3e-06,
+  "seed": 42
+}

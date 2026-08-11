@@ -1,0 +1,20 @@
+{
+  "selected_learning_rate": 1e-05,
+  "validation_scores": {
+    "1e-06": {
+      "best_score": 0.5219345559151385,
+      "best_return_mae": 0.007104527486000847,
+      "best_epoch": 6
+    },
+    "3e-06": {
+      "best_score": 0.5177544048903272,
+      "best_return_mae": 0.007162223755836456,
+      "best_epoch": 4
+    },
+    "1e-05": {
+      "best_score": 0.5320927723840345,
+      "best_return_mae": 0.007053570727918536,
+      "best_epoch": 5
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "boundaries": {
+    "first_day": "2023-08-11",
+    "train_end": "2025-09-08",
+    "val_end": "2026-02-24",
+    "last_day": "2026-08-03",
+    "train_days": 503,
+    "val_days": 107,
+    "test_days": 109
+  },
+  "forecast_cases": {
+    "train": {
+      "total": 930,
+      "i8888": 465,
+      "rb8888": 465
+    },
+    "val": {
+      "total": 214,
+      "i8888": 107,
+      "rb8888": 107
+    },
+    "test": {
+      "total": 218,
+      "i8888": 109,
+      "rb8888": 109
+    }
+  }
+}

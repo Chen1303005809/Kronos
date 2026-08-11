@@ -1,0 +1,7 @@
+{
+  "source": "exploratory_partial_panel_opt_in",
+  "strict_pair_cases": 0,
+  "partial_pair_cases": 1590,
+  "used_cases": 1590,
+  "formal_p1_to_p2_eligible": false
+}
