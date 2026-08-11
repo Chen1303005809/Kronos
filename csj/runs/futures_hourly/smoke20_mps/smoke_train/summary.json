@@ -1,0 +1,9 @@
+{
+  "checkpoint_path": "/Users/eurus/Code/kronos/Kronos/csj/runs/futures_hourly/smoke20_mps/smoke_train/best_model.pt",
+  "best_epoch": 1,
+  "best_score": 0.0,
+  "best_return_mae": 0.01771244193015825,
+  "elapsed_seconds": 17.677058375207707,
+  "learning_rate": 3e-06,
+  "seed": 42
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "epoch": 1,
+    "train_loss": 2.8316437005996704,
+    "validation": {
+      "samples": 2,
+      "direction_samples": 2,
+      "direction_balanced_accuracy": 0.0,
+      "direction_accuracy": 0.0,
+      "return_mae": 0.016482008941698656,
+      "return_bias": -0.016482008941698656,
+      "return_correlation": 0.9999999999999998,
+      "mean_close_path_correlation": -0.08411020035725136,
+      "mean_range_relative_error": 0.43957377987622226,
+      "mean_up_probability": 0.25
+    },
+    "learning_rate": 0.0,
+    "improved": true,
+    "epoch_seconds": 6.363731083925813
+  }
+]

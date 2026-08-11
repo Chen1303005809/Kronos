@@ -1,0 +1,48 @@
+[
+  {
+    "instrument": "rb8888",
+    "raw_bars": 4999,
+    "clean_bars": 4988,
+    "raw_trading_days": 721,
+    "clean_trading_days": 718,
+    "valid_day_counts": {
+      "5": 19,
+      "7": 699
+    },
+    "removed_days": [
+      {
+        "trading_day": "2023-08-11",
+        "bars": 4
+      },
+      {
+        "trading_day": "2024-04-04",
+        "bars": 1
+      },
+      {
+        "trading_day": "2024-04-30",
+        "bars": 6
+      }
+    ],
+    "first_timestamp": "2023-08-11T21:00:00",
+    "last_timestamp": "2026-08-03T14:00:00"
+  },
+  {
+    "instrument": "i8888",
+    "raw_bars": 4999,
+    "clean_bars": 4993,
+    "raw_trading_days": 720,
+    "clean_trading_days": 719,
+    "valid_day_counts": {
+      "5": 20,
+      "7": 699
+    },
+    "removed_days": [
+      {
+        "trading_day": "2024-04-30",
+        "bars": 6
+      }
+    ],
+    "first_timestamp": "2023-08-11T09:00:00",
+    "last_timestamp": "2026-08-03T14:00:00"
+  }
+]
