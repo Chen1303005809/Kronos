@@ -1,8 +1,19 @@
 # V4 可观测合约 Cohort 与逐 Fold 涨跌图实施计划
 
-> 状态：方案已确认，尚未实施  
-> 日期：2026-08-11  
+> 状态：P0/P1 已完成；P1 gate 未通过，V4 已冻结，不实施 P2/P3
+> 初始方案日期：2026-08-11
+> 最终结论日期：2026-08-12
 > 结果范围：`retrospective_observed_cohort`，仅作研究证据，不作生产有效性或可交易性声明
+
+## 0. V4 最终结论
+
+正式结果见 `csj/results/observed_contract_cohort_v4/p1_granularity_gate.json`：
+
+- shared 的 `pair - target-only` ensemble BA 为 `-4.92pp`，5/10 日 block bootstrap 的 `P(improvement > 0)` 为 `10.20%/7.30%`。
+- per-product 的 `pair - target-only` ensemble BA 为 `-1.89pp`，5/10 日概率为 `24.35%/25.85%`。
+- 两种粒度均未通过预注册 gate，`selected_granularity = null`、`allows_p2 = false`。
+
+因此本文后续 P2/P3 内容只保留为当时的预注册设计，不再执行。下一条研究路线升级为 [`V5_IMPLEMENTATION_PLAN.md`](V5_IMPLEMENTATION_PLAN.md)：去除邻居输入，在全量目标案例上复验 target-only 方向信号，并通过独立桥接 gate 判断该信号能否改善完整路径。
 
 ## 1. 交接摘要
 
@@ -431,4 +442,3 @@ model/tokenizer revisions
 5. 不修改或重写已有 V3 runs/results；图表回填只能新增产物。
 6. 先完成绘图工具和 V3 回填，再开始 V4 数据层。
 7. V4 首轮实施止于 P1 2×2 消融；没有同步结果和 gate 结论时不得提前实现 P2。
-

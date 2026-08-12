@@ -1,0 +1,70 @@
+experiment:
+  name: target_only_direction_guided_path_research
+  version: 5
+  result_scope: retrospective_observed_contracts
+  production_eligible: false
+
+data:
+  snapshot_root: csj/data/active_contract_snapshots
+  products: [i, j, jm, rb]
+  primary_selection_products: [i, jm, rb]
+  transfer_products: [j]
+  lookback: 256
+  valid_bar_counts: [5, 7]
+  clip: 5.0
+  normalization_epsilon: 0.00001
+  data_rule_version: target-only-observed-contract-data-v1
+
+model:
+  tokenizer_id: NeoQuasar/Kronos-Tokenizer-base
+  tokenizer_revision: 0e0117387f39004a9016484a186a908917e22426
+  predictor_id: NeoQuasar/Kronos-small
+  predictor_revision: 901c26c1332695a2a8f243eb2f37243a37bea320
+  max_context: 512
+  cache_dir: csj/artifacts/hf_cache
+
+walk_forward:
+  minimum_fit_days: 60
+  inner_validation_days: 20
+  evaluation_days: 20
+  step_days: 20
+  purge_days: 3
+
+runtime:
+  device: cuda
+
+p0:
+  sample_count: 32
+  temperature: 1.0
+  top_k: 0
+  top_p: 0.9
+  random_seed: 20260812
+  inference_batch_size: 2
+  selection_order:
+    - zero_shot_mean_path
+    - zero_shot_sample_vote
+    - fit_product_majority
+    - context_3day_momentum
+
+p1:
+  seeds: [42, 43, 44]
+  fusion_hidden_dim: 256
+  dropout: 0.0
+  training:
+    learning_rate: 0.0003
+    batch_size: 64
+    max_epochs: 30
+    early_stopping_patience: 5
+    weight_decay: 0.01
+    gradient_clip: 3.0
+    num_workers: 0
+    sampling_strategy: prediction_day_product_uniform
+
+evaluation:
+  bootstrap_iterations: 2000
+  bootstrap_block_days: [5, 10]
+  bootstrap_random_seed: 20260812
+
+output:
+  root: csj/runs/target_only_path_v5
+  results_root: csj/results/target_only_path_v5

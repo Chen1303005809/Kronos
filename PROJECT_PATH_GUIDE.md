@@ -103,7 +103,7 @@ Kronos/
 
 ### `/csj`：期货研究与实验主目录
 
-`csj` 是当前开发最密集的研究体系。它同时保留历史 V1/V2、具体合约面板 V3 和观察 cohort V4，因此必须先按版本分流，不能把所有脚本当作同一条管线。
+`csj` 是当前开发最密集的研究体系。它同时保留历史 V1/V2、具体合约面板 V3、观察 cohort V4 和目标单流路径 V5，因此必须先按版本分流，不能把所有脚本当作同一条管线。
 
 #### `/csj` 目录下的通用源码
 
@@ -129,6 +129,7 @@ Kronos/
 - `active_contract_panel_v3.yaml`：V3 严格完整面板配置，正式结论要求完整历史面板。
 - `active_contract_panel_v3_partial.yaml`：V3 partial panel 探索配置；结果只能作探索性证据。
 - `observed_contract_cohort_v4.yaml`：V4 当前观察 cohort 研究配置，固定 `production_eligible: false`。
+- `target_only_path_v5.yaml`：V5 计划配置，尚未实施；正式实现前以 `V5_IMPLEMENTATION_PLAN.md` 为准。
 
 如果任务涉及训练协议、设备、学习率、窗口或输出位置，先读对应 YAML 和版本文档，不要从已有 JSON 结果反推配置。
 
@@ -162,6 +163,17 @@ V4 不声称重建历史活跃合约面板，而是在当前冻结 cohort 中选
 
 配套设计文档是 `V4_IMPLEMENTATION_PLAN.md`。如果问题是“为什么 V4 不等同于历史生产面板”，先读该文档和 `cohort_data.py` 的模块注释。
 
+V4 已于 P1 冻结：shared 与 per-product 的 pair arm 均未通过邻居增量 gate，`allows_p2: false`。不得实现或运行 V4 P2/P3。
+
+#### V5：target-only 方向引导路径（计划阶段）
+
+V5 去除邻居输入，使用不要求 `has_pair` 的全量目标案例。它先复验 shared target-only 方向信号，再以固定路径库重加权作为分类到完整路径的桥接 gate，最后才允许训练方向条件路径适配器。
+
+- 当前唯一权威设计文档：`csj/V5_IMPLEMENTATION_PLAN.md`。
+- 计划源码目录：`csj/v5/`；当前尚未实施，不能把计划接口写成已完成能力。
+- 计划配置：`csj/configs/target_only_path_v5.yaml`。
+- 计划结果：`csj/results/target_only_path_v5/`，范围固定为 `retrospective_observed_contracts`、`production_eligible: false`。
+
 #### `/csj/utils`：外部数据服务与小工具
 
 - `kline_client.py`：K 线服务客户端、请求和超时边界。
@@ -173,7 +185,9 @@ V4 不声称重建历史活跃合约面板，而是在当前冻结 cohort 中选
 
 - `run_v2_cuda.sh`：V2 三日实验；支持 check、pilot、full、phase1/2/3 和 resume。
 - `run_v3_cuda.sh`：V3 面板实验；支持 audit、P0、P1。
-- `run_v4_cuda.sh`：V4 observed cohort 实验；支持 audit、P0、P1 ablation，P2/P3 仍受 gate 约束。
+- `run_v4_cuda.sh`：V4 observed cohort 实验；支持 audit、P0、P1 ablation。当前 gate 已固定拒绝 P2/P3，不得绕过。
+
+V5 runner 尚未实施；实施后使用独立的 `run_v5_cuda.sh`，不得复用 V4 run/results 目录。
 
 脚本只是编排器，真正的业务逻辑在相应 Python 模块。运行前先确认 `PYTHON_BIN`、`CONFIG`、`RUN_ID` 和 CUDA 环境；不要把 V2、V3、V4 的 run 目录混用。
 
@@ -208,6 +222,7 @@ csj/runs/<strategy>/<run_id>/
 - `active_contract_panel_v3/`：V3 严格配置结果。
 - `active_contract_panel_v3_partial/`：V3 partial 探索结果。
 - `observed_contract_cohort_v4/`：V4 observed cohort 结果。
+- `target_only_path_v5/`：V5 计划结果目录；尚未产生正式结果。
 
 先读 `REPORT.md`、`*_REPORT.md`、`metrics.json`、`*_metrics.json`、`data_audit.json`、`split_summary.json`；只有需要追溯案例、checkpoint 或绘图时才进入对应 `runs`。
 
@@ -247,6 +262,7 @@ csj/runs/<strategy>/<run_id>/
 | V2 三日趋势 | `csj/HANDOFF_3DAY_TREND_V2.md`、`csj/V3_TRAINING.md`、`futures_3day_trend.yaml` | `csj/three_day_*.py`、`trend_model.py` | `csj/results/futures_3day_trend/` |
 | V3 具体合约面板 | `csj/V3_TRAINING.md`、`V3_EVALUATION_METRICS.md` | `csj/v3/`、`csj/active_contract_data.py` | `csj/results/active_contract_panel_v3*/` |
 | V4 observed cohort | `csj/V4_IMPLEMENTATION_PLAN.md` | `csj/v4/` | `csj/results/observed_contract_cohort_v4/` |
+| V5 target-only 路径 | `csj/V5_IMPLEMENTATION_PLAN.md` | `csj/v5/`（计划） | `csj/results/target_only_path_v5/`（计划） |
 | Web UI | `webui/README.md` | `webui/app.py`、`webui/templates/` | `webui/prediction_results/` |
 
 注意：V2 文档文件名中仍可能出现 `V3`（例如三日趋势阶段的历史命名），应以入口模块和 YAML 的 `experiment.version` 为准，不要只按文件名判断版本。
@@ -307,11 +323,11 @@ AGENTS.md → csj/README.md → 对应 csj/configs/*.yaml
          → 对应 tests/test_futures_*.py 或 test_three_day_trend.py
 ```
 
-### 修改 V3/V4 面板研究
+### 修改 V3/V4/V5 具体合约研究
 
 ```text
 AGENTS.md → CONTEXT.md → 对应版本训练/计划文档
-         → 对应 config → csj/v3/ 或 csj/v4/
+         → 对应 config → csj/v3/、csj/v4/ 或 csj/v5/
          → 对应 tests/ → results 汇总 → 必要时追踪 runs
 ```
 
