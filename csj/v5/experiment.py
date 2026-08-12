@@ -173,6 +173,26 @@ def _canonicalize_target_end_day(records: pd.DataFrame, *, label: str) -> pd.Dat
     return output
 
 
+def _canonicalize_direction_truth(records: pd.DataFrame, *, label: str) -> pd.DataFrame:
+    """Use one checked integer representation for shared ground-truth fields."""
+
+    output = records.copy()
+    for column, allowed in (("actual_label", {0, 1}), ("actual_direction", {-1, 0, 1})):
+        if column not in output:
+            raise V5ExperimentError(f"{label} records miss {column}")
+        numeric = pd.to_numeric(output[column], errors="coerce")
+        if numeric.isna().any() or not np.isfinite(numeric.to_numpy(dtype=np.float64)).all():
+            raise V5ExperimentError(f"{label} has non-finite {column}")
+        rounded = np.rint(numeric.to_numpy(dtype=np.float64))
+        if not np.array_equal(numeric.to_numpy(dtype=np.float64), rounded):
+            raise V5ExperimentError(f"{label} has non-integral {column}")
+        values = rounded.astype(np.int8)
+        if not set(values).issubset(allowed):
+            raise V5ExperimentError(f"{label} has invalid {column} values")
+        output[column] = values
+    return output
+
+
 def _assert_same_direction_records(
     candidate: pd.DataFrame,
     baseline: pd.DataFrame,
@@ -200,6 +220,8 @@ def _assert_same_direction_records(
             raise V5ExperimentError(f"{label}/{side} records contain duplicate case keys")
     candidate = _canonicalize_target_end_day(candidate, label=f"{label}/candidate")
     baseline = _canonicalize_target_end_day(baseline, label=f"{label}/baseline")
+    candidate = _canonicalize_direction_truth(candidate, label=f"{label}/candidate")
+    baseline = _canonicalize_direction_truth(baseline, label=f"{label}/baseline")
     candidate_indexed = candidate.set_index("case_key", verify_integrity=True).sort_index()
     baseline_indexed = baseline.set_index("case_key", verify_integrity=True).sort_index()
     if set(candidate_indexed.index) != set(baseline_indexed.index):
@@ -290,8 +312,11 @@ def _probe_seed_ensemble(records_by_seed: Mapping[int, pd.DataFrame]) -> pd.Data
     ordered = [
         (
             seed,
-            _canonicalize_target_end_day(
-                records_by_seed[seed], label=f"V5 P1 seed {seed}"
+            _canonicalize_direction_truth(
+                _canonicalize_target_end_day(
+                    records_by_seed[seed], label=f"V5 P1 seed {seed}"
+                ),
+                label=f"V5 P1 seed {seed}",
             ),
         )
         for seed in expected

@@ -131,3 +131,24 @@ def test_v5_p1_seed_ensemble_accepts_mixed_cached_and_fresh_dates() -> None:
 
     assert pd.api.types.is_datetime64_any_dtype(ensemble["target_end_day"])
     assert ensemble.loc[0, "target_end_day"] == pd.Timestamp("2026-01-05")
+
+
+def test_v5_p1_alignment_accepts_equivalent_direction_label_dtypes() -> None:
+    """P0 int8 labels and P1/JSON int64 labels have identical semantics."""
+
+    p0_baseline = _direction_records_with_target_end_day(pd.Timestamp("2026-01-05"))
+    p0_baseline["actual_label"] = p0_baseline["actual_label"].astype("int8")
+    p0_baseline["actual_direction"] = p0_baseline["actual_direction"].astype("int8")
+    p1_probe = _direction_records_with_target_end_day(pd.Timestamp("2026-01-05"))
+
+    _assert_same_direction_records(p1_probe, p0_baseline, label="V5 P1/fold_00")
+
+
+def test_v5_p1_alignment_still_rejects_different_actual_labels() -> None:
+    candidate = _direction_records_with_target_end_day(pd.Timestamp("2026-01-05"))
+    baseline = _direction_records_with_target_end_day(pd.Timestamp("2026-01-05"))
+    baseline.loc[0, "actual_label"] = 0
+    baseline.loc[0, "actual_direction"] = -1
+
+    with pytest.raises(V5ExperimentError, match="arms disagree on actual_label"):
+        _assert_same_direction_records(candidate, baseline, label="V5 P1/fold_00")
