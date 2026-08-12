@@ -1,5 +1,9 @@
 # 项目级原则
 
+## 新会话目录入口
+
+每次开始新的会话，先阅读 [`PROJECT_PATH_GUIDE.md`](PROJECT_PATH_GUIDE.md)，再按其中的任务路径进入源码、配置或实验产物。项目 Git 根目录为 `/Users/eurus/Code/kronos/Kronos`；不要从外层工作区或 `csj/runs/`、`csj/artifacts/` 等生成物目录开始全量扫描。
+
 ## 模型评估必须可视化
 
 - 凡是涉及模型评估的分析、实验、报告或结论，都必须生成并提供图表，直观展示预测结果与实际结果的关系。
