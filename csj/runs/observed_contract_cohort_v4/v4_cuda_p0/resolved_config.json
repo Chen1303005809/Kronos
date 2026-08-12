@@ -1,0 +1,106 @@
+{
+  "experiment": {
+    "name": "observed_contract_cohort_research",
+    "version": 4,
+    "result_scope": "retrospective_observed_cohort",
+    "production_eligible": false
+  },
+  "data": {
+    "snapshot_root": "/mnt/data/RohonDev1/csj/Kronos/csj/data/active_contract_snapshots",
+    "products": [
+      "i",
+      "j",
+      "jm",
+      "rb"
+    ],
+    "primary_selection_products": [
+      "i",
+      "jm",
+      "rb"
+    ],
+    "transfer_products": [
+      "j"
+    ],
+    "lookbacks": [
+      256,
+      512
+    ],
+    "lookback": 256,
+    "valid_bar_counts": [
+      5,
+      7
+    ],
+    "clip": 5.0,
+    "normalization_epsilon": 1e-05,
+    "data_rule_version": "observed-cohort-data-v1",
+    "selection_rule_version": "nearest-available-observed-neighbor-v1"
+  },
+  "model": {
+    "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+    "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+    "predictor_id": "NeoQuasar/Kronos-small",
+    "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+    "max_context": 512,
+    "cache_dir": "/mnt/data/RohonDev1/csj/Kronos/csj/artifacts/hf_cache"
+  },
+  "walk_forward": {
+    "minimum_fit_days": 60,
+    "inner_validation_days": 20,
+    "evaluation_days": 20,
+    "step_days": 20,
+    "purge_days": 3
+  },
+  "runtime": {
+    "device": "cuda"
+  },
+  "p0": {
+    "sample_count": 10
+  },
+  "p1": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "fusion_hidden_dim": 256,
+    "dropout": 0.0,
+    "training": {
+      "learning_rate": 0.0003,
+      "batch_size": 64,
+      "max_epochs": 30,
+      "early_stopping_patience": 5,
+      "weight_decay": 0.01,
+      "gradient_clip": 3.0,
+      "num_workers": 0,
+      "shared_sampling_strategy": "prediction_day_product_uniform",
+      "per_product_sampling_strategy": "prediction_day_uniform"
+    }
+  },
+  "evaluation": {
+    "sample_count": 10,
+    "temperature": 1.0,
+    "top_k": 0,
+    "top_p": 0.9,
+    "inference_batch_size": 2,
+    "random_seed": 20260811,
+    "bootstrap_iterations": 2000,
+    "bootstrap_block_days": [
+      5,
+      10
+    ]
+  },
+  "output": {
+    "root": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4",
+    "results_root": "/mnt/data/RohonDev1/csj/Kronos/csj/results/observed_contract_cohort_v4"
+  },
+  "runtime_resolved": {
+    "device_requested": "cuda",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "model_download_allowed": false,
+    "primary_context_length": 256,
+    "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+    "device": "cuda",
+    "cuda_device": "NVIDIA GeForce RTX 4090"
+  }
+}

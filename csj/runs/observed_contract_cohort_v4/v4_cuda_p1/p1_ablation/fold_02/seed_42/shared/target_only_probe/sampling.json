@@ -1,0 +1,9 @@
+{
+  "strategy": "prediction_day_product_uniform",
+  "cases": 544,
+  "unique_prediction_days": 79,
+  "min_cases_per_prediction_day": 2,
+  "max_cases_per_prediction_day": 11,
+  "unique_prediction_day_product_groups": 198,
+  "per_prediction_day_product_sampling_mass": 0.9999999999999999
+}

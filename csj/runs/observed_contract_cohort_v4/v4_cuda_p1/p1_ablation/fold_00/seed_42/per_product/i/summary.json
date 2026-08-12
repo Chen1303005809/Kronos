@@ -1,0 +1,81 @@
+{
+  "strategy_version": 4,
+  "phase": "p1_ablation",
+  "run_id": "v4_cuda_p1",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "seed": 42,
+  "sampling_strategy": "prediction_day_uniform",
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_00/seed_42/per_product/i/target_only_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 34,
+      "unique_prediction_days": 17,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 2,
+      "per_prediction_day_sampling_mass": 1.0
+    },
+    "elapsed_seconds": 31.960367572959512
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_00/seed_42/per_product/i/pair_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 34,
+      "unique_prediction_days": 17,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 2,
+      "per_prediction_day_sampling_mass": 1.0
+    },
+    "elapsed_seconds": 69.52498579397798
+  },
+  "target_only_metrics": {
+    "samples": 83,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.7469879518072289,
+    "positive_labels": 62,
+    "negative_labels": 21,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 20,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 63,
+        "balanced_accuracy": 0.5
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 83,
+    "excluded_zero_day3_returns": 0,
+    "balanced_accuracy": 0.5,
+    "accuracy": 0.7469879518072289,
+    "positive_labels": 62,
+    "negative_labels": 21,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 20,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 63,
+        "balanced_accuracy": 0.5
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "epoch": 1,
+    "train_bce": 0.7209952672322592,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.4851046698872786,
+      "accuracy": 0.51,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.5416666666666666
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "improved": true
+  },
+  {
+    "epoch": 2,
+    "train_bce": 0.6770221789677938,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.5116747181964574,
+      "accuracy": 0.49,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.5
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5231829573934836
+        }
+      }
+    },
+    "improved": true
+  },
+  {
+    "epoch": 3,
+    "train_bce": 0.6658628384272257,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.5036231884057971,
+      "accuracy": 0.53,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.6041666666666666
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5012531328320802
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 4,
+    "train_bce": 0.6112173398335775,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.5,
+      "accuracy": 0.54,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.5
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 5,
+    "train_bce": 0.6337824861208597,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.4931561996779388,
+      "accuracy": 0.51,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.4791666666666667
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5194235588972431
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 6,
+    "train_bce": 0.5802995165189108,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.5112721417069244,
+      "accuracy": 0.54,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.6458333333333334
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 7,
+    "train_bce": 0.6264704465866089,
+    "validation": {
+      "samples": 100,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.47383252818035426,
+      "accuracy": 0.51,
+      "positive_labels": 54,
+      "negative_labels": 46,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 20,
+          "balanced_accuracy": 0.3958333333333333
+        },
+        "later": {
+          "samples": 80,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "improved": false
+  }
+]

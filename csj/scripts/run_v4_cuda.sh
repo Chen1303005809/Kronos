@@ -18,4 +18,4 @@ if [[ $# -gt 0 ]]; then
   shift
 fi
 
-exec .venv/bin/python -m csj.v4.experiment "$STAGE" --device cuda "$@"
+exec /mnt/RohonDev1/miniconda3/envs/kronos/bin/python -m csj.v4.experiment "$STAGE" --device cuda "$@"

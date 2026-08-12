@@ -1,0 +1,81 @@
+{
+  "strategy_version": 4,
+  "phase": "p1_ablation",
+  "run_id": "v4_cuda_p1",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "seed": 44,
+  "sampling_strategy": "prediction_day_uniform",
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_03/seed_44/per_product/rb/target_only_probe/best_probe_head.pt",
+    "best_epoch": 10,
+    "best_balanced_accuracy": 0.5555555555555556,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 237,
+      "unique_prediction_days": 82,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 5,
+      "per_prediction_day_sampling_mass": 1.0000000000000004
+    },
+    "elapsed_seconds": 246.81662175618112
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_03/seed_44/per_product/rb/pair_probe/best_probe_head.pt",
+    "best_epoch": 6,
+    "best_balanced_accuracy": 0.5794117647058823,
+    "sampling": {
+      "strategy": "prediction_day_uniform",
+      "cases": 237,
+      "unique_prediction_days": 82,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 5,
+      "per_prediction_day_sampling_mass": 1.0000000000000004
+    },
+    "elapsed_seconds": 401.0778894261457
+  },
+  "target_only_metrics": {
+    "samples": 78,
+    "excluded_zero_day3_returns": 2,
+    "balanced_accuracy": 0.5454545454545454,
+    "accuracy": 0.48717948717948717,
+    "positive_labels": 34,
+    "negative_labels": 44,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 40,
+        "balanced_accuracy": 0.5454545454545454
+      },
+      "later": {
+        "samples": 38,
+        "balanced_accuracy": 0.5454545454545454
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 78,
+    "excluded_zero_day3_returns": 2,
+    "balanced_accuracy": 0.5340909090909091,
+    "accuracy": 0.47435897435897434,
+    "positive_labels": 34,
+    "negative_labels": 44,
+    "by_product": {},
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 40,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 38,
+        "balanced_accuracy": 0.5681818181818181
+      }
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "strategy_version": 4,
+  "phase": "p1_ablation",
+  "run_id": "v4_cuda_p1",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "seed": 43,
+  "sampling_strategy": "prediction_day_product_uniform",
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_01/seed_43/shared/target_only_probe/best_probe_head.pt",
+    "best_epoch": 6,
+    "best_balanced_accuracy": 0.60022427810485,
+    "sampling": {
+      "strategy": "prediction_day_product_uniform",
+      "cases": 356,
+      "unique_prediction_days": 59,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 10,
+      "unique_prediction_day_product_groups": 138,
+      "per_prediction_day_product_sampling_mass": 1.0
+    },
+    "elapsed_seconds": 326.9119006982073
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_01/seed_43/shared/pair_probe/best_probe_head.pt",
+    "best_epoch": 4,
+    "best_balanced_accuracy": 0.5515839641155033,
+    "sampling": {
+      "strategy": "prediction_day_product_uniform",
+      "cases": 356,
+      "unique_prediction_days": 59,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 10,
+      "unique_prediction_day_product_groups": 138,
+      "per_prediction_day_product_sampling_mass": 1.0
+    },
+    "elapsed_seconds": 590.9601562889293
+  },
+  "target_only_metrics": {
+    "samples": 264,
+    "excluded_zero_day3_returns": 1,
+    "balanced_accuracy": 0.601168672597244,
+    "accuracy": 0.5946969696969697,
+    "positive_labels": 117,
+    "negative_labels": 147,
+    "by_product": {
+      "i": {
+        "samples": 102,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.6315280464216634,
+        "accuracy": 0.6176470588235294,
+        "positive_labels": 55,
+        "negative_labels": 47,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 20,
+            "balanced_accuracy": 0.6458333333333334
+          },
+          "later": {
+            "samples": 82,
+            "balanced_accuracy": 0.6299940369707812
+          }
+        }
+      },
+      "jm": {
+        "samples": 71,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.7272727272727273,
+        "accuracy": 0.6619718309859155,
+        "positive_labels": 27,
+        "negative_labels": 44,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 37,
+            "balanced_accuracy": 0.7307692307692308
+          },
+          "later": {
+            "samples": 34,
+            "balanced_accuracy": 0.7222222222222222
+          }
+        }
+      },
+      "rb": {
+        "samples": 91,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.5535714285714286,
+        "accuracy": 0.5164835164835165,
+        "positive_labels": 35,
+        "negative_labels": 56,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 23,
+            "balanced_accuracy": 0.553030303030303
+          },
+          "later": {
+            "samples": 68,
+            "balanced_accuracy": 0.5371980676328503
+          }
+        }
+      }
+    },
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 80,
+        "balanced_accuracy": 0.6158730158730159
+      },
+      "later": {
+        "samples": 184,
+        "balanced_accuracy": 0.5952893352462936
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 264,
+    "excluded_zero_day3_returns": 1,
+    "balanced_accuracy": 0.5100296528867958,
+    "accuracy": 0.5,
+    "positive_labels": 117,
+    "negative_labels": 147,
+    "by_product": {
+      "i": {
+        "samples": 102,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.5555125725338491,
+        "accuracy": 0.5490196078431373,
+        "positive_labels": 55,
+        "negative_labels": 47,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 20,
+            "balanced_accuracy": 0.4791666666666667
+          },
+          "later": {
+            "samples": 82,
+            "balanced_accuracy": 0.5855694692903995
+          }
+        }
+      },
+      "jm": {
+        "samples": 71,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.5408249158249158,
+        "accuracy": 0.49295774647887325,
+        "positive_labels": 27,
+        "negative_labels": 44,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 37,
+            "balanced_accuracy": 0.45104895104895104
+          },
+          "later": {
+            "samples": 34,
+            "balanced_accuracy": 0.5277777777777778
+          }
+        }
+      },
+      "rb": {
+        "samples": 91,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.49464285714285716,
+        "accuracy": 0.45054945054945056,
+        "positive_labels": 35,
+        "negative_labels": 56,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 23,
+            "balanced_accuracy": 0.6666666666666666
+          },
+          "later": {
+            "samples": 68,
+            "balanced_accuracy": 0.5014492753623189
+          }
+        }
+      }
+    },
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 80,
+        "balanced_accuracy": 0.48412698412698413
+      },
+      "later": {
+        "samples": 184,
+        "balanced_accuracy": 0.5190100430416069
+      }
+    }
+  }
+}

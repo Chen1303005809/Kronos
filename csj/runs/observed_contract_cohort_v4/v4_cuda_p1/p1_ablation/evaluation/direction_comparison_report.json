@@ -1,0 +1,54 @@
+{
+  "evaluation_contract_version": "direction-comparison-v1",
+  "stage": "p1_ablation",
+  "metadata": {
+    "strategy_version": 4,
+    "phase": "p1_ablation",
+    "run_id": "v4_cuda_p1",
+    "result_scope": "retrospective_observed_cohort",
+    "production_eligible": false,
+    "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+    "evaluation_contract_version": "direction-comparison-v1",
+    "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+    "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+    "predictor_id": "NeoQuasar/Kronos-small",
+    "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320"
+  },
+  "fold_artifacts": {
+    "fold_00": {
+      "evaluation_contract_version": "direction-comparison-v1",
+      "report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_00/prediction_vs_actual.json",
+      "figures": [
+        "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_00/prediction_vs_actual.png"
+      ]
+    },
+    "fold_01": {
+      "evaluation_contract_version": "direction-comparison-v1",
+      "report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_01/prediction_vs_actual.json",
+      "figures": [
+        "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_01/prediction_vs_actual.png"
+      ]
+    },
+    "fold_02": {
+      "evaluation_contract_version": "direction-comparison-v1",
+      "report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_02/prediction_vs_actual.json",
+      "figures": [
+        "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_02/prediction_vs_actual.png"
+      ]
+    },
+    "fold_03": {
+      "evaluation_contract_version": "direction-comparison-v1",
+      "report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_03/prediction_vs_actual.json",
+      "figures": [
+        "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_03/prediction_vs_actual.png"
+      ]
+    },
+    "fold_04": {
+      "evaluation_contract_version": "direction-comparison-v1",
+      "report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_04/prediction_vs_actual.json",
+      "figures": [
+        "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/fold_04/prediction_vs_actual.png"
+      ]
+    }
+  }
+}

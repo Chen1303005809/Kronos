@@ -1,0 +1,81 @@
+{
+  "strategy_version": 4,
+  "phase": "p1_ablation",
+  "run_id": "v4_cuda_p1",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "record_counts_by_seed": {
+    "42": {
+      "shared_target_only": 1513,
+      "shared_pair": 1513,
+      "per_product_target_only": 1513,
+      "per_product_pair": 1513
+    },
+    "43": {
+      "shared_target_only": 1513,
+      "shared_pair": 1513,
+      "per_product_target_only": 1513,
+      "per_product_pair": 1513
+    },
+    "44": {
+      "shared_target_only": 1513,
+      "shared_pair": 1513,
+      "per_product_target_only": 1513,
+      "per_product_pair": 1513
+    }
+  },
+  "primary_direction_stage_report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/evaluation/direction_comparison_report.json",
+  "transfer_direction_stage_report": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/transfer_evaluation/direction_comparison_report.json",
+  "auxiliary_shared_transfer": {
+    "available": true,
+    "products": [
+      "j"
+    ],
+    "pair": {
+      "samples": 80,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.5121951219512195,
+      "accuracy": 0.5,
+      "positive_labels": 39,
+      "negative_labels": 41,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 40,
+          "balanced_accuracy": 0.5263157894736842
+        },
+        "later": {
+          "samples": 40,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "target_only": {
+      "samples": 80,
+      "excluded_zero_day3_returns": 0,
+      "balanced_accuracy": 0.4715447154471545,
+      "accuracy": 0.475,
+      "positive_labels": 39,
+      "negative_labels": 41,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 40,
+          "balanced_accuracy": 0.5037593984962406
+        },
+        "later": {
+          "samples": 40,
+          "balanced_accuracy": 0.4292929292929293
+        }
+      }
+    },
+    "balanced_accuracy_improvement": 0.04065040650406504
+  },
+  "gate_path": "/mnt/data/RohonDev1/csj/Kronos/csj/results/observed_contract_cohort_v4/p1_granularity_gate.json"
+}

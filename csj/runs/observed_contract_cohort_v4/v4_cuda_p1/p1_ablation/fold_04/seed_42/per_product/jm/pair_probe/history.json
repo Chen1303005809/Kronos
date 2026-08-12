@@ -1,0 +1,146 @@
+[
+  {
+    "epoch": 1,
+    "train_bce": 0.7221507685525077,
+    "validation": {
+      "samples": 131,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.6141686182669789,
+      "accuracy": 0.6259541984732825,
+      "positive_labels": 70,
+      "negative_labels": 61,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 31,
+          "balanced_accuracy": 0.6281512605042017
+        },
+        "later": {
+          "samples": 100,
+          "balanced_accuracy": 0.6087662337662337
+        }
+      }
+    },
+    "improved": true
+  },
+  {
+    "epoch": 2,
+    "train_bce": 0.7016073295048305,
+    "validation": {
+      "samples": 131,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5060889929742388,
+      "accuracy": 0.4732824427480916,
+      "positive_labels": 70,
+      "negative_labels": 61,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 31,
+          "balanced_accuracy": 0.5
+        },
+        "later": {
+          "samples": 100,
+          "balanced_accuracy": 0.5064935064935066
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 3,
+    "train_bce": 0.7062392915998187,
+    "validation": {
+      "samples": 131,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.4895784543325527,
+      "accuracy": 0.4961832061068702,
+      "positive_labels": 70,
+      "negative_labels": 61,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 31,
+          "balanced_accuracy": 0.38865546218487396
+        },
+        "later": {
+          "samples": 100,
+          "balanced_accuracy": 0.4935064935064935
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 4,
+    "train_bce": 0.7035659125873021,
+    "validation": {
+      "samples": 131,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.59192037470726,
+      "accuracy": 0.5954198473282443,
+      "positive_labels": 70,
+      "negative_labels": 61,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 31,
+          "balanced_accuracy": 0.5840336134453781
+        },
+        "later": {
+          "samples": 100,
+          "balanced_accuracy": 0.5706168831168831
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 5,
+    "train_bce": 0.6865871633802142,
+    "validation": {
+      "samples": 131,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5193208430913349,
+      "accuracy": 0.48854961832061067,
+      "positive_labels": 70,
+      "negative_labels": 61,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 31,
+          "balanced_accuracy": 0.5
+        },
+        "later": {
+          "samples": 100,
+          "balanced_accuracy": 0.5219155844155844
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 6,
+    "train_bce": 0.6654011522020612,
+    "validation": {
+      "samples": 131,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.6129976580796253,
+      "accuracy": 0.5954198473282443,
+      "positive_labels": 70,
+      "negative_labels": 61,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 31,
+          "balanced_accuracy": 0.6134453781512605
+        },
+        "later": {
+          "samples": 100,
+          "balanced_accuracy": 0.6079545454545454
+        }
+      }
+    },
+    "improved": false
+  }
+]

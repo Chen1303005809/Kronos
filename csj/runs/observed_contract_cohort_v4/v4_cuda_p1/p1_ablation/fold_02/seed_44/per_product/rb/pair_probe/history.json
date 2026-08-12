@@ -1,0 +1,170 @@
+[
+  {
+    "epoch": 1,
+    "train_bce": 0.7505325873692831,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.4910714285714286,
+      "accuracy": 0.5714285714285714,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.5
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.5086956521739131
+        }
+      }
+    },
+    "improved": true
+  },
+  {
+    "epoch": 2,
+    "train_bce": 0.7555323243141174,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5357142857142857,
+      "accuracy": 0.5604395604395604,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.5340909090909092
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.5608695652173913
+        }
+      }
+    },
+    "improved": true
+  },
+  {
+    "epoch": 3,
+    "train_bce": 0.6588123440742493,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5,
+      "accuracy": 0.38461538461538464,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.5
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 4,
+    "train_bce": 0.6782207091649374,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5267857142857143,
+      "accuracy": 0.4175824175824176,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.5454545454545454
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.5222222222222223
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 5,
+    "train_bce": 0.6448597311973572,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.4946428571428571,
+      "accuracy": 0.5494505494505495,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.6666666666666666
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.44202898550724634
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 6,
+    "train_bce": 0.6268368164698283,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5142857142857142,
+      "accuracy": 0.6263736263736264,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.5416666666666666
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "improved": false
+  },
+  {
+    "epoch": 7,
+    "train_bce": 0.793239414691925,
+    "validation": {
+      "samples": 91,
+      "excluded_zero_day3_returns": 1,
+      "balanced_accuracy": 0.5339285714285714,
+      "accuracy": 0.6373626373626373,
+      "positive_labels": 35,
+      "negative_labels": 56,
+      "by_product": {},
+      "by_neighbor_direction": {
+        "earlier": {
+          "samples": 23,
+          "balanced_accuracy": 0.5416666666666666
+        },
+        "later": {
+          "samples": 68,
+          "balanced_accuracy": 0.5323671497584541
+        }
+      }
+    },
+    "improved": false
+  }
+]

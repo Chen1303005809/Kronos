@@ -1,0 +1,199 @@
+{
+  "strategy_version": 4,
+  "phase": "p1_ablation",
+  "run_id": "v4_cuda_p1",
+  "result_scope": "retrospective_observed_cohort",
+  "production_eligible": false,
+  "cohort_fingerprint": "1cab0043b4d87f137e65b3855d442ad5e65df602d7a901fff3cd4db2377ffc98",
+  "evaluation_contract_version": "direction-comparison-v1",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "seed": 43,
+  "sampling_strategy": "prediction_day_product_uniform",
+  "target_only": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_02/seed_43/shared/target_only_probe/best_probe_head.pt",
+    "best_epoch": 5,
+    "best_balanced_accuracy": 0.5755056890012642,
+    "sampling": {
+      "strategy": "prediction_day_product_uniform",
+      "cases": 544,
+      "unique_prediction_days": 79,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 11,
+      "unique_prediction_day_product_groups": 198,
+      "per_prediction_day_product_sampling_mass": 0.9999999999999999
+    },
+    "elapsed_seconds": 418.1419288269244
+  },
+  "pair": {
+    "checkpoint": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/observed_contract_cohort_v4/v4_cuda_p1/p1_ablation/fold_02/seed_43/shared/pair_probe/best_probe_head.pt",
+    "best_epoch": 1,
+    "best_balanced_accuracy": 0.5275916561314791,
+    "sampling": {
+      "strategy": "prediction_day_product_uniform",
+      "cases": 544,
+      "unique_prediction_days": 79,
+      "min_cases_per_prediction_day": 2,
+      "max_cases_per_prediction_day": 11,
+      "unique_prediction_day_product_groups": 198,
+      "per_prediction_day_product_sampling_mass": 0.9999999999999999
+    },
+    "elapsed_seconds": 556.6575406859629
+  },
+  "target_only_metrics": {
+    "samples": 324,
+    "excluded_zero_day3_returns": 4,
+    "balanced_accuracy": 0.514179104477612,
+    "accuracy": 0.5462962962962963,
+    "positive_labels": 134,
+    "negative_labels": 190,
+    "by_product": {
+      "i": {
+        "samples": 126,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.49271504623143736,
+        "accuracy": 0.626984126984127,
+        "positive_labels": 43,
+        "negative_labels": 83,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 20,
+            "balanced_accuracy": 0.532967032967033
+          },
+          "later": {
+            "samples": 106,
+            "balanced_accuracy": 0.4849206349206349
+          }
+        }
+      },
+      "jm": {
+        "samples": 119,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.5165242165242165,
+        "accuracy": 0.4957983193277311,
+        "positive_labels": 54,
+        "negative_labels": 65,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 20,
+            "balanced_accuracy": 0.5
+          },
+          "later": {
+            "samples": 99,
+            "balanced_accuracy": 0.5204545454545455
+          }
+        }
+      },
+      "rb": {
+        "samples": 79,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.4658944658944659,
+        "accuracy": 0.4936708860759494,
+        "positive_labels": 37,
+        "negative_labels": 42,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 39,
+            "balanced_accuracy": 0.4473684210526316
+          },
+          "later": {
+            "samples": 40,
+            "balanced_accuracy": 0.4859335038363171
+          }
+        }
+      }
+    },
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 79,
+        "balanced_accuracy": 0.48906048906048905
+      },
+      "later": {
+        "samples": 245,
+        "balanced_accuracy": 0.5267832265254946
+      }
+    }
+  },
+  "pair_metrics": {
+    "samples": 324,
+    "excluded_zero_day3_returns": 4,
+    "balanced_accuracy": 0.5211311861743912,
+    "accuracy": 0.49382716049382713,
+    "positive_labels": 134,
+    "negative_labels": 190,
+    "by_product": {
+      "i": {
+        "samples": 126,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.5208741944522275,
+        "accuracy": 0.5238095238095238,
+        "positive_labels": 43,
+        "negative_labels": 83,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 20,
+            "balanced_accuracy": 0.5
+          },
+          "later": {
+            "samples": 106,
+            "balanced_accuracy": 0.5226190476190476
+          }
+        }
+      },
+      "jm": {
+        "samples": 119,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.4703703703703703,
+        "accuracy": 0.44537815126050423,
+        "positive_labels": 54,
+        "negative_labels": 65,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 20,
+            "balanced_accuracy": 0.5
+          },
+          "later": {
+            "samples": 99,
+            "balanced_accuracy": 0.45909090909090905
+          }
+        }
+      },
+      "rb": {
+        "samples": 79,
+        "excluded_zero_day3_returns": 0,
+        "balanced_accuracy": 0.5347490347490347,
+        "accuracy": 0.5189873417721519,
+        "positive_labels": 37,
+        "negative_labels": 42,
+        "by_product": {},
+        "by_neighbor_direction": {
+          "earlier": {
+            "samples": 39,
+            "balanced_accuracy": 0.5
+          },
+          "later": {
+            "samples": 40,
+            "balanced_accuracy": 0.5255754475703325
+          }
+        }
+      }
+    },
+    "by_neighbor_direction": {
+      "earlier": {
+        "samples": 79,
+        "balanced_accuracy": 0.5
+      },
+      "later": {
+        "samples": 245,
+        "balanced_accuracy": 0.5114586235720257
+      }
+    }
+  }
+}
