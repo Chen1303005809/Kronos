@@ -145,6 +145,34 @@ def _direction_metrics(records: pd.DataFrame) -> dict[str, object]:
     }
 
 
+def _canonicalize_target_end_day(records: pd.DataFrame, *, label: str) -> pd.DataFrame:
+    """Give fresh and JSON-round-tripped records one trading-day representation.
+
+    P0 persists its compact record index as JSON, so ``target_end_day`` comes
+    back as an ISO string.  P1 evaluation produces ``pandas.Timestamp``
+    values.  Both identify the same V5 trading day and must compare equal.
+    Normalize only this declared day key; all other provenance fields remain
+    subject to exact equality checks.
+    """
+
+    if "target_end_day" not in records:
+        raise V5ExperimentError(f"{label} records miss target_end_day")
+    normalized: list[pd.Timestamp] = []
+    for raw_day in records["target_end_day"].tolist():
+        try:
+            day = pd.Timestamp(raw_day)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise V5ExperimentError(f"{label} has an invalid target_end_day: {raw_day!r}") from exc
+        if pd.isna(day):
+            raise V5ExperimentError(f"{label} has a null target_end_day")
+        if day.tzinfo is not None:
+            raise V5ExperimentError(f"{label} target_end_day must be timezone-naive: {raw_day!r}")
+        normalized.append(day.normalize())
+    output = records.copy()
+    output["target_end_day"] = pd.DatetimeIndex(normalized)
+    return output
+
+
 def _assert_same_direction_records(
     candidate: pd.DataFrame,
     baseline: pd.DataFrame,
@@ -170,6 +198,8 @@ def _assert_same_direction_records(
             raise V5ExperimentError(f"{label}/{side} records miss columns: {missing!r}")
         if records["case_key"].duplicated().any():
             raise V5ExperimentError(f"{label}/{side} records contain duplicate case keys")
+    candidate = _canonicalize_target_end_day(candidate, label=f"{label}/candidate")
+    baseline = _canonicalize_target_end_day(baseline, label=f"{label}/baseline")
     candidate_indexed = candidate.set_index("case_key", verify_integrity=True).sort_index()
     baseline_indexed = baseline.set_index("case_key", verify_integrity=True).sort_index()
     if set(candidate_indexed.index) != set(baseline_indexed.index):
@@ -257,7 +287,15 @@ def _probe_seed_ensemble(records_by_seed: Mapping[int, pd.DataFrame]) -> pd.Data
     expected = (42, 43, 44)
     if tuple(sorted(records_by_seed)) != expected:
         raise V5ExperimentError(f"V5 P1 ensemble requires seeds {expected!r}")
-    ordered = [(seed, records_by_seed[seed].copy()) for seed in expected]
+    ordered = [
+        (
+            seed,
+            _canonicalize_target_end_day(
+                records_by_seed[seed], label=f"V5 P1 seed {seed}"
+            ),
+        )
+        for seed in expected
+    ]
     _, first = ordered[0]
     first_indexed = first.set_index("case_key", verify_integrity=True).sort_index()
     probabilities = [first_indexed["probability_up"].to_numpy(dtype=np.float64)]
