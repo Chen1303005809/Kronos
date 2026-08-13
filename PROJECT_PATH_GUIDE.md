@@ -103,7 +103,7 @@ Kronos/
 
 ### `/csj`：期货研究与实验主目录
 
-`csj` 是当前开发最密集的研究体系。它同时保留历史 V1/V2、具体合约面板 V3、观察 cohort V4 和目标单流路径 V5，因此必须先按版本分流，不能把所有脚本当作同一条管线。
+`csj` 是当前开发最密集的研究体系。它同时保留历史 V1/V2、具体合约面板 V3、观察 cohort V4、目标单流路径 V5、三品种主动风控 V6 和多品种主动风控 V7，因此必须先按版本分流，不能把所有脚本当作同一条管线。
 
 #### `/csj` 目录下的通用源码
 
@@ -130,6 +130,8 @@ Kronos/
 - `active_contract_panel_v3_partial.yaml`：V3 partial panel 探索配置；结果只能作探索性证据。
 - `observed_contract_cohort_v4.yaml`：V4 当前观察 cohort 研究配置，固定 `production_eligible: false`。
 - `target_only_path_v5.yaml`：V5 计划配置，尚未实施；正式实现前以 `V5_IMPLEMENTATION_PLAN.md` 为准。
+- `risk_control_v6.yaml`：V6 主动风控预注册配置；P0 标签与审计 runner 已实施，P1-P5 仍受 gate 保护。
+- `risk_control_v7.yaml`：V7 多品种主动风控配置；固定覆盖度筛选、预测原点日切分及五折 P0 gate。
 
 如果任务涉及训练协议、设备、学习率、窗口或输出位置，先读对应 YAML 和版本文档，不要从已有 JSON 结果反推配置。
 
@@ -138,6 +140,7 @@ Kronos/
 - `kline_rb8888.json`、`kline_i8888.json`：连续合约小时 K 线，主要供 V1/V2 历史实验使用；它们不是具体交割月合约生产面板。
 - `active_contract_snapshots/`：具体合约的快照归档。每个时间目录通常包含 `manifest.json`、原始 payload 和处理后的 K 线；V3/V4 的面板/cohort 数据从这里构建。
 - 快照目录是数据证据，不要覆盖旧快照。要判断某次 V3/V4 实验使用了什么数据，先看其 `manifest.json`、`snapshot_id`、哈希和配置。
+- K 线服务不能查询已交割合约。补充数据时只能从当时确认仍活跃的具体合约向前采集并生成新快照；禁止枚举旧交割月做历史回填。合约在活跃期已经归档的不可变快照仍可按其 provenance 使用。
 
 #### `/csj/v3`：V3 活跃具体合约面板
 
@@ -173,6 +176,24 @@ V5 去除邻居输入，使用不要求 `has_pair` 的全量目标案例。它�
 - 计划源码目录：`csj/v5/`；当前尚未实施，不能把计划接口写成已完成能力。
 - 计划配置：`csj/configs/target_only_path_v5.yaml`。
 - 计划结果：`csj/results/target_only_path_v5/`，范围固定为 `retrospective_observed_contracts`、`production_eligible: false`。
+
+#### V6：target-only 主动风控（P0 已实施，gate 未通过）
+
+V6 不再以第三日涨跌为最终目标，而是从目标具体合约的历史和冻结 Kronos 路径中估计未来三日多头/空头最大不利波动风险。风险预测与仓位执行是两个独立 seam；overlay 只能缩小外部基础仓位，不能开仓、反向或增加杠杆。
+
+- 当前权威设计：`csj/v6/IMPLEMENTATION_PLAN.md`。
+- 目录状态：`csj/v6/` 已实现配置校验、风险标签、五折 P0 审计、gate、报告与图表；P1-P5 尚未实施。
+- 预注册配置：`csj/configs/risk_control_v6.yaml`。
+- P0 结果：`csj/results/risk_control_v6/`。当前支持度/预测日原子性 gate 未通过，范围固定为 `retrospective_observed_contracts`、`production_eligible: false`。
+
+#### V7：多品种 target-only 主动风控（P0 已通过）
+
+V7 保留 V6 的三日不利波动标签和门槛，但用纯数据覆盖度规则扩展到 21 个商品品种，并将 walk-forward 切分键改为 `origin_trading_day`。V6 的失败证据不被覆盖。
+
+- 入口与设计：`csj/v7/README.md`、`csj/v7/experiment.py`。
+- 配置：`csj/configs/risk_control_v7.yaml`。
+- P0 结果：`csj/results/risk_control_v7/`，逐运行证据在 `csj/runs/risk_control_v7/`。
+- 当前权威运行 `v7_p0_20260813_verified` 的五折 gate 已通过，但仍是 `production_eligible: false` 的回看证据；P1 尚未实施，不能把 P0 通过写成稳定 edge。
 
 #### `/csj/utils`：外部数据服务与小工具
 
@@ -263,6 +284,7 @@ csj/runs/<strategy>/<run_id>/
 | V3 具体合约面板 | `csj/V3_TRAINING.md`、`V3_EVALUATION_METRICS.md` | `csj/v3/`、`csj/active_contract_data.py` | `csj/results/active_contract_panel_v3*/` |
 | V4 observed cohort | `csj/V4_IMPLEMENTATION_PLAN.md` | `csj/v4/` | `csj/results/observed_contract_cohort_v4/` |
 | V5 target-only 路径 | `csj/V5_IMPLEMENTATION_PLAN.md` | `csj/v5/`（计划） | `csj/results/target_only_path_v5/`（计划） |
+| V6 主动风控 | `csj/v6/IMPLEMENTATION_PLAN.md` | `csj/v6/`（P0） | `csj/results/risk_control_v6/`（P0 failed） |
 | Web UI | `webui/README.md` | `webui/app.py`、`webui/templates/` | `webui/prediction_results/` |
 
 注意：V2 文档文件名中仍可能出现 `V3`（例如三日趋势阶段的历史命名），应以入口模块和 YAML 的 `experiment.version` 为准，不要只按文件名判断版本。

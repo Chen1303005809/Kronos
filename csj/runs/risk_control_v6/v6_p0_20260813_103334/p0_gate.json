@@ -1,0 +1,471 @@
+{
+  "strategy_version": 6,
+  "phase": "p0",
+  "run_id": "v6_p0_20260813_103334",
+  "result_scope": "retrospective_observed_contracts",
+  "production_eligible": false,
+  "data_rule_version": "target-only-observed-contract-data-v1",
+  "risk_label_rule_version": "adverse-excursion-vol-scaled-v1",
+  "data_fingerprint": "79539f9fcf81f636509d33c006e220a998edf85647e451ed22961edf426e053c",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "tokenizer_frozen": true,
+  "predictor_frozen": true,
+  "gate_name": "v6_p0_risk_label_support_and_leakage",
+  "available": true,
+  "allows_next_phase": false,
+  "support": {
+    "folds": {
+      "fold_00": {
+        "fit": {
+          "cases": 237,
+          "long_events": 48,
+          "short_events": 48,
+          "long_event_rate": 0.20253164556962025,
+          "short_event_rate": 0.20253164556962025
+        },
+        "inner_validation": {
+          "cases": 205,
+          "long_events": 64,
+          "short_events": 18,
+          "long_event_rate": 0.3121951219512195,
+          "short_event_rate": 0.08780487804878048
+        },
+        "evaluation": {
+          "cases": 273,
+          "long_events": 9,
+          "short_events": 59,
+          "long_event_rate": 0.03296703296703297,
+          "short_event_rate": 0.21611721611721613
+        }
+      },
+      "fold_01": {
+        "fit": {
+          "cases": 436,
+          "long_events": 88,
+          "short_events": 88,
+          "long_event_rate": 0.2018348623853211,
+          "short_event_rate": 0.2018348623853211
+        },
+        "inner_validation": {
+          "cases": 262,
+          "long_events": 21,
+          "short_events": 50,
+          "long_event_rate": 0.08015267175572519,
+          "short_event_rate": 0.19083969465648856
+        },
+        "evaluation": {
+          "cases": 325,
+          "long_events": 89,
+          "short_events": 55,
+          "long_event_rate": 0.27384615384615385,
+          "short_event_rate": 0.16923076923076924
+        }
+      },
+      "fold_02": {
+        "fit": {
+          "cases": 689,
+          "long_events": 138,
+          "short_events": 138,
+          "long_event_rate": 0.20029027576197386,
+          "short_event_rate": 0.20029027576197386
+        },
+        "inner_validation": {
+          "cases": 317,
+          "long_events": 111,
+          "short_events": 55,
+          "long_event_rate": 0.3501577287066246,
+          "short_event_rate": 0.17350157728706625
+        },
+        "evaluation": {
+          "cases": 385,
+          "long_events": 111,
+          "short_events": 102,
+          "long_event_rate": 0.2883116883116883,
+          "short_event_rate": 0.2649350649350649
+        }
+      },
+      "fold_03": {
+        "fit": {
+          "cases": 1002,
+          "long_events": 201,
+          "short_events": 201,
+          "long_event_rate": 0.20059880239520958,
+          "short_event_rate": 0.20059880239520958
+        },
+        "inner_validation": {
+          "cases": 379,
+          "long_events": 61,
+          "short_events": 88,
+          "long_event_rate": 0.16094986807387862,
+          "short_event_rate": 0.23218997361477572
+        },
+        "evaluation": {
+          "cases": 429,
+          "long_events": 131,
+          "short_events": 43,
+          "long_event_rate": 0.30536130536130535,
+          "short_event_rate": 0.10023310023310024
+        }
+      },
+      "fold_04": {
+        "fit": {
+          "cases": 1366,
+          "long_events": 274,
+          "short_events": 274,
+          "long_event_rate": 0.2005856515373353,
+          "short_event_rate": 0.2005856515373353
+        },
+        "inner_validation": {
+          "cases": 421,
+          "long_events": 130,
+          "short_events": 77,
+          "long_event_rate": 0.3087885985748218,
+          "short_event_rate": 0.1828978622327791
+        },
+        "evaluation": {
+          "cases": 481,
+          "long_events": 91,
+          "short_events": 65,
+          "long_event_rate": 0.1891891891891892,
+          "short_event_rate": 0.13513513513513514
+        }
+      }
+    },
+    "pooled_evaluation_by_product": {
+      "i": {
+        "cases": 624,
+        "long_events": 159,
+        "short_events": 103,
+        "long_event_rate": 0.2548076923076923,
+        "short_event_rate": 0.16506410256410256
+      },
+      "jm": {
+        "cases": 602,
+        "long_events": 114,
+        "short_events": 92,
+        "long_event_rate": 0.1893687707641196,
+        "short_event_rate": 0.15282392026578073
+      },
+      "rb": {
+        "cases": 667,
+        "long_events": 158,
+        "short_events": 129,
+        "long_event_rate": 0.2368815592203898,
+        "short_event_rate": 0.1934032983508246
+      }
+    }
+  },
+  "conditions": [
+    {
+      "check_id": "fold_00:fit:long_event_support",
+      "passed": false,
+      "observed": 48,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_00:fit:short_event_support",
+      "passed": false,
+      "observed": 48,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_00:inner_validation:long_event_support",
+      "passed": true,
+      "observed": 64,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_00:inner_validation:short_event_support",
+      "passed": false,
+      "observed": 18,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_00:evaluation:long_event_support",
+      "passed": false,
+      "observed": 9,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_00:evaluation:short_event_support",
+      "passed": true,
+      "observed": 59,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_01:fit:long_event_support",
+      "passed": false,
+      "observed": 88,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_01:fit:short_event_support",
+      "passed": false,
+      "observed": 88,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_01:inner_validation:long_event_support",
+      "passed": true,
+      "observed": 21,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_01:inner_validation:short_event_support",
+      "passed": true,
+      "observed": 50,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_01:evaluation:long_event_support",
+      "passed": true,
+      "observed": 89,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_01:evaluation:short_event_support",
+      "passed": true,
+      "observed": 55,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_02:fit:long_event_support",
+      "passed": true,
+      "observed": 138,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_02:fit:short_event_support",
+      "passed": true,
+      "observed": 138,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_02:inner_validation:long_event_support",
+      "passed": true,
+      "observed": 111,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_02:inner_validation:short_event_support",
+      "passed": true,
+      "observed": 55,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_02:evaluation:long_event_support",
+      "passed": true,
+      "observed": 111,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_02:evaluation:short_event_support",
+      "passed": true,
+      "observed": 102,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_03:fit:long_event_support",
+      "passed": true,
+      "observed": 201,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_03:fit:short_event_support",
+      "passed": true,
+      "observed": 201,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_03:inner_validation:long_event_support",
+      "passed": true,
+      "observed": 61,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_03:inner_validation:short_event_support",
+      "passed": true,
+      "observed": 88,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_03:evaluation:long_event_support",
+      "passed": true,
+      "observed": 131,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_03:evaluation:short_event_support",
+      "passed": true,
+      "observed": 43,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_04:fit:long_event_support",
+      "passed": true,
+      "observed": 274,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_04:fit:short_event_support",
+      "passed": true,
+      "observed": 274,
+      "required_minimum": 100
+    },
+    {
+      "check_id": "fold_04:inner_validation:long_event_support",
+      "passed": true,
+      "observed": 130,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_04:inner_validation:short_event_support",
+      "passed": true,
+      "observed": 77,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_04:evaluation:long_event_support",
+      "passed": true,
+      "observed": 91,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "fold_04:evaluation:short_event_support",
+      "passed": true,
+      "observed": 65,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "pooled_evaluation_case_keys_unique_across_folds",
+      "passed": true,
+      "observed_duplicate_case_keys": 0,
+      "required_maximum": 0
+    },
+    {
+      "check_id": "pooled_evaluation:i:long_event_support",
+      "passed": true,
+      "observed": 159,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "pooled_evaluation:i:short_event_support",
+      "passed": true,
+      "observed": 103,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "pooled_evaluation:jm:long_event_support",
+      "passed": true,
+      "observed": 114,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "pooled_evaluation:jm:short_event_support",
+      "passed": true,
+      "observed": 92,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "pooled_evaluation:rb:long_event_support",
+      "passed": true,
+      "observed": 158,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "pooled_evaluation:rb:short_event_support",
+      "passed": true,
+      "observed": 129,
+      "required_minimum": 20
+    },
+    {
+      "check_id": "included_case_integrity_failures",
+      "passed": true,
+      "observed": 0,
+      "required_maximum": 0
+    },
+    {
+      "check_id": "past_only_and_split_leakage_failures",
+      "passed": true,
+      "observed": 0,
+      "required_maximum": 0
+    },
+    {
+      "check_id": "exact_pre_registered_fold_count",
+      "passed": true,
+      "observed": 5,
+      "required": 5
+    },
+    {
+      "check_id": "exact_pre_registered_fold_ids",
+      "passed": true,
+      "observed": [
+        "fold_00",
+        "fold_01",
+        "fold_02",
+        "fold_03",
+        "fold_04"
+      ],
+      "required": [
+        "fold_00",
+        "fold_01",
+        "fold_02",
+        "fold_03",
+        "fold_04"
+      ]
+    }
+  ],
+  "integrity_failure_count": 0,
+  "leakage_failure_count": 0,
+  "protocol_failure_count": 0,
+  "failed_condition_ids": [
+    "fold_00:fit:long_event_support",
+    "fold_00:fit:short_event_support",
+    "fold_00:inner_validation:short_event_support",
+    "fold_00:evaluation:long_event_support",
+    "fold_01:fit:long_event_support",
+    "fold_01:fit:short_event_support"
+  ],
+  "data_audit": {
+    "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/data_audit.json",
+    "sha256": "0cda55609ec4f66623cf049043c7166f6668ea7ddc1f57d0e292908e8d904383",
+    "bytes": 538256
+  },
+  "record_artifacts": {
+    "continuous_risk_outcomes": {
+      "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/p0/risk_outcomes.json",
+      "sha256": "c3ce788c31a87a1c31c9f9e37f3afb5d43a9ed238c9afb30ea96014aee43e9fb",
+      "bytes": 4030801
+    },
+    "fold_tail_events": {
+      "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/p0/fold_label_records.json",
+      "sha256": "2d1f19ef0f0669f0b8ab17d307cd684b3640a7adb1cfb2d25f1e048799fc5099",
+      "bytes": 6736477
+    }
+  },
+  "plot_artifacts": {
+    "risk_label_distributions": {
+      "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/p0/figures/risk_label_distributions.png",
+      "sha256": "6e826df7a9a1c8c0b6b4c731124d70900d66f3f412265b71d72c63b699b4462d",
+      "bytes": 196247
+    },
+    "fold_event_support": {
+      "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/p0/figures/fold_event_support.png",
+      "sha256": "f272eec3e10fbfb770a51866720ba2a44b11962ae9c5d4b0b27e63b824c0e3bc",
+      "bytes": 66353
+    },
+    "fold_tail_thresholds": {
+      "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/p0/figures/fold_tail_thresholds.png",
+      "sha256": "a802f941dc00aa9f3fcade18d0ce4d3307f24f58d4a305524290a8ebd1055a13",
+      "bytes": 98119
+    },
+    "summary_json": {
+      "path": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_20260813_103334/p0/figures/plot_summary.json",
+      "sha256": "9e4b104a4806053f5f1a763696a328b59c9057b50bfcc6be679559387dc8beb3",
+      "bytes": 6683
+    }
+  }
+}

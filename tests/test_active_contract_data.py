@@ -10,6 +10,7 @@ import pytest
 
 from csj.active_contract_data import (
     ACTIVE_CONTRACTS,
+    EXPANDED_CANDIDATE_CONTRACTS,
     SHANGHAI,
     ActiveContractDataError,
     FetchSettings,
@@ -18,6 +19,7 @@ from csj.active_contract_data import (
     collect_active_contract_snapshot,
     contracts_for_products,
     delivery_year_month,
+    reject_past_delivery_contracts,
 )
 from csj.utils.kline_client import klineclient
 
@@ -79,6 +81,28 @@ def test_frozen_active_list_has_all_user_supplied_concrete_contracts() -> None:
     assert pairs[-1] == ("j", "j2704")
     assert delivery_year_month("rb2612") == "2026-12"
     assert delivery_year_month("rb2701") == "2027-01"
+
+
+def test_expanded_candidates_only_add_future_delivery_months() -> None:
+    pairs = contracts_for_products(["rb"], include_candidates=True)
+
+    assert pairs[:9] == [("rb", value) for value in ACTIVE_CONTRACTS["rb"]]
+    assert pairs[9:] == [
+        ("rb", value) for value in EXPANDED_CANDIDATE_CONTRACTS["rb"]
+    ]
+    assert pairs[-1] == ("rb", "rb2712")
+
+
+def test_explicit_candidates_accept_new_products_and_reject_past_delivery_months() -> None:
+    pairs = contracts_for_products(["rb"], extra_contracts=["cu2609", "m2701"])
+
+    assert pairs[-2:] == [("cu", "cu2609"), ("m", "m2701")]
+    reject_past_delivery_contracts(pairs, snapshot_at=NOW)
+    with pytest.raises(ValueError, match="cannot be queried"):
+        reject_past_delivery_contracts(
+            [("rb", "rb2607")],
+            snapshot_at=NOW,
+        )
 
 
 def test_cutoff_clamps_future_date_and_future_time_to_current_shanghai_time() -> None:

@@ -16,6 +16,10 @@ _Avoid_: Continuous contract, product
 A provider-produced, roll-stitched series such as `rb8888`. It is outside the concrete-contract production and training corpus.
 _Avoid_: Training contract, prediction contract
 
+**Delivered Contract**:
+A concrete delivery-month contract that has already completed delivery. The current K-line provider cannot query it retrospectively, so it is never treated as an on-demand historical backfill source. Data already captured in an immutable snapshot while the contract was active may still be used with its recorded provenance.
+_Avoid_: Queryable historical contract, backfill candidate
+
 **Contract Panel**:
 The time-aligned prediction contract plus zero or more neighboring concrete contracts that coexist at a forecast time. Each member supplies its own six-dimensional OHLCVA sequence; a panel does not imply a fixed contract count.
 _Avoid_: One continuous series

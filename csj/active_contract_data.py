@@ -84,6 +84,16 @@ ACTIVE_CONTRACTS: dict[str, tuple[str, ...]] = {
     ),
 }
 
+# Candidate months beyond the original user-supplied snapshot universe.  These
+# are queried only while their delivery month has not passed.  A successful
+# provider response is evidence that the concrete contract is available; an
+# empty/timeout response remains an explicit failed manifest row.  The list is
+# intentionally finite so collection cannot silently enumerate old contracts.
+EXPANDED_CANDIDATE_CONTRACTS: dict[str, tuple[str, ...]] = {
+    product: tuple(f"{product}27{month:02d}" for month in range(5, 13))
+    for product in ("rb", "i", "jm", "j")
+}
+
 _CONTRACT_PATTERN = re.compile(r"^(?P<product>[a-z]+)(?P<year>\d{2})(?P<month>\d{2})$")
 
 
@@ -239,8 +249,13 @@ def clamp_provider_cutoff(
     )
 
 
-def contracts_for_products(products: Sequence[str] | None = None) -> list[tuple[str, str]]:
-    """Return ordered ``(product, contract_id)`` pairs from the frozen list."""
+def contracts_for_products(
+    products: Sequence[str] | None = None,
+    *,
+    include_candidates: bool = False,
+    extra_contracts: Sequence[str] = (),
+) -> list[tuple[str, str]]:
+    """Return ordered concrete contracts, optionally including future candidates."""
 
     requested = tuple(product.lower() for product in (products or tuple(ACTIVE_CONTRACTS)))
     unknown = sorted(set(requested) - set(ACTIVE_CONTRACTS))
@@ -249,6 +264,8 @@ def contracts_for_products(products: Sequence[str] | None = None) -> list[tuple[
     pairs: list[tuple[str, str]] = []
     for product in requested:
         contracts = ACTIVE_CONTRACTS[product]
+        if include_candidates:
+            contracts = tuple(dict.fromkeys((*contracts, *EXPANDED_CANDIDATE_CONTRACTS[product])))
         if len(set(contracts)) != len(contracts):
             raise ValueError(f"Duplicate concrete contract in {product!r}")
         previous_maturity: tuple[int, int] | None = None
@@ -264,7 +281,36 @@ def contracts_for_products(products: Sequence[str] | None = None) -> list[tuple[
                 raise ValueError(f"Contracts for {product!r} are not maturity ordered")
             previous_maturity = maturity
             pairs.append((product, normalized))
+    seen = {contract_id for _, contract_id in pairs}
+    for value in extra_contracts:
+        normalized = str(value).strip().lower()
+        match = _CONTRACT_PATTERN.fullmatch(normalized)
+        if match is None:
+            raise ValueError(f"Invalid explicit concrete contract ID: {value!r}")
+        if normalized in seen:
+            continue
+        parse_delivery_year_month(normalized)
+        pairs.append((match.group("product"), normalized))
+        seen.add(normalized)
     return pairs
+
+
+def reject_past_delivery_contracts(
+    pairs: Sequence[tuple[str, str]], *, snapshot_at: datetime
+) -> None:
+    """Prevent the collector from probing a delivery month that has passed."""
+
+    current_month = (snapshot_at.year, snapshot_at.month)
+    past = [
+        contract_id
+        for _, contract_id in pairs
+        if parse_delivery_year_month(contract_id) < current_month
+    ]
+    if past:
+        raise ValueError(
+            "Delivered/past delivery-month contracts cannot be queried: "
+            + ", ".join(sorted(past))
+        )
 
 
 def _fetch_worker(
@@ -456,13 +502,20 @@ def collect_active_contract_snapshot(
     settings: FetchSettings,
     cutoff: ProviderCutoff,
     products: Sequence[str] | None = None,
+    include_candidates: bool = False,
+    extra_contracts: Sequence[str] = (),
     now: datetime | None = None,
     fetcher: FetchFunction = fetch_payload_in_isolated_process,
 ) -> SnapshotResult:
     """Fetch every selected concrete contract and archive one immutable snapshot."""
 
     snapshot_at = _ensure_shanghai(now)
-    selected_contracts = contracts_for_products(products)
+    selected_contracts = contracts_for_products(
+        products,
+        include_candidates=include_candidates,
+        extra_contracts=extra_contracts,
+    )
+    reject_past_delivery_contracts(selected_contracts, snapshot_at=snapshot_at)
     root = Path(output_root)
     root.mkdir(parents=True, exist_ok=True)
     snapshot_id = snapshot_at.strftime("%Y%m%dT%H%M%S%z")
@@ -515,7 +568,13 @@ def collect_active_contract_snapshot(
         "completed_at": completed_at.isoformat(),
         "status": "complete" if failed == 0 else "partial",
         "panel_completeness": "complete" if failed == 0 else "partial_panel",
-        "active_contract_list_source": "user_supplied_active_contract_list",
+        "active_contract_list_source": (
+            "user_supplied_active_contract_list_plus_explicit_candidates"
+            if extra_contracts
+            else "user_supplied_active_contract_list_plus_future_candidates"
+            if include_candidates
+            else "user_supplied_active_contract_list"
+        ),
         "timezone": "Asia/Shanghai",
         "query": {
             "provider": {"host": settings.host, "port": settings.port},
@@ -526,6 +585,10 @@ def collect_active_contract_snapshot(
             "cutoff": cutoff.to_manifest(),
             "request_isolation": "one fresh process and TCP connection per contract",
             "retry_policy": "no automatic retry",
+            "included_future_candidates": include_candidates,
+            "explicit_candidate_contracts": [
+                str(value).strip().lower() for value in extra_contracts
+            ],
         },
         "contracts": records,
     }
@@ -559,6 +622,17 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         nargs="+",
         choices=tuple(ACTIVE_CONTRACTS),
         help="Optional subset of products; default archives all four products.",
+    )
+    parser.add_argument(
+        "--include-candidates",
+        action="store_true",
+        help="Also probe the finite 2705-2712 candidate set; failures remain in the manifest.",
+    )
+    parser.add_argument(
+        "--extra-contracts",
+        nargs="+",
+        default=(),
+        help="Explicit additional non-past concrete contract IDs to probe.",
     )
     parser.add_argument(
         "--end-date",
@@ -612,6 +686,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         settings=settings,
         cutoff=cutoff,
         products=args.products,
+        include_candidates=args.include_candidates,
+        extra_contracts=args.extra_contracts,
         now=now,
     )
     print(

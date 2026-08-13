@@ -1,0 +1,151 @@
+experiment:
+  name: target_only_active_risk_control
+  version: 6
+  result_scope: retrospective_observed_contracts
+  production_eligible: false
+
+data:
+  snapshot_root: csj/data/active_contract_snapshots
+  products: [i, j, jm, rb]
+  primary_products: [i, jm, rb]
+  transfer_products: [j]
+  lookback: 256
+  horizon_trading_days: 3
+  valid_bar_counts: [5, 7]
+  clip: 5.0
+  normalization_epsilon: 0.00001
+  data_rule_version: target-only-observed-contract-data-v1
+
+risk_labels:
+  version: adverse-excursion-vol-scaled-v1
+  origin_price: close
+  long_adverse_price: low
+  short_adverse_price: high
+  context_volatility:
+    method: ewma_close_log_return
+    bars: 60
+    halflife_bars: 20
+    adjust: false
+    bias: false
+    floor: 0.00001
+    horizon_scaling: sqrt_target_bar_count
+  tail_event:
+    quantile: 0.80
+    quantile_method: linear
+    comparison: greater_than_or_equal
+    threshold_source: outer_fit_primary_cases_only
+  severity_transform: log1p
+  future_volatility_target: log_ratio_to_context_horizon_scale
+
+model:
+  tokenizer_id: NeoQuasar/Kronos-Tokenizer-base
+  tokenizer_revision: 0e0117387f39004a9016484a186a908917e22426
+  predictor_id: NeoQuasar/Kronos-small
+  predictor_revision: 901c26c1332695a2a8f243eb2f37243a37bea320
+  max_context: 512
+  cache_dir: csj/artifacts/hf_cache
+  freeze_tokenizer: true
+  freeze_predictor: true
+
+walk_forward:
+  minimum_fit_days: 60
+  inner_validation_days: 20
+  evaluation_days: 20
+  step_days: 20
+  purge_days: 3
+  fold_count: 5
+
+p0:
+  minimum_fit_events_per_side: 100
+  minimum_validation_events_per_side: 20
+  minimum_evaluation_events_per_side: 20
+  minimum_pooled_evaluation_events_per_product_side: 20
+  maximum_integrity_failures: 0
+  maximum_leakage_failures: 0
+
+path_bank:
+  sample_count: 64
+  temperature: 1.0
+  top_k: 0
+  top_p: 0.9
+  random_seed: 20260812
+  minimum_valid_paths_per_case: 60
+  minimum_valid_path_fraction: 0.99
+
+risk_head:
+  seeds: [42, 43, 44]
+  kronos_projection_dim: 128
+  feature_projection_dim: 64
+  fusion_hidden_dim: 128
+  dropout: 0.0
+  outputs:
+    - long_tail_logit
+    - short_tail_logit
+    - log1p_expected_long_mae
+    - log1p_expected_short_mae
+    - future_vol_ratio
+  loss_weights:
+    long_tail_bce: 1.0
+    short_tail_bce: 1.0
+    long_severity_smooth_l1: 0.25
+    short_severity_smooth_l1: 0.25
+    future_vol_smooth_l1: 0.25
+  training:
+    learning_rate: 0.0003
+    batch_size: 64
+    max_epochs: 30
+    early_stopping_patience: 5
+    weight_decay: 0.01
+    gradient_clip: 3.0
+    num_workers: 0
+    sampling_strategy: prediction_day_product_uniform
+    checkpoint_metric: validation_macro_brier
+  matched_control:
+    name: context_feature_control
+    zero_kronos_hidden: true
+    zero_path_summaries: true
+
+calibration:
+  method: affine_platt
+  source: inner_validation_only
+  shared_across_primary_products: true
+  soft_alert_quantile: 0.80
+  hard_alert_quantile: 0.95
+  maximum_primary_ece: 0.10
+  maximum_pooled_ece: 0.05
+
+abstention:
+  maximum_context_clip_fraction: 0.05
+  minimum_valid_paths: 60
+  unsupported_products: true
+  formal_primary_coverage_minimum: 0.95
+
+overlay:
+  policy: position_reduction_only
+  soft_alert_multiplier_end: 0.50
+  hard_alert_multiplier: 0.25
+  abstain_multiplier_for_research_replay: 1.00
+  execution_lag_bars: 1
+  overlapping_forecasts: latest_only
+  require_external_base_positions_for_formal_gate: true
+  base_positions_path: null
+  matched_control:
+    name: exposure_matched_random_overlay
+    preserve_mean_multiplier_by_fold_product_side: true
+    preserve_rebalance_count: true
+    random_seed: 20260812
+
+evaluation:
+  alert_budget: 0.20
+  bootstrap_iterations: 2000
+  bootstrap_block_days: [5, 10]
+  bootstrap_random_seed: 20260812
+  cvar_alpha: 0.05
+  minimum_return_retention: 0.85
+
+runtime:
+  device: cuda
+
+output:
+  root: csj/runs/risk_control_v6
+  results_root: csj/results/risk_control_v6

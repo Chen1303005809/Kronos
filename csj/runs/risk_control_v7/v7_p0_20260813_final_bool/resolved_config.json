@@ -1,0 +1,80 @@
+{
+  "experiment": {
+    "name": "diversified_target_only_active_risk_control",
+    "version": 7,
+    "result_scope": "retrospective_observed_diversified_contracts",
+    "production_eligible": false
+  },
+  "data": {
+    "snapshot_root": "/Users/eurus/Code/kronos/Kronos/csj/data/active_contract_snapshots/20260813T105916+0800",
+    "products": [
+      "a",
+      "b",
+      "br",
+      "bu",
+      "c",
+      "eb",
+      "eg",
+      "fu",
+      "hc",
+      "i",
+      "jm",
+      "l",
+      "m",
+      "p",
+      "pg",
+      "pp",
+      "rb",
+      "ru",
+      "sp",
+      "v",
+      "y"
+    ],
+    "gate_products": [
+      "i",
+      "jm",
+      "rb"
+    ],
+    "study_start_day": "2025-10-15",
+    "lookback": 256,
+    "horizon_trading_days": 3,
+    "valid_bar_counts": [
+      5,
+      7
+    ],
+    "clip": 5.0,
+    "normalization_epsilon": 1e-05,
+    "coverage_filter": {
+      "minimum_bars": 1300,
+      "latest_first_bar": "2025-10-01"
+    }
+  },
+  "risk_labels": {
+    "version": "adverse-excursion-vol-scaled-v1",
+    "volatility_bars": 60,
+    "halflife_bars": 20,
+    "tail_quantile": 0.8,
+    "quantile_method": "linear"
+  },
+  "walk_forward": {
+    "split_key": "origin_trading_day",
+    "minimum_fit_days": 60,
+    "inner_validation_days": 20,
+    "evaluation_days": 20,
+    "step_days": 20,
+    "purge_days": 3,
+    "fold_count": 5
+  },
+  "p0": {
+    "minimum_fit_events_per_side": 100,
+    "minimum_validation_events_per_side": 20,
+    "minimum_evaluation_events_per_side": 20,
+    "minimum_pooled_evaluation_events_per_product_side": 20,
+    "maximum_integrity_failures": 0,
+    "maximum_leakage_failures": 0
+  },
+  "output": {
+    "root": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v7",
+    "results_root": "/Users/eurus/Code/kronos/Kronos/csj/results/risk_control_v7"
+  }
+}

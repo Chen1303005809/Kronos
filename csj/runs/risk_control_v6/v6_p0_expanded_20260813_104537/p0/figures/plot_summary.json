@@ -1,0 +1,241 @@
+{
+  "strategy_version": 6,
+  "phase": "p0",
+  "run_id": "v6_p0_expanded_20260813_104537",
+  "result_scope": "retrospective_observed_contracts",
+  "production_eligible": false,
+  "data_rule_version": "target-only-observed-contract-data-v1",
+  "risk_label_rule_version": "adverse-excursion-vol-scaled-v1",
+  "data_fingerprint": "921f843b1fcdaec8874235d0108319a90271dda1a352e11b6162d8ca892e6476",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "tokenizer_frozen": true,
+  "predictor_frozen": true,
+  "plot_contract_version": "v6-p0-risk-label-audit-v1",
+  "artifacts": {
+    "risk_label_distributions": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_expanded_20260813_104537/p0/figures/risk_label_distributions.png",
+    "fold_event_support": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_expanded_20260813_104537/p0/figures/fold_event_support.png",
+    "fold_tail_thresholds": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_expanded_20260813_104537/p0/figures/fold_tail_thresholds.png",
+    "summary_json": "/Users/eurus/Code/kronos/Kronos/csj/runs/risk_control_v6/v6_p0_expanded_20260813_104537/p0/figures/plot_summary.json"
+  },
+  "display_limits": {
+    "i": {
+      "long_mae": {
+        "display_minimum": 0.0,
+        "display_maximum": 3.088168968817739,
+        "values_outside_display_range": 9
+      },
+      "short_mae": {
+        "display_minimum": 0.0,
+        "display_maximum": 3.1512033004767206,
+        "values_outside_display_range": 9
+      },
+      "future_vol_ratio": {
+        "display_minimum": -0.8640350113407828,
+        "display_maximum": 0.6218908193140696,
+        "values_outside_display_range": 18
+      }
+    },
+    "jm": {
+      "long_mae": {
+        "display_minimum": 0.0,
+        "display_maximum": 3.201461631606955,
+        "values_outside_display_range": 9
+      },
+      "short_mae": {
+        "display_minimum": 0.0,
+        "display_maximum": 5.31349657601724,
+        "values_outside_display_range": 9
+      },
+      "future_vol_ratio": {
+        "display_minimum": -0.8826056473336394,
+        "display_maximum": 1.3389332515455594,
+        "values_outside_display_range": 18
+      }
+    },
+    "rb": {
+      "long_mae": {
+        "display_minimum": 0.0,
+        "display_maximum": 4.2101405039071285,
+        "values_outside_display_range": 9
+      },
+      "short_mae": {
+        "display_minimum": 0.0,
+        "display_maximum": 3.4216222452859344,
+        "values_outside_display_range": 9
+      },
+      "future_vol_ratio": {
+        "display_minimum": -0.8036106341244852,
+        "display_maximum": 0.8737327668027357,
+        "values_outside_display_range": 18
+      }
+    }
+  },
+  "fold_split_event_support": [
+    {
+      "fold_id": "fold_00",
+      "split": "fit",
+      "label": "F00\nfit",
+      "cases": 237,
+      "long_events": 48,
+      "short_events": 48,
+      "required_minimum": 100
+    },
+    {
+      "fold_id": "fold_00",
+      "split": "inner_validation",
+      "label": "F00\nval",
+      "cases": 203,
+      "long_events": 64,
+      "short_events": 18,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_00",
+      "split": "evaluation",
+      "label": "F00\nevaluation",
+      "cases": 253,
+      "long_events": 9,
+      "short_events": 57,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_01",
+      "split": "fit",
+      "label": "F01\nfit",
+      "cases": 436,
+      "long_events": 88,
+      "short_events": 88,
+      "required_minimum": 100
+    },
+    {
+      "fold_id": "fold_01",
+      "split": "inner_validation",
+      "label": "F01\nval",
+      "cases": 242,
+      "long_events": 19,
+      "short_events": 48,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_01",
+      "split": "evaluation",
+      "label": "F01\nevaluation",
+      "cases": 306,
+      "long_events": 83,
+      "short_events": 51,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_02",
+      "split": "fit",
+      "label": "F02\nfit",
+      "cases": 670,
+      "long_events": 134,
+      "short_events": 134,
+      "required_minimum": 100
+    },
+    {
+      "fold_id": "fold_02",
+      "split": "inner_validation",
+      "label": "F02\nval",
+      "cases": 300,
+      "long_events": 104,
+      "short_events": 53,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_02",
+      "split": "evaluation",
+      "label": "F02\nevaluation",
+      "cases": 354,
+      "long_events": 103,
+      "short_events": 92,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_03",
+      "split": "fit",
+      "label": "F03\nfit",
+      "cases": 965,
+      "long_events": 193,
+      "short_events": 193,
+      "required_minimum": 100
+    },
+    {
+      "fold_id": "fold_03",
+      "split": "inner_validation",
+      "label": "F03\nval",
+      "cases": 347,
+      "long_events": 57,
+      "short_events": 77,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_03",
+      "split": "evaluation",
+      "label": "F03\nevaluation",
+      "cases": 396,
+      "long_events": 124,
+      "short_events": 42,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_04",
+      "split": "fit",
+      "label": "F04\nfit",
+      "cases": 1300,
+      "long_events": 260,
+      "short_events": 260,
+      "required_minimum": 100
+    },
+    {
+      "fold_id": "fold_04",
+      "split": "inner_validation",
+      "label": "F04\nval",
+      "cases": 388,
+      "long_events": 122,
+      "short_events": 73,
+      "required_minimum": 20
+    },
+    {
+      "fold_id": "fold_04",
+      "split": "evaluation",
+      "label": "F04\nevaluation",
+      "cases": 444,
+      "long_events": 89,
+      "short_events": 61,
+      "required_minimum": 20
+    }
+  ],
+  "fit_only_thresholds": [
+    {
+      "fold_id": "fold_00",
+      "long_tail_threshold": 1.193003940575558,
+      "short_tail_threshold": 1.5484434521406498
+    },
+    {
+      "fold_id": "fold_01",
+      "long_tail_threshold": 1.3512919287156737,
+      "short_tail_threshold": 1.3630159783181603
+    },
+    {
+      "fold_id": "fold_02",
+      "long_tail_threshold": 1.1854348208788588,
+      "short_tail_threshold": 1.3488779876075763
+    },
+    {
+      "fold_id": "fold_03",
+      "long_tail_threshold": 1.3419584820888155,
+      "short_tail_threshold": 1.2546765016638797
+    },
+    {
+      "fold_id": "fold_04",
+      "long_tail_threshold": 1.2598424563218429,
+      "short_tail_threshold": 1.3488385781940204
+    }
+  ],
+  "note": "Only axes are clipped for readability; audit statistics and gate use full values."
+}
