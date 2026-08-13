@@ -1,0 +1,380 @@
+{
+  "strategy_version": 7,
+  "phase": "p1",
+  "run_id": "v7_cuda_1",
+  "result_scope": "retrospective_observed_diversified_contracts",
+  "production_eligible": false,
+  "git_commit": "ebf96c5c7b0cce712281a07dc3127a4f1b98e4c1",
+  "resolved_config_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/resolved_config.json",
+  "resolved_config_sha256": "9ad8ffb7bd725d9a59dac28d35a4a08cde67ce03db2386647c0ca43facf9727e",
+  "data_fingerprint": "2387ff95a1f7bedc7a96377d3af0a45a4bf02f707c2edab1d3f47731d6e0ea1c",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "risk_label_version": "adverse-excursion-vol-scaled-v1",
+  "smoke": false,
+  "runtime": {
+    "device_requested": "cuda",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "model_download_allowed": false,
+    "canonical_p0_run_id": "v7_p0_20260813_verified",
+    "canonical_p0_gate_sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf",
+    "canonical_unique_case_count": 5154,
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+    "device": "cuda",
+    "cuda_available": true,
+    "mps_available": false,
+    "cuda_device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_device_count": 4,
+    "cuda_capability": [
+      8,
+      9
+    ]
+  },
+  "upstream_gate_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_p0_20260813_verified/p0_gate.json",
+  "upstream_gate_sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf",
+  "available": true,
+  "allows_next_phase": false,
+  "failed_condition_ids": [
+    "global_finite_ohlc_path_validity",
+    "validation_baseline_selection_available_by_fold",
+    "fold_02:inner_validation:short_raw_path_risk_non_degenerate",
+    "fold_04:inner_validation:long_raw_path_risk_non_degenerate",
+    "fold_04:inner_validation:short_raw_path_risk_non_degenerate"
+  ],
+  "conditions": [
+    {
+      "condition_id": "global_finite_ohlc_path_validity",
+      "passed": false,
+      "observed": 0.3764824650756694,
+      "required": 0.99
+    },
+    {
+      "condition_id": "all_non_abstain_cases_meet_minimum_valid_paths",
+      "passed": true,
+      "minimum_required": 60,
+      "eligible_cases": 72,
+      "path_quality_abstain_cases": 5082
+    },
+    {
+      "condition_id": "validation_baseline_selection_available_by_fold",
+      "passed": false,
+      "selection_by_fold": {
+        "fold_00": {
+          "selected_baseline": null,
+          "selection_available": false,
+          "selection_unavailable_reason": "no_finite_validation_selection_brier",
+          "path_quality_eligibility": {
+            "fit_cases_before_path_quality": 890,
+            "fit_cases_eligible_for_risk": 15,
+            "validation_cases_before_path_quality": 558,
+            "validation_cases_eligible_for_risk": 4,
+            "eligible_validation_products": [
+              "ru",
+              "v"
+            ]
+          }
+        },
+        "fold_01": {
+          "selected_baseline": "fit_product_event_rate",
+          "selection_available": true,
+          "selection_unavailable_reason": null,
+          "path_quality_eligibility": {
+            "fit_cases_before_path_quality": 1446,
+            "fit_cases_eligible_for_risk": 20,
+            "validation_cases_before_path_quality": 601,
+            "validation_cases_eligible_for_risk": 18,
+            "eligible_validation_products": [
+              "eg",
+              "jm",
+              "m",
+              "ru",
+              "v"
+            ]
+          }
+        },
+        "fold_02": {
+          "selected_baseline": "fit_global_event_rate",
+          "selection_available": true,
+          "selection_unavailable_reason": null,
+          "path_quality_eligibility": {
+            "fit_cases_before_path_quality": 2037,
+            "fit_cases_eligible_for_risk": 36,
+            "validation_cases_before_path_quality": 660,
+            "validation_cases_eligible_for_risk": 10,
+            "eligible_validation_products": [
+              "a",
+              "hc",
+              "jm",
+              "ru"
+            ]
+          }
+        },
+        "fold_03": {
+          "selected_baseline": "fit_global_event_rate",
+          "selection_available": true,
+          "selection_unavailable_reason": null,
+          "path_quality_eligibility": {
+            "fit_cases_before_path_quality": 2692,
+            "fit_cases_eligible_for_risk": 48,
+            "validation_cases_before_path_quality": 707,
+            "validation_cases_eligible_for_risk": 22,
+            "eligible_validation_products": [
+              "br",
+              "c",
+              "hc",
+              "jm",
+              "rb"
+            ]
+          }
+        },
+        "fold_04": {
+          "selected_baseline": null,
+          "selection_available": false,
+          "selection_unavailable_reason": "no_path_quality_eligible_inner_validation_cases",
+          "path_quality_eligibility": {
+            "fit_cases_before_path_quality": 3387,
+            "fit_cases_eligible_for_risk": 71,
+            "validation_cases_before_path_quality": 748,
+            "validation_cases_eligible_for_risk": 0,
+            "eligible_validation_products": []
+          }
+        }
+      }
+    },
+    {
+      "condition_id": "fold_00:fit:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 15,
+      "minimum": 0.0,
+      "maximum": 0.9344262295081968,
+      "variance": 0.07320158826554879
+    },
+    {
+      "condition_id": "fold_00:fit:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 15,
+      "minimum": 0.0,
+      "maximum": 0.03333333333333333,
+      "variance": 0.00017222751609394558
+    },
+    {
+      "condition_id": "fold_00:inner_validation:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 4,
+      "minimum": 0.0,
+      "maximum": 0.2833333333333333,
+      "variance": 0.011826173333034729
+    },
+    {
+      "condition_id": "fold_00:inner_validation:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 4,
+      "minimum": 0.0,
+      "maximum": 0.23333333333333334,
+      "variance": 0.010208333333333331
+    },
+    {
+      "condition_id": "fold_01:fit:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 20,
+      "minimum": 0.0,
+      "maximum": 0.9344262295081968,
+      "variance": 0.06197494021086773
+    },
+    {
+      "condition_id": "fold_01:fit:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 20,
+      "minimum": 0.0,
+      "maximum": 0.26666666666666666,
+      "variance": 0.003462274475816982
+    },
+    {
+      "condition_id": "fold_01:inner_validation:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 18,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "variance": 0.11565014971561191
+    },
+    {
+      "condition_id": "fold_01:inner_validation:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 18,
+      "minimum": 0.0,
+      "maximum": 0.016666666666666666,
+      "variance": 1.4574759945130312e-05
+    },
+    {
+      "condition_id": "fold_02:fit:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 36,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "variance": 0.11303006930810404
+    },
+    {
+      "condition_id": "fold_02:fit:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 36,
+      "minimum": 0.0,
+      "maximum": 0.16666666666666666,
+      "variance": 0.0007579180888463691
+    },
+    {
+      "condition_id": "fold_02:inner_validation:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 10,
+      "minimum": 0.0,
+      "maximum": 0.9666666666666667,
+      "variance": 0.07897058194185533
+    },
+    {
+      "condition_id": "fold_02:inner_validation:short_raw_path_risk_non_degenerate",
+      "passed": false,
+      "eligible_cases": 10,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "variance": 0.0
+    },
+    {
+      "condition_id": "fold_03:fit:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 48,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "variance": 0.09291278522413594
+    },
+    {
+      "condition_id": "fold_03:fit:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 48,
+      "minimum": 0.0,
+      "maximum": 0.2,
+      "variance": 0.0008494569741129362
+    },
+    {
+      "condition_id": "fold_03:inner_validation:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 22,
+      "minimum": 0.0,
+      "maximum": 0.7540983606557377,
+      "variance": 0.06621807153528138
+    },
+    {
+      "condition_id": "fold_03:inner_validation:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 22,
+      "minimum": 0.0,
+      "maximum": 0.11290322580645161,
+      "variance": 0.0006504919889462716
+    },
+    {
+      "condition_id": "fold_04:fit:long_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 71,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "variance": 0.08954992732061991
+    },
+    {
+      "condition_id": "fold_04:fit:short_raw_path_risk_non_degenerate",
+      "passed": true,
+      "eligible_cases": 71,
+      "minimum": 0.0,
+      "maximum": 0.18333333333333332,
+      "variance": 0.0006902474739194049
+    },
+    {
+      "condition_id": "fold_04:inner_validation:long_raw_path_risk_non_degenerate",
+      "passed": false,
+      "eligible_cases": 0,
+      "minimum": null,
+      "maximum": null,
+      "variance": null
+    },
+    {
+      "condition_id": "fold_04:inner_validation:short_raw_path_risk_non_degenerate",
+      "passed": false,
+      "eligible_cases": 0,
+      "minimum": null,
+      "maximum": null,
+      "variance": null
+    },
+    {
+      "condition_id": "same_cache_key_determinism_check",
+      "passed": true,
+      "checks": [
+        {
+          "case_key": "a2609|2025-11-12T14:00:00",
+          "cache_key": "66613f6a4dbd7c2324199d0fcdbca8a1a36a56347e00a878f88eaa20b72fce44",
+          "passed": true,
+          "expected_output_signature_sha256": "4c5ca043f5163f6d762f46c84d1c63000bc1a7402d58b54d9567bb1854ce22d8",
+          "observed_output_signature_sha256": "4c5ca043f5163f6d762f46c84d1c63000bc1a7402d58b54d9567bb1854ce22d8"
+        }
+      ]
+    },
+    {
+      "condition_id": "evaluation_contexts_generated_without_evaluation_metric_selection",
+      "passed": true,
+      "evaluation_unique_cases": 3537,
+      "note": "P1 reports no evaluation prediction-performance metric."
+    },
+    {
+      "condition_id": "path_manifest_failures_and_required_figures_present",
+      "passed": true,
+      "figures": {
+        "coverage": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/path_bank_coverage.png",
+        "valid_path_distribution": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/valid_path_distribution.png",
+        "risk_probability_distribution": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/risk_probability_distribution.png",
+        "validation_pr": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/validation_pr_curves.png",
+        "validation_reliability": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/validation_reliability.png",
+        "validation_probability_event_rate": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/validation_probability_event_rate.png",
+        "summary_json": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/plot_summary.json"
+      },
+      "failures_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_path_bank/failures.json"
+    },
+    {
+      "condition_id": "no_raw_path_generation_failures",
+      "passed": true,
+      "failure_count": 0
+    }
+  ],
+  "path_bank_manifest": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_path_bank/manifest.json",
+    "sha256": "b0bd689b310bc489558dd79998fff4ac69bd27f8d064e95d60231f0e2b8b37c0"
+  },
+  "path_summaries": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_path_bank/path_summaries.json",
+    "sha256": "4fd1a256d5186237cef6d688aec073026db88e7618c552a6a5c1603c54d98a95"
+  },
+  "baseline_selection": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/selection.json",
+    "sha256": "736579d036f54ef2e69e698ce0db43a87e31b0e777c0c36263266613a5c12515"
+  },
+  "selected_validation_records": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/selected_validation_records.json",
+    "sha256": "b92db255aaeca3ad4060d69a2bfe776047295a0484436ae7926ca79764b59bec"
+  },
+  "figures": {
+    "coverage": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/path_bank_coverage.png",
+    "valid_path_distribution": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/valid_path_distribution.png",
+    "risk_probability_distribution": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/risk_probability_distribution.png",
+    "validation_pr": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/validation_pr_curves.png",
+    "validation_reliability": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/validation_reliability.png",
+    "validation_probability_event_rate": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/validation_probability_event_rate.png",
+    "summary_json": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda_1/p1_baselines/figures/plot_summary.json"
+  },
+  "statistics": {
+    "unique_cases": 5154,
+    "fold_records": 17263,
+    "global_valid_path_count": 124185,
+    "global_path_count": 329856,
+    "global_valid_path_fraction": 0.3764824650756694,
+    "abstain_path_quality_cases": 5082,
+    "eligible_cases": 72
+  }
+}
