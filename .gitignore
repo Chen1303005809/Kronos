@@ -78,5 +78,10 @@ tmp/
 # Futures experiment artifacts and downloaded model cache
 csj/artifacts/
 
+# CUDA path-bank and per-run result artifacts are reproducible but can be very
+# large.  The verified P0 evidence remains versioned separately.
+csj/runs/risk_control_v7/v7_p1_*/
+csj/results/risk_control_v7/p1_*
+
 
 *.pt

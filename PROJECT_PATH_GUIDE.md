@@ -193,7 +193,7 @@ V7 保留 V6 的三日不利波动标签和门槛，但用纯数据覆盖度规�
 - 权威实施与跨会话交接：`csj/v7/IMPLEMENTATION_PLAN.md`；状态摘要与当前入口见 `csj/v7/README.md`、`csj/v7/experiment.py`。
 - 配置：`csj/configs/risk_control_v7.yaml`。
 - P0 结果：`csj/results/risk_control_v7/`，逐运行证据在 `csj/runs/risk_control_v7/`。
-- 当前权威运行 `v7_p0_20260813_verified` 的五折 gate 已通过，但仍是 `production_eligible: false` 的回看证据；P1 尚未实施，不能把 P0 通过写成稳定 edge。下一会话必须按 V7 方案逐 gate 实施，不能续跑已冻结的 V6 P1-P5。
+- 当前权威运行 `v7_p0_20260813_verified` 的五折 gate 已通过，但仍是 `production_eligible: false` 的回看证据。V7 已实施 P1 的 CUDA path-bank、validation-only baselines、图表和 gate；正式 CUDA 结果尚待同步审阅，P2-P5 仍不可运行。不能把 P0 或 P1 的工程通过写成稳定 edge，也不能续跑已冻结的 V6 P1-P5。
 
 #### `/csj/utils`：外部数据服务与小工具
 
@@ -207,6 +207,7 @@ V7 保留 V6 的三日不利波动标签和门槛，但用纯数据覆盖度规�
 - `run_v2_cuda.sh`：V2 三日实验；支持 check、pilot、full、phase1/2/3 和 resume。
 - `run_v3_cuda.sh`：V3 面板实验；支持 audit、P0、P1。
 - `run_v4_cuda.sh`：V4 observed cohort 实验；支持 audit、P0、P1 ablation。当前 gate 已固定拒绝 P2/P3，不得绕过。
+- `run_v7_cuda.sh`：V7 多品种主动风控 P1；支持 check、P1 smoke 与正式 P1，正式输入固定为已验证 P0。
 
 V5 runner 尚未实施；实施后使用独立的 `run_v5_cuda.sh`，不得复用 V4 run/results 目录。
 
