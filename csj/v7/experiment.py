@@ -1106,31 +1106,74 @@ class V7Experiment:
             raise V7ExperimentError("V7 P1 path summaries do not cover all P0 fold records")
         selections: dict[str, object] = {}
         selected_validation_frames: list[pd.DataFrame] = []
-        selected_baseline_by_fold: dict[str, str] = {}
+        selected_baseline_by_fold: dict[str, str | None] = {}
         selected_parameters: dict[str, object] = {}
+        baseline_selection_available = True
+        baseline_selection_notes: list[str] = []
+        expected_selection_order = tuple(self.config["baselines"]["selection_order"])
+        gate_products = tuple(self.config["data"]["gate_products"])
+        all_products = tuple(self.config["data"]["products"])
         for fold_id, fold_records in records.groupby("fold_id", sort=True):
             eligible = fold_records.loc[fold_records["eligible_for_risk"].astype(bool)].copy()
             fit = eligible.loc[eligible["split"].astype(str) == "fit"].copy()
             validation = eligible.loc[
                 eligible["split"].astype(str) == "inner_validation"
             ].copy()
+            raw_fit = fold_records.loc[fold_records["split"].astype(str) == "fit"]
+            raw_validation = fold_records.loc[
+                fold_records["split"].astype(str) == "inner_validation"
+            ]
+            eligibility = {
+                "fit_cases_before_path_quality": int(len(raw_fit)),
+                "fit_cases_eligible_for_risk": int(len(fit)),
+                "validation_cases_before_path_quality": int(len(raw_validation)),
+                "validation_cases_eligible_for_risk": int(len(validation)),
+                "eligible_validation_products": sorted(
+                    validation["product"].astype(str).unique().tolist()
+                ),
+            }
             if fit.empty or validation.empty:
-                raise V7ExperimentError(f"V7 P1 lacks eligible fit/validation cases for {fold_id}")
-            validation_by_name, parameters = fit_and_predict_baselines(
-                fit_records=fit,
-                destination_records=validation,
-                config=self.config,
-                path_features=fold_features,
-            )
-            selected_name, selection = choose_baseline(
-                validation_by_name,
-                selection_order=tuple(self.config["baselines"]["selection_order"]),
-                gate_products=tuple(self.config["data"]["gate_products"]),
-                all_products=tuple(self.config["data"]["products"]),
-            )
-            selected = validation_by_name[selected_name].copy()
-            selected["baseline_name"] = selected_name
-            selected_validation_frames.append(selected)
+                missing_split_names = [
+                    name
+                    for name, frame in (("fit", fit), ("inner_validation", validation))
+                    if frame.empty
+                ]
+                selected_name = None
+                selection: dict[str, object] = {
+                    "selected_baseline": None,
+                    "selection_available": False,
+                    "selection_unavailable_reason": (
+                        "no_path_quality_eligible_" + "_or_".join(missing_split_names) + "_cases"
+                    ),
+                    "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+                    "selection_order": list(expected_selection_order),
+                    "validation_scores": {},
+                }
+                parameters: dict[str, object] = {}
+            else:
+                validation_by_name, parameters = fit_and_predict_baselines(
+                    fit_records=fit,
+                    destination_records=validation,
+                    config=self.config,
+                    path_features=fold_features,
+                )
+                selected_name, selection = choose_baseline(
+                    validation_by_name,
+                    selection_order=expected_selection_order,
+                    gate_products=gate_products,
+                    all_products=all_products,
+                    allow_unavailable=True,
+                )
+                if selected_name is not None:
+                    selected = validation_by_name[selected_name].copy()
+                    selected["baseline_name"] = selected_name
+                    selected_validation_frames.append(selected)
+            selection["path_quality_eligibility"] = eligibility
+            if selected_name is None:
+                baseline_selection_available = False
+                baseline_selection_notes.append(
+                    f"{fold_id}: {selection['selection_unavailable_reason']}"
+                )
             selected_baseline_by_fold[str(fold_id)] = selected_name
             selected_parameters[str(fold_id)] = parameters
             selections[str(fold_id)] = {
@@ -1150,9 +1193,30 @@ class V7Experiment:
                     ])
                 ),
                 **selection,
-                "selected_validation_metrics": classification_metrics(selected),
+                "selected_validation_metrics": (
+                    classification_metrics(selected)
+                    if selected_name is not None
+                    else None
+                ),
             }
-        selected_validation = pd.concat(selected_validation_frames, ignore_index=True)
+        # Showing a partial selected-baseline validation plot would look like a
+        # valid all-fold comparison.  Once any fold is unselectable, render
+        # truthful status figures and make the P1 gate fail instead.
+        selected_validation = (
+            pd.concat(selected_validation_frames, ignore_index=True)
+            if baseline_selection_available and selected_validation_frames
+            else pd.DataFrame(
+                columns=(
+                    "fold_id",
+                    "product",
+                    "p_long",
+                    "p_short",
+                    "long_tail_event",
+                    "short_tail_event",
+                    "baseline_name",
+                )
+            )
+        )
         selection_path = self.run_dir / "p1_baselines" / "selection.json"
         selection_payload = {
             **self._metadata("p1_baselines", smoke=False),
@@ -1187,6 +1251,13 @@ class V7Experiment:
                 **self._metadata("p1_baselines", smoke=False),
                 "selection_path": str(selection_path),
             },
+            selection_available=baseline_selection_available,
+            selection_note=(
+                "No complete five-fold validation baseline selection is available.\n"
+                + "\n".join(baseline_selection_notes)
+                if not baseline_selection_available
+                else None
+            ),
         )
         conditions: list[dict[str, object]] = []
         statistics = dict(features["statistics"])
@@ -1211,6 +1282,23 @@ class V7Experiment:
                 "minimum_required": int(self.config["path_bank"]["minimum_valid_paths_per_case"]),
                 "eligible_cases": int(statistics["eligible_cases"]),
                 "path_quality_abstain_cases": int(statistics["abstain_path_quality_cases"]),
+            }
+        )
+        conditions.append(
+            {
+                "condition_id": "validation_baseline_selection_available_by_fold",
+                "passed": baseline_selection_available,
+                "selection_by_fold": {
+                    fold_id: {
+                        "selected_baseline": payload["selected_baseline"],
+                        "selection_available": payload["selection_available"],
+                        "selection_unavailable_reason": payload.get(
+                            "selection_unavailable_reason"
+                        ),
+                        "path_quality_eligibility": payload["path_quality_eligibility"],
+                    }
+                    for fold_id, payload in selections.items()
+                },
             }
         )
         for fold_id in sorted(records["fold_id"].astype(str).unique()):
@@ -1299,7 +1387,7 @@ class V7Experiment:
         ]
         for fold_id, payload in selections.items():
             report.append(
-                f"| {fold_id} | {payload['selected_baseline']} | {payload['validation_cases']} |"
+                f"| {fold_id} | {payload['selected_baseline'] or ('unavailable: ' + str(payload['selection_unavailable_reason']))} | {payload['validation_cases']} |"
             )
         report.extend(["", "## 失败项", ""])
         report.extend([f"- `{item}`" for item in failed] if failed else ["- 无。"])

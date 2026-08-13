@@ -474,7 +474,8 @@ def choose_baseline(
     selection_order: Sequence[str],
     gate_products: Sequence[str],
     all_products: Sequence[str],
-) -> tuple[str, dict[str, object]]:
+    allow_unavailable: bool = False,
+) -> tuple[str | None, dict[str, object]]:
     """Select exactly one baseline solely from inner-validation Brier."""
 
     expected = tuple(str(value) for value in selection_order)
@@ -497,10 +498,25 @@ def choose_baseline(
         and np.isfinite(float(scores[name]["selection_brier"]))
     ]
     if not usable:
-        raise V7BaselineError("No V7 baseline has a valid validation selection Brier")
+        evidence: dict[str, object] = {
+            "selected_baseline": None,
+            "selection_available": False,
+            "selection_unavailable_reason": "no_finite_validation_selection_brier",
+            "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+            "validation_scores": scores,
+            "selection_order": list(expected),
+        }
+        if allow_unavailable:
+            return None, evidence
+        raise V7BaselineError(
+            "No V7 baseline has a valid validation selection Brier; "
+            "inspect missing_core_product_side_cells and "
+            "missing_all_product_side_cells in the selection diagnostics"
+        )
     best = min(usable, key=lambda name: (float(scores[name]["selection_brier"]), expected.index(name)))
     return best, {
         "selected_baseline": best,
+        "selection_available": True,
         "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
         "validation_scores": scores,
         "selection_order": list(expected),

@@ -19,6 +19,8 @@ CUDA 运行顺序：
 RUN_ID=v7_p1_cuda bash csj/scripts/run_v7_cuda.sh check
 RUN_ID=v7_p1_cuda bash csj/scripts/run_v7_cuda.sh p1-smoke
 RUN_ID=v7_p1_cuda bash csj/scripts/run_v7_cuda.sh p1
+# 已完成 path bank 后，仅重跑基线选择/报告：
+RUN_ID=v7_p1_cuda bash csj/scripts/run_v7_cuda.sh p1-baselines
 ```
 
 `p1-smoke` 固定为 8 个 case × 4 条路径，只验证模型加载、原始 path/hidden 的形状、原子 shard、resume 和确定性抽检。它会生成 `p1_smoke_gate.json`，但该 gate 固定不解锁 P2。正式 `p1` 固定缓存 5154 个唯一 case × 64 条路径，按 target length 分 shard；随后仅用 inner validation 选择每折简单风险基线，并产生 cache 覆盖、有效路径、风险概率、PR、reliability 与概率分箱事件率图。

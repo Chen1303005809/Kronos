@@ -9,6 +9,7 @@ set -euo pipefail
 #   RUN_ID=v7_cuda bash csj/scripts/run_v7_cuda.sh check
 #   RUN_ID=v7_cuda bash csj/scripts/run_v7_cuda.sh p1-smoke
 #   RUN_ID=v7_cuda bash csj/scripts/run_v7_cuda.sh p1
+#   RUN_ID=v7_cuda bash csj/scripts/run_v7_cuda.sh p1-baselines
 #   RUN_ID=v7_cuda bash csj/scripts/run_v7_cuda.sh full
 #
 # Environment:
@@ -83,6 +84,12 @@ case "$MODE" in
   p1)
     check_cuda
     run_stage p1-path-bank --resume
+    run_stage p1-baselines
+    ;;
+  p1-baselines)
+    # Use this after updating baseline/reporting code for an already complete
+    # formal path bank.  It never regenerates the 5154 × 64 raw paths.
+    check_cuda
     run_stage p1-baselines
     ;;
   full)

@@ -86,11 +86,17 @@ def _save(figure: plt.Figure, path: Path) -> Path:
     return path
 
 
-def _require(records: pd.DataFrame, columns: Sequence[str], *, label: str) -> None:
+def _require(
+    records: pd.DataFrame,
+    columns: Sequence[str],
+    *,
+    label: str,
+    allow_empty: bool = False,
+) -> None:
     missing = sorted(set(columns).difference(records.columns))
     if missing:
         raise V7PlotError(f"V7 {label} records miss columns: {missing!r}")
-    if records.empty:
+    if records.empty and not allow_empty:
         raise V7PlotError(f"V7 {label} records are empty")
 
 
@@ -138,14 +144,33 @@ def _bin_rows(records: pd.DataFrame, *, side: str, bins: int = 10) -> list[dict[
     return rows
 
 
+def _unavailable_axis(axis: plt.Axes, message: str) -> None:
+    """Render a truthful placeholder when a failed P1 gate has no score to plot."""
+
+    axis.set_axis_off()
+    axis.text(
+        0.5,
+        0.5,
+        message,
+        ha="center",
+        va="center",
+        wrap=True,
+        fontsize=10,
+        color="#991b1b",
+        transform=axis.transAxes,
+    )
+
+
 def render_p1_plots(
     *,
     path_records: pd.DataFrame,
     fold_path_records: pd.DataFrame,
     validation_records: pd.DataFrame,
-    selected_baselines: Mapping[str, str],
+    selected_baselines: Mapping[str, str | None],
     output_dir: str | Path,
     metadata: Mapping[str, object],
+    selection_available: bool = True,
+    selection_note: str | None = None,
 ) -> P1PlotArtifacts:
     """Render the P1 figure contract from raw cache and validation only."""
 
@@ -163,7 +188,10 @@ def render_p1_plots(
         validation_records,
         ("fold_id", "product", "p_long", "p_short", "long_tail_event", "short_tail_event"),
         label="validation",
+        allow_empty=not selection_available,
     )
+    if validation_records.empty and selection_available:
+        raise V7PlotError("V7 P1 selected validation records are empty despite available selection")
     root = Path(output_dir)
     root.mkdir(parents=True, exist_ok=True)
 
@@ -208,7 +236,12 @@ def render_p1_plots(
             fold_path_records["eligible_for_risk"].astype(bool), f"p_{side}"
         ].dropna().to_numpy(dtype=float)
         if not len(values):
-            raise V7PlotError(f"V7 P1 has no eligible fold-derived {side} probabilities")
+            _unavailable_axis(
+                axis,
+                f"No eligible fold-derived {side} raw-path probabilities.\n"
+                "P1 gate fails; no path score is plotted.",
+            )
+            continue
         axis.hist(values, bins=20, color=color, edgecolor="white", alpha=0.82)
         axis.set_title(f"zero-shot raw-path {side} risk")
         axis.set_xlabel("crossing fraction")
@@ -218,6 +251,13 @@ def render_p1_plots(
 
     figure, axes = plt.subplots(1, 2, figsize=(12.5, 4.8))
     for axis, side, color in zip(axes, ("long", "short"), ("#dc2626", "#2563eb"), strict=True):
+        if validation_records.empty:
+            _unavailable_axis(
+                axis,
+                selection_note
+                or "No validation baseline could be selected; P1 gate fails.",
+            )
+            continue
         labels = validation_records[f"{side}_tail_event"].astype(int).to_numpy()
         probabilities = validation_records[f"p_{side}"].to_numpy(dtype=float)
         recall, precision = _pr_curve(probabilities, labels)
@@ -231,6 +271,13 @@ def render_p1_plots(
     binned = {side: _bin_rows(validation_records, side=side) for side in ("long", "short")}
     figure, axes = plt.subplots(1, 2, figsize=(12.5, 4.8))
     for axis, side, color in zip(axes, ("long", "short"), ("#dc2626", "#2563eb"), strict=True):
+        if validation_records.empty:
+            _unavailable_axis(
+                axis,
+                selection_note
+                or "No validation baseline could be selected; P1 gate fails.",
+            )
+            continue
         rows = [row for row in binned[side] if row["count"]]
         x = np.asarray([row["mean_probability"] for row in rows], dtype=float)
         y = np.asarray([row["actual_event_rate"] for row in rows], dtype=float)
@@ -247,6 +294,13 @@ def render_p1_plots(
 
     figure, axes = plt.subplots(1, 2, figsize=(12.5, 4.8))
     for axis, side, color in zip(axes, ("long", "short"), ("#dc2626", "#2563eb"), strict=True):
+        if validation_records.empty:
+            _unavailable_axis(
+                axis,
+                selection_note
+                or "No validation baseline could be selected; P1 gate fails.",
+            )
+            continue
         rows = binned[side]
         counts = np.asarray([row["count"] for row in rows], dtype=float)
         rates = np.asarray(
@@ -271,6 +325,8 @@ def render_p1_plots(
         {
             "metadata": dict(metadata),
             "selected_baselines": dict(selected_baselines),
+            "selection_available": bool(selection_available),
+            "selection_note": selection_note,
             "path_bank_cases": int(len(path_records)),
             "fold_path_risk_records": int(len(fold_path_records)),
             "validation_cases": int(len(validation_records)),
