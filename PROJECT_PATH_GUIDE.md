@@ -190,10 +190,10 @@ V6 不再以第三日涨跌为最终目标，而是从目标具体合约的历�
 
 V7 保留 V6 的三日不利波动标签和门槛，但用纯数据覆盖度规则扩展到 21 个商品品种，并将 walk-forward 切分键改为 `origin_trading_day`。V6 的失败证据不被覆盖。
 
-- 入口与设计：`csj/v7/README.md`、`csj/v7/experiment.py`。
+- 权威实施与跨会话交接：`csj/v7/IMPLEMENTATION_PLAN.md`；状态摘要与当前入口见 `csj/v7/README.md`、`csj/v7/experiment.py`。
 - 配置：`csj/configs/risk_control_v7.yaml`。
 - P0 结果：`csj/results/risk_control_v7/`，逐运行证据在 `csj/runs/risk_control_v7/`。
-- 当前权威运行 `v7_p0_20260813_verified` 的五折 gate 已通过，但仍是 `production_eligible: false` 的回看证据；P1 尚未实施，不能把 P0 通过写成稳定 edge。
+- 当前权威运行 `v7_p0_20260813_verified` 的五折 gate 已通过，但仍是 `production_eligible: false` 的回看证据；P1 尚未实施，不能把 P0 通过写成稳定 edge。下一会话必须按 V7 方案逐 gate 实施，不能续跑已冻结的 V6 P1-P5。
 
 #### `/csj/utils`：外部数据服务与小工具
 

@@ -37,3 +37,5 @@ csj/v6/
 ```
 
 当前证据位于 [`../results/risk_control_v6/`](../results/risk_control_v6/)。P0 不加载 Kronos、不要求 CUDA。P0 gate 未通过是研究结论，不是命令运行失败；`p1-path-bank` 会拒绝继续。
+
+后续方案已递增为 V7。实现 V7 时阅读 [`../v7/IMPLEMENTATION_PLAN.md`](../v7/IMPLEMENTATION_PLAN.md)，不要解锁或续跑 V6 P1-P5，也不要用 V7 的通过结果覆盖本目录的失败证据。

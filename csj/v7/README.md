@@ -1,6 +1,8 @@
-# V7 多品种主动风控 P0
+# V7 多品种主动风控
 
 当前状态：`v7_p0_20260813_verified` 的五折 P0 gate 已通过；P1 尚未实施。
+
+P1-P5 的唯一权威实施与跨会话交接文档是 [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md)。当前 CLI 仍只实现 `audit`；文档中的 P1-P5 命令是待实现接口。
 
 V7 是 V6 数据门控失败后的新主版本。V6 的失败证据保持不变；V7 不通过降低事件阈值或偷看 evaluation 修复它，而是改变两个已证实不可行的协议前提：
 
