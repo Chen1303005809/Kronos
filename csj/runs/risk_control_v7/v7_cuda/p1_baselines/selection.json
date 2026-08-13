@@ -1,0 +1,4997 @@
+{
+  "strategy_version": 7,
+  "phase": "p1_baselines",
+  "run_id": "v7_cuda",
+  "result_scope": "retrospective_observed_diversified_contracts",
+  "production_eligible": false,
+  "git_commit": "d95128813619f866a854ea74b17b04ad8a13f116",
+  "resolved_config_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda/resolved_config.json",
+  "resolved_config_sha256": "9ad8ffb7bd725d9a59dac28d35a4a08cde67ce03db2386647c0ca43facf9727e",
+  "data_fingerprint": "2387ff95a1f7bedc7a96377d3af0a45a4bf02f707c2edab1d3f47731d6e0ea1c",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "risk_label_version": "adverse-excursion-vol-scaled-v1",
+  "smoke": false,
+  "runtime": {
+    "device_requested": "cuda",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "model_download_allowed": false,
+    "canonical_p0_run_id": "v7_p0_20260813_verified",
+    "canonical_p0_gate_sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf",
+    "canonical_unique_case_count": 5154,
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+    "device": "cuda",
+    "cuda_available": true,
+    "mps_available": false,
+    "cuda_device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_device_count": 4,
+    "cuda_capability": [
+      8,
+      9
+    ]
+  },
+  "upstream_gate_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_p0_20260813_verified/p0_gate.json",
+  "upstream_gate_sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf",
+  "path_bank_manifest": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda/p1_path_bank/manifest.json",
+    "sha256": "54dd4acd9096121f6a2932133849afbc7fd5497215537bee4bde9ed2ce6c37bf"
+  },
+  "path_summaries": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda/p1_path_bank/path_summaries.json",
+    "sha256": "43016f58bac81dcbc5a3532bd227730e2e7d752877e526db62bfd712b1cbf253"
+  },
+  "selection_by_fold": {
+    "fold_00": {
+      "selected_baseline": null,
+      "fit_cases": 15,
+      "validation_cases": 4,
+      "path_quality_abstain_fit_cases": 875,
+      "path_quality_abstain_validation_cases": 554,
+      "selection_available": false,
+      "selection_unavailable_reason": "no_finite_validation_selection_brier",
+      "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+      "validation_scores": {
+        "fit_global_event_rate": {
+          "selection_brier": null,
+          "core_macro_brier": null,
+          "all_product_macro_brier": 0.07222222222222223,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fit_product_event_rate": {
+          "selection_brier": null,
+          "core_macro_brier": null,
+          "all_product_macro_brier": 0.06666666666666667,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "ewma_volatility_rank": {
+          "selection_brier": null,
+          "core_macro_brier": null,
+          "all_product_macro_brier": 0.041666666666666664,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "atr20_rank": {
+          "selection_brier": null,
+          "core_macro_brier": null,
+          "all_product_macro_brier": 0.08333333333333333,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fixed_context_logistic": {
+          "selection_brier": null,
+          "core_macro_brier": null,
+          "all_product_macro_brier": 0.08333333332033532,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "zero_shot_path_risk": {
+          "selection_brier": null,
+          "core_macro_brier": null,
+          "all_product_macro_brier": 0.05624322538744065,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "jm",
+              "side": "long"
+            },
+            {
+              "product": "jm",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        }
+      },
+      "selection_order": [
+        "fit_global_event_rate",
+        "fit_product_event_rate",
+        "ewma_volatility_rank",
+        "atr20_rank",
+        "fixed_context_logistic",
+        "zero_shot_path_risk"
+      ],
+      "path_quality_eligibility": {
+        "fit_cases_before_path_quality": 890,
+        "fit_cases_eligible_for_risk": 15,
+        "validation_cases_before_path_quality": 558,
+        "validation_cases_eligible_for_risk": 4,
+        "eligible_validation_products": [
+          "ru",
+          "v"
+        ]
+      },
+      "selected_validation_metrics": null
+    },
+    "fold_01": {
+      "selected_baseline": "fit_product_event_rate",
+      "fit_cases": 20,
+      "validation_cases": 18,
+      "path_quality_abstain_fit_cases": 1426,
+      "path_quality_abstain_validation_cases": 583,
+      "selection_available": true,
+      "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+      "validation_scores": {
+        "fit_global_event_rate": {
+          "selection_brier": 0.09116666666666666,
+          "core_macro_brier": 0.0225,
+          "all_product_macro_brier": 0.15983333333333333,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fit_product_event_rate": {
+          "selection_brier": 0.0875,
+          "core_macro_brier": 0.0225,
+          "all_product_macro_brier": 0.1525,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "ewma_volatility_rank": {
+          "selection_brier": 0.0980952380952381,
+          "core_macro_brier": 0.0,
+          "all_product_macro_brier": 0.1961904761904762,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "atr20_rank": {
+          "selection_brier": 0.10791666666666666,
+          "core_macro_brier": 0.0,
+          "all_product_macro_brier": 0.21583333333333332,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fixed_context_logistic": {
+          "selection_brier": 0.14898922670379014,
+          "core_macro_brier": 4.523510378907182e-06,
+          "all_product_macro_brier": 0.2979739298972014,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "zero_shot_path_risk": {
+          "selection_brier": 0.11862042770030748,
+          "core_macro_brier": 0.0,
+          "all_product_macro_brier": 0.23724085540061496,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "hc",
+              "side": "long"
+            },
+            {
+              "product": "hc",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        }
+      },
+      "selection_order": [
+        "fit_global_event_rate",
+        "fit_product_event_rate",
+        "ewma_volatility_rank",
+        "atr20_rank",
+        "fixed_context_logistic",
+        "zero_shot_path_risk"
+      ],
+      "path_quality_eligibility": {
+        "fit_cases_before_path_quality": 1446,
+        "fit_cases_eligible_for_risk": 20,
+        "validation_cases_before_path_quality": 601,
+        "validation_cases_eligible_for_risk": 18,
+        "eligible_validation_products": [
+          "eg",
+          "jm",
+          "m",
+          "ru",
+          "v"
+        ]
+      },
+      "selected_validation_metrics": {
+        "long": {
+          "cases": 18,
+          "event_count": 1,
+          "event_rate": 0.05555555555555555,
+          "brier": 0.05513888888888888,
+          "pr_auc": 0.14285714285714285,
+          "probability_minimum": 0.0,
+          "probability_maximum": 0.15,
+          "probability_standard_deviation": 0.06718548123582124
+        },
+        "short": {
+          "cases": 18,
+          "event_count": 9,
+          "event_rate": 0.5,
+          "brier": 0.36902777777777773,
+          "pr_auc": 0.7363235529902197,
+          "probability_minimum": 0.0,
+          "probability_maximum": 0.5,
+          "probability_standard_deviation": 0.1455354099714415
+        }
+      }
+    },
+    "fold_02": {
+      "selected_baseline": "fit_global_event_rate",
+      "fit_cases": 36,
+      "validation_cases": 10,
+      "path_quality_abstain_fit_cases": 2001,
+      "path_quality_abstain_validation_cases": 650,
+      "selection_available": true,
+      "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+      "validation_scores": {
+        "fit_global_event_rate": {
+          "selection_brier": 0.1996527777777778,
+          "core_macro_brier": 0.2673611111111111,
+          "all_product_macro_brier": 0.13194444444444445,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fit_product_event_rate": {
+          "selection_brier": 0.28732638888888884,
+          "core_macro_brier": 0.41666666666666663,
+          "all_product_macro_brier": 0.1579861111111111,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "ewma_volatility_rank": {
+          "selection_brier": 0.251953125,
+          "core_macro_brier": 0.359375,
+          "all_product_macro_brier": 0.14453125,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "atr20_rank": {
+          "selection_brier": 0.33919270833333337,
+          "core_macro_brier": 0.5052083333333334,
+          "all_product_macro_brier": 0.17317708333333334,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fixed_context_logistic": {
+          "selection_brier": 0.2101075713406658,
+          "core_macro_brier": 0.2500227539659711,
+          "all_product_macro_brier": 0.17019238871536047,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "zero_shot_path_risk": {
+          "selection_brier": 0.35110733166115654,
+          "core_macro_brier": 0.5105001024608502,
+          "all_product_macro_brier": 0.1917145608614629,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "br",
+              "side": "long"
+            },
+            {
+              "product": "br",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "c",
+              "side": "long"
+            },
+            {
+              "product": "c",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "rb",
+              "side": "long"
+            },
+            {
+              "product": "rb",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        }
+      },
+      "selection_order": [
+        "fit_global_event_rate",
+        "fit_product_event_rate",
+        "ewma_volatility_rank",
+        "atr20_rank",
+        "fixed_context_logistic",
+        "zero_shot_path_risk"
+      ],
+      "path_quality_eligibility": {
+        "fit_cases_before_path_quality": 2037,
+        "fit_cases_eligible_for_risk": 36,
+        "validation_cases_before_path_quality": 660,
+        "validation_cases_eligible_for_risk": 10,
+        "eligible_validation_products": [
+          "a",
+          "hc",
+          "jm",
+          "ru"
+        ]
+      },
+      "selected_validation_metrics": {
+        "long": {
+          "cases": 10,
+          "event_count": 1,
+          "event_rate": 0.1,
+          "brier": 0.09444444444444447,
+          "pr_auc": 0.14285714285714285,
+          "probability_minimum": 0.16666666666666666,
+          "probability_maximum": 0.16666666666666666,
+          "probability_standard_deviation": 2.7755575615628914e-17
+        },
+        "short": {
+          "cases": 10,
+          "event_count": 5,
+          "event_rate": 0.5,
+          "brier": 0.3125,
+          "pr_auc": 0.6433333333333333,
+          "probability_minimum": 0.25,
+          "probability_maximum": 0.25,
+          "probability_standard_deviation": 0.0
+        }
+      }
+    },
+    "fold_03": {
+      "selected_baseline": "fit_global_event_rate",
+      "fit_cases": 48,
+      "validation_cases": 22,
+      "path_quality_abstain_fit_cases": 2644,
+      "path_quality_abstain_validation_cases": 685,
+      "selection_available": true,
+      "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+      "validation_scores": {
+        "fit_global_event_rate": {
+          "selection_brier": 0.2915513392857143,
+          "core_macro_brier": 0.300390625,
+          "all_product_macro_brier": 0.2827120535714286,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "ru",
+              "side": "long"
+            },
+            {
+              "product": "ru",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fit_product_event_rate": {
+          "selection_brier": 0.3872513640873016,
+          "core_macro_brier": 0.4153061224489796,
+          "all_product_macro_brier": 0.3591966057256236,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "ru",
+              "side": "long"
+            },
+            {
+              "product": "ru",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "ewma_volatility_rank": {
+          "selection_brier": 0.3470642857142857,
+          "core_macro_brier": 0.35050000000000003,
+          "all_product_macro_brier": 0.34362857142857145,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "ru",
+              "side": "long"
+            },
+            {
+              "product": "ru",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "atr20_rank": {
+          "selection_brier": 0.32145892857142855,
+          "core_macro_brier": 0.311625,
+          "all_product_macro_brier": 0.33129285714285717,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "ru",
+              "side": "long"
+            },
+            {
+              "product": "ru",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "fixed_context_logistic": {
+          "selection_brier": 0.36481756127300735,
+          "core_macro_brier": 0.38629967758737715,
+          "all_product_macro_brier": 0.34333544495863755,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "ru",
+              "side": "long"
+            },
+            {
+              "product": "ru",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        },
+        "zero_shot_path_risk": {
+          "selection_brier": 0.3288792510572064,
+          "core_macro_brier": 0.3540880774284093,
+          "all_product_macro_brier": 0.30367042468600347,
+          "missing_core_product_side_cells": [
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            }
+          ],
+          "missing_all_product_side_cells": [
+            {
+              "product": "a",
+              "side": "long"
+            },
+            {
+              "product": "a",
+              "side": "short"
+            },
+            {
+              "product": "b",
+              "side": "long"
+            },
+            {
+              "product": "b",
+              "side": "short"
+            },
+            {
+              "product": "bu",
+              "side": "long"
+            },
+            {
+              "product": "bu",
+              "side": "short"
+            },
+            {
+              "product": "eb",
+              "side": "long"
+            },
+            {
+              "product": "eb",
+              "side": "short"
+            },
+            {
+              "product": "eg",
+              "side": "long"
+            },
+            {
+              "product": "eg",
+              "side": "short"
+            },
+            {
+              "product": "fu",
+              "side": "long"
+            },
+            {
+              "product": "fu",
+              "side": "short"
+            },
+            {
+              "product": "i",
+              "side": "long"
+            },
+            {
+              "product": "i",
+              "side": "short"
+            },
+            {
+              "product": "l",
+              "side": "long"
+            },
+            {
+              "product": "l",
+              "side": "short"
+            },
+            {
+              "product": "m",
+              "side": "long"
+            },
+            {
+              "product": "m",
+              "side": "short"
+            },
+            {
+              "product": "p",
+              "side": "long"
+            },
+            {
+              "product": "p",
+              "side": "short"
+            },
+            {
+              "product": "pg",
+              "side": "long"
+            },
+            {
+              "product": "pg",
+              "side": "short"
+            },
+            {
+              "product": "pp",
+              "side": "long"
+            },
+            {
+              "product": "pp",
+              "side": "short"
+            },
+            {
+              "product": "ru",
+              "side": "long"
+            },
+            {
+              "product": "ru",
+              "side": "short"
+            },
+            {
+              "product": "sp",
+              "side": "long"
+            },
+            {
+              "product": "sp",
+              "side": "short"
+            },
+            {
+              "product": "v",
+              "side": "long"
+            },
+            {
+              "product": "v",
+              "side": "short"
+            },
+            {
+              "product": "y",
+              "side": "long"
+            },
+            {
+              "product": "y",
+              "side": "short"
+            }
+          ]
+        }
+      },
+      "selection_order": [
+        "fit_global_event_rate",
+        "fit_product_event_rate",
+        "ewma_volatility_rank",
+        "atr20_rank",
+        "fixed_context_logistic",
+        "zero_shot_path_risk"
+      ],
+      "path_quality_eligibility": {
+        "fit_cases_before_path_quality": 2692,
+        "fit_cases_eligible_for_risk": 48,
+        "validation_cases_before_path_quality": 707,
+        "validation_cases_eligible_for_risk": 22,
+        "eligible_validation_products": [
+          "br",
+          "c",
+          "hc",
+          "jm",
+          "rb"
+        ]
+      },
+      "selected_validation_metrics": {
+        "long": {
+          "cases": 22,
+          "event_count": 5,
+          "event_rate": 0.22727272727272727,
+          "brier": 0.18607954545454544,
+          "pr_auc": 0.15126908179539758,
+          "probability_minimum": 0.125,
+          "probability_maximum": 0.125,
+          "probability_standard_deviation": 0.0
+        },
+        "short": {
+          "cases": 22,
+          "event_count": 8,
+          "event_rate": 0.36363636363636365,
+          "brier": 0.23401988636363635,
+          "pr_auc": 0.5101282500179558,
+          "probability_minimum": 0.3125,
+          "probability_maximum": 0.3125,
+          "probability_standard_deviation": 0.0
+        }
+      }
+    },
+    "fold_04": {
+      "selected_baseline": null,
+      "fit_cases": 71,
+      "validation_cases": 0,
+      "path_quality_abstain_fit_cases": 3316,
+      "path_quality_abstain_validation_cases": 748,
+      "selection_available": false,
+      "selection_unavailable_reason": "no_path_quality_eligible_inner_validation_cases",
+      "selection_metric": "0.5 * core_macro_brier + 0.5 * all_product_macro_brier",
+      "selection_order": [
+        "fit_global_event_rate",
+        "fit_product_event_rate",
+        "ewma_volatility_rank",
+        "atr20_rank",
+        "fixed_context_logistic",
+        "zero_shot_path_risk"
+      ],
+      "validation_scores": {},
+      "path_quality_eligibility": {
+        "fit_cases_before_path_quality": 3387,
+        "fit_cases_eligible_for_risk": 71,
+        "validation_cases_before_path_quality": 748,
+        "validation_cases_eligible_for_risk": 0,
+        "eligible_validation_products": []
+      },
+      "selected_validation_metrics": null
+    }
+  },
+  "frozen_baseline_parameters_by_fold": {
+    "fold_00": {
+      "event_rates": {
+        "global": {
+          "long": 0.06666666666666667,
+          "short": 0.13333333333333333
+        },
+        "product": {
+          "c": {
+            "long": 0.0,
+            "short": 0.3333333333333333
+          },
+          "ru": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "sp": {
+            "long": 0.14285714285714285,
+            "short": 0.14285714285714285
+          }
+        }
+      },
+      "fit_product_event_rate": {
+        "fallback_to_global_products": [
+          "v"
+        ]
+      },
+      "ewma_volatility_rank": {
+        "feature": "ewma_volatility",
+        "quantiles": [
+          0.001036067369677855,
+          0.0013607113439715237,
+          0.0030471965473233492,
+          0.0036836941668043923,
+          0.0038752083932805416,
+          0.0038947441814746585,
+          0.0040882176884597015,
+          0.004184288323739056,
+          0.004302197188977955,
+          0.004656600902840948,
+          0.006433537542944224
+        ],
+        "probabilities": {
+          "long": [
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "short": [
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "atr20_rank": {
+        "feature": "atr20_over_price",
+        "quantiles": [
+          0.0019298245614035089,
+          0.0022148748036813683,
+          0.004501825634761283,
+          0.005584003399433428,
+          0.005732556604726368,
+          0.005870806566738044,
+          0.006221252067032819,
+          0.006296319483941115,
+          0.0070762412698412705,
+          0.00785665004870781,
+          0.008209186840471757
+        ],
+        "probabilities": {
+          "long": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "short": [
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "fixed_context_logistic": {
+        "features": [
+          "ewma_volatility",
+          "atr20_over_price",
+          "range20_over_price",
+          "absolute_return_day_minus_3",
+          "absolute_return_day_minus_2",
+          "absolute_return_day_minus_1",
+          "volume_zscore",
+          "amount_zscore",
+          "context_clip_fraction"
+        ],
+        "by_side": {
+          "long": {
+            "mean": [
+              0.003656043148926097,
+              0.00558883268913248,
+              0.0265260509202112,
+              0.0056966982670428575,
+              0.005856626985904389,
+              0.006345886517374995,
+              1.3223950854271773,
+              1.210982144542546,
+              0.002690972222222222
+            ],
+            "scale": [
+              0.0013700697181684746,
+              0.0019418419735401653,
+              0.012082310624795442,
+              0.004801937814250599,
+              0.0054768840862358045,
+              0.0058262176520677295,
+              0.8099201646610332,
+              0.8397893785199824,
+              0.0010048469533672072
+            ],
+            "coefficients": [
+              -12.987962100439857,
+              -0.3905899602693853,
+              1.586099273988932,
+              -3.8482321210228903,
+              -3.241762980366294,
+              -2.6240808556177226,
+              3.781467460420436,
+              2.8707717578468546,
+              0.21126927550550573,
+              7.283190025483885
+            ]
+          },
+          "short": {
+            "mean": [
+              0.003656043148926097,
+              0.00558883268913248,
+              0.0265260509202112,
+              0.0056966982670428575,
+              0.005856626985904389,
+              0.006345886517374995,
+              1.3223950854271773,
+              1.210982144542546,
+              0.002690972222222222
+            ],
+            "scale": [
+              0.0013700697181684746,
+              0.0019418419735401653,
+              0.012082310624795442,
+              0.004801937814250599,
+              0.0054768840862358045,
+              0.0058262176520677295,
+              0.8099201646610332,
+              0.8397893785199824,
+              0.0010048469533672072
+            ],
+            "coefficients": [
+              -11.690900326269054,
+              -2.7394489738075762,
+              -4.136791917172922,
+              -3.664378859523116,
+              2.3832937684364217,
+              3.3485317942961537,
+              -2.443384630275438,
+              2.248646853105225,
+              1.9694257744125852,
+              5.800997358457289
+            ]
+          }
+        }
+      }
+    },
+    "fold_01": {
+      "event_rates": {
+        "global": {
+          "long": 0.15,
+          "short": 0.15
+        },
+        "product": {
+          "c": {
+            "long": 0.0,
+            "short": 0.3333333333333333
+          },
+          "p": {
+            "long": 1.0,
+            "short": 0.0
+          },
+          "rb": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "ru": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "sp": {
+            "long": 0.2857142857142857,
+            "short": 0.14285714285714285
+          },
+          "v": {
+            "long": 0.0,
+            "short": 0.5
+          }
+        }
+      },
+      "fit_product_event_rate": {
+        "fallback_to_global_products": [
+          "eg",
+          "jm",
+          "m"
+        ]
+      },
+      "ewma_volatility_rank": {
+        "feature": "ewma_volatility",
+        "quantiles": [
+          0.001036067369677855,
+          0.0014530972025638255,
+          0.0033050460770018063,
+          0.0036119869803664666,
+          0.0037987140238332578,
+          0.0038869042213549544,
+          0.003967808691252632,
+          0.004134380644695812,
+          0.004302197188977955,
+          0.004927878617850236,
+          0.006433537542944224
+        ],
+        "probabilities": {
+          "long": [
+            0.0,
+            0.0,
+            0.5,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0
+          ],
+          "short": [
+            0.5,
+            0.0,
+            0.5,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "atr20_rank": {
+        "feature": "atr20_over_price",
+        "quantiles": [
+          0.0019298245614035089,
+          0.0022506305295336257,
+          0.005010845019470029,
+          0.005624011898016997,
+          0.005764200232225035,
+          0.005859292504329373,
+          0.006190629511077638,
+          0.006257711116968911,
+          0.0070762412698412705,
+          0.008196369947585082,
+          0.009332915753210148
+        ],
+        "probabilities": {
+          "long": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "short": [
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "fixed_context_logistic": {
+        "features": [
+          "ewma_volatility",
+          "atr20_over_price",
+          "range20_over_price",
+          "absolute_return_day_minus_3",
+          "absolute_return_day_minus_2",
+          "absolute_return_day_minus_1",
+          "volume_zscore",
+          "amount_zscore",
+          "context_clip_fraction"
+        ],
+        "by_side": {
+          "long": {
+            "mean": [
+              0.0037271674516981858,
+              0.005785965606386088,
+              0.02789028042771715,
+              0.007013279660550079,
+              0.006255716987746965,
+              0.005632564758060881,
+              1.197879787944983,
+              1.119507283080356,
+              0.0024739583333333337
+            ],
+            "scale": [
+              0.001294754971301851,
+              0.0018821662469756674,
+              0.011873825287947167,
+              0.0056763536109763965,
+              0.005074766173947873,
+              0.005487830062177672,
+              0.7466156238302057,
+              0.7575892175158446,
+              0.0010001491859203918
+            ],
+            "coefficients": [
+              -8.812794550207,
+              -16.99714374276985,
+              8.122220220617999,
+              20.497212765572833,
+              -7.9625005059565535,
+              -11.628235138376297,
+              -3.484213297267439,
+              -9.098875477644045,
+              6.349802913003532,
+              11.786623179211242
+            ]
+          },
+          "short": {
+            "mean": [
+              0.0037271674516981858,
+              0.005785965606386088,
+              0.02789028042771715,
+              0.007013279660550079,
+              0.006255716987746965,
+              0.005632564758060881,
+              1.197879787944983,
+              1.119507283080356,
+              0.0024739583333333337
+            ],
+            "scale": [
+              0.001294754971301851,
+              0.0018821662469756674,
+              0.011873825287947167,
+              0.0056763536109763965,
+              0.005074766173947873,
+              0.005487830062177672,
+              0.7466156238302057,
+              0.7575892175158446,
+              0.0010001491859203918
+            ],
+            "coefficients": [
+              -21.036893520629995,
+              6.914260054877525,
+              10.887290823586545,
+              -22.523018111665397,
+              -2.673845717237165,
+              10.49533890579713,
+              -23.977210756189503,
+              5.352190761378024,
+              5.133603597794993,
+              -4.940237470595499
+            ]
+          }
+        }
+      }
+    },
+    "fold_02": {
+      "event_rates": {
+        "global": {
+          "long": 0.16666666666666666,
+          "short": 0.25
+        },
+        "product": {
+          "c": {
+            "long": 0.3333333333333333,
+            "short": 0.3333333333333333
+          },
+          "eg": {
+            "long": 0.2,
+            "short": 0.8
+          },
+          "jm": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "m": {
+            "long": 0.0,
+            "short": 0.5
+          },
+          "p": {
+            "long": 1.0,
+            "short": 0.0
+          },
+          "rb": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "ru": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "sp": {
+            "long": 0.42857142857142855,
+            "short": 0.0
+          },
+          "v": {
+            "long": 0.0,
+            "short": 0.3333333333333333
+          }
+        }
+      },
+      "fit_product_event_rate": {
+        "fallback_to_global_products": [
+          "a",
+          "hc"
+        ]
+      },
+      "ewma_volatility_rank": {
+        "feature": "ewma_volatility",
+        "quantiles": [
+          0.001036067369677855,
+          0.0017655477210090026,
+          0.0034411020905836145,
+          0.003781168606848426,
+          0.0038947441814746585,
+          0.004241591240728596,
+          0.005065440582798418,
+          0.006388541739169933,
+          0.007523191964263079,
+          0.012028365835070701,
+          0.014866249099549405
+        ],
+        "probabilities": {
+          "long": [
+            0.25,
+            0.0,
+            0.5,
+            0.0,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0
+          ],
+          "short": [
+            0.25,
+            0.6666666666666666,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.75,
+            0.25
+          ]
+        }
+      },
+      "atr20_rank": {
+        "feature": "atr20_over_price",
+        "quantiles": [
+          0.0019298245614035089,
+          0.00273034918532028,
+          0.005062836624775583,
+          0.005687571531540472,
+          0.005870806566738044,
+          0.006273154463757792,
+          0.007349206349206352,
+          0.009497695467604414,
+          0.011981340535232015,
+          0.015890833646793306,
+          0.020726078466181432
+        ],
+        "probabilities": {
+          "long": [
+            0.25,
+            0.0,
+            0.25,
+            0.3333333333333333,
+            0.5,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0
+          ],
+          "short": [
+            0.25,
+            0.6666666666666666,
+            0.0,
+            0.3333333333333333,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.25
+          ]
+        }
+      },
+      "fixed_context_logistic": {
+        "features": [
+          "ewma_volatility",
+          "atr20_over_price",
+          "range20_over_price",
+          "absolute_return_day_minus_3",
+          "absolute_return_day_minus_2",
+          "absolute_return_day_minus_1",
+          "volume_zscore",
+          "amount_zscore",
+          "context_clip_fraction"
+        ],
+        "by_side": {
+          "long": {
+            "mean": [
+              0.005517587218296983,
+              0.008349371746672885,
+              0.04516805393799092,
+              0.011323576215671316,
+              0.00993517733624592,
+              0.009905350907510671,
+              1.354776065479473,
+              1.3263711149469488,
+              0.0024775752314814816
+            ],
+            "scale": [
+              0.0034710037659487643,
+              0.004961484197483891,
+              0.031594619859897186,
+              0.010531066116666342,
+              0.011908663855168068,
+              0.012180285724060344,
+              0.806211180550816,
+              0.8256112965874904,
+              0.0013004496808699938
+            ],
+            "coefficients": [
+              -2.572395094383893,
+              -5.48195727098306,
+              4.487838549193768,
+              1.126186619806568,
+              -1.4519713412194444,
+              -0.8915987120415402,
+              0.426702138469972,
+              0.6271185580038717,
+              -2.010494993888179,
+              1.0980715908204297
+            ]
+          },
+          "short": {
+            "mean": [
+              0.005517587218296983,
+              0.008349371746672885,
+              0.04516805393799092,
+              0.011323576215671316,
+              0.00993517733624592,
+              0.009905350907510671,
+              1.354776065479473,
+              1.3263711149469488,
+              0.0024775752314814816
+            ],
+            "scale": [
+              0.0034710037659487643,
+              0.004961484197483891,
+              0.031594619859897186,
+              0.010531066116666342,
+              0.011908663855168068,
+              0.012180285724060344,
+              0.806211180550816,
+              0.8256112965874904,
+              0.0013004496808699938
+            ],
+            "coefficients": [
+              -1.813789424509247,
+              -2.151395539669939,
+              2.7832813603070816,
+              -1.9228569925079404,
+              0.49006329499079015,
+              0.281445464559437,
+              0.1536951417386279,
+              -10.211453448086033,
+              10.96550894579671,
+              0.534430495194819
+            ]
+          }
+        }
+      }
+    },
+    "fold_03": {
+      "event_rates": {
+        "global": {
+          "long": 0.125,
+          "short": 0.3125
+        },
+        "product": {
+          "a": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "c": {
+            "long": 0.3333333333333333,
+            "short": 0.3333333333333333
+          },
+          "eg": {
+            "long": 0.2,
+            "short": 1.0
+          },
+          "hc": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "jm": {
+            "long": 0.14285714285714285,
+            "short": 0.5714285714285714
+          },
+          "m": {
+            "long": 0.0,
+            "short": 0.2857142857142857
+          },
+          "p": {
+            "long": 1.0,
+            "short": 0.0
+          },
+          "rb": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "ru": {
+            "long": 0.0,
+            "short": 0.0
+          },
+          "sp": {
+            "long": 0.2857142857142857,
+            "short": 0.14285714285714285
+          },
+          "v": {
+            "long": 0.0,
+            "short": 0.3333333333333333
+          }
+        }
+      },
+      "fit_product_event_rate": {
+        "fallback_to_global_products": [
+          "br"
+        ]
+      },
+      "ewma_volatility_rank": {
+        "feature": "ewma_volatility",
+        "quantiles": [
+          0.001036067369677855,
+          0.0018159952416578003,
+          0.00358658017517059,
+          0.0038944268417291233,
+          0.004263995147951943,
+          0.004873551297457092,
+          0.005448148734804219,
+          0.0064245383821893666,
+          0.007482069955299729,
+          0.011628935692200835,
+          0.014866249099549405
+        ],
+        "probabilities": {
+          "long": [
+            0.2,
+            0.2,
+            0.2,
+            0.25,
+            0.0,
+            0.0,
+            0.0,
+            0.2,
+            0.2,
+            0.0
+          ],
+          "short": [
+            0.2,
+            0.6,
+            0.2,
+            0.0,
+            0.0,
+            0.2,
+            0.5,
+            0.2,
+            0.8,
+            0.4
+          ]
+        }
+      },
+      "atr20_rank": {
+        "feature": "atr20_over_price",
+        "quantiles": [
+          0.0019298245614035089,
+          0.0028183337347946528,
+          0.005379913022652639,
+          0.0057948025529813395,
+          0.006205136090713195,
+          0.00698076107480029,
+          0.007489475030243614,
+          0.009327549476984552,
+          0.011610320170894254,
+          0.01517546937659497,
+          0.020726078466181432
+        ],
+        "probabilities": {
+          "long": [
+            0.2,
+            0.0,
+            0.4,
+            0.0,
+            0.4,
+            0.0,
+            0.0,
+            0.0,
+            0.2,
+            0.0
+          ],
+          "short": [
+            0.2,
+            0.6,
+            0.0,
+            0.25,
+            0.0,
+            0.2,
+            0.25,
+            0.4,
+            0.6,
+            0.6
+          ]
+        }
+      },
+      "fixed_context_logistic": {
+        "features": [
+          "ewma_volatility",
+          "atr20_over_price",
+          "range20_over_price",
+          "absolute_return_day_minus_3",
+          "absolute_return_day_minus_2",
+          "absolute_return_day_minus_1",
+          "volume_zscore",
+          "amount_zscore",
+          "context_clip_fraction"
+        ],
+        "by_side": {
+          "long": {
+            "mean": [
+              0.005627763008530961,
+              0.008233784835854609,
+              0.04275346523111217,
+              0.011238593092377493,
+              0.009421171466913056,
+              0.009043189164198337,
+              1.2689878149422011,
+              1.2644063639669352,
+              0.0024549696180555555
+            ],
+            "scale": [
+              0.0032161907470054196,
+              0.00456137223620194,
+              0.0301397090837131,
+              0.009818973699212972,
+              0.010798871960250872,
+              0.010923864973298367,
+              0.7940267252418172,
+              0.7923426478952191,
+              0.0012624137150433915
+            ],
+            "coefficients": [
+              -2.8435125932677408,
+              -2.4011248056346925,
+              1.0480782612268513,
+              1.4935849720304262,
+              -1.5805402462273201,
+              -0.5259405242043115,
+              0.6915244807854313,
+              -2.18611640805613,
+              1.0777507110480915,
+              0.8782277278685067
+            ]
+          },
+          "short": {
+            "mean": [
+              0.005627763008530961,
+              0.008233784835854609,
+              0.04275346523111217,
+              0.011238593092377493,
+              0.009421171466913056,
+              0.009043189164198337,
+              1.2689878149422011,
+              1.2644063639669352,
+              0.0024549696180555555
+            ],
+            "scale": [
+              0.0032161907470054196,
+              0.00456137223620194,
+              0.0301397090837131,
+              0.009818973699212972,
+              0.010798871960250872,
+              0.010923864973298367,
+              0.7940267252418172,
+              0.7923426478952191,
+              0.0012624137150433915
+            ],
+            "coefficients": [
+              -1.01889986142333,
+              -0.8740776593457288,
+              1.9002163787184072,
+              -2.1537612917744005,
+              0.835461108163349,
+              0.5108576364781251,
+              0.5352625263921179,
+              -1.6336418175206697,
+              1.8265455713513197,
+              0.4075610081848463
+            ]
+          }
+        }
+      }
+    },
+    "fold_04": {}
+  }
+}

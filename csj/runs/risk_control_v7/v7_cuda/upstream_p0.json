@@ -1,0 +1,18 @@
+{
+  "canonical_only": true,
+  "run_id": "v7_p0_20260813_verified",
+  "snapshot_id": "20260813T105916+0800",
+  "data_fingerprint": "2387ff95a1f7bedc7a96377d3af0a45a4bf02f707c2edab1d3f47731d6e0ea1c",
+  "p0_gate": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_p0_20260813_verified/p0_gate.json",
+    "sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf"
+  },
+  "p0_audit": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_p0_20260813_verified/data_audit.json",
+    "sha256": "45bc5866e9dadbf897c07fc688809e0906a763076c1002b111c3709f6fabd32b"
+  },
+  "fold_label_records": {
+    "path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_p0_20260813_verified/p0/fold_label_records.json",
+    "sha256": "17b78903b5eaf018682900048e53ed25c5fb3ec1b228d49d5d3e853e9bdad24c"
+  }
+}

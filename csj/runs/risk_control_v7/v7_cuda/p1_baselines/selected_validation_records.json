@@ -1,0 +1,39 @@
+{
+  "strategy_version": 7,
+  "phase": "p1_baselines",
+  "run_id": "v7_cuda",
+  "result_scope": "retrospective_observed_diversified_contracts",
+  "production_eligible": false,
+  "git_commit": "d95128813619f866a854ea74b17b04ad8a13f116",
+  "resolved_config_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_cuda/resolved_config.json",
+  "resolved_config_sha256": "9ad8ffb7bd725d9a59dac28d35a4a08cde67ce03db2386647c0ca43facf9727e",
+  "data_fingerprint": "2387ff95a1f7bedc7a96377d3af0a45a4bf02f707c2edab1d3f47731d6e0ea1c",
+  "tokenizer_id": "NeoQuasar/Kronos-Tokenizer-base",
+  "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
+  "predictor_id": "NeoQuasar/Kronos-small",
+  "predictor_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
+  "risk_label_version": "adverse-excursion-vol-scaled-v1",
+  "smoke": false,
+  "runtime": {
+    "device_requested": "cuda",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "model_download_allowed": false,
+    "canonical_p0_run_id": "v7_p0_20260813_verified",
+    "canonical_p0_gate_sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf",
+    "canonical_unique_case_count": 5154,
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+    "device": "cuda",
+    "cuda_available": true,
+    "mps_available": false,
+    "cuda_device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_device_count": 4,
+    "cuda_capability": [
+      8,
+      9
+    ]
+  },
+  "upstream_gate_path": "/mnt/data/RohonDev1/csj/Kronos/csj/runs/risk_control_v7/v7_p0_20260813_verified/p0_gate.json",
+  "upstream_gate_sha256": "7e606cc45acbf2cfaa99e92bba8373e8e26e2b19fc6df2fc80e8859a950887bf",
+  "records": []
+}
