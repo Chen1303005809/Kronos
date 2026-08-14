@@ -923,15 +923,6 @@ def plot_three_day_forecast(result: ThreeDayForecastResult, output_path: str | P
     axis.plot(forecast_x, actual_y, color="black", linewidth=2.1, label="actual close")
     axis.fill_between(forecast_x, q10_y, q90_y, color="#2563eb", alpha=0.18, label="Kronos 10–90%")
     axis.plot(forecast_x, q50_y, color="#2563eb", linewidth=2.0, linestyle="-", label="Kronos median")
-    styles = {
-        "persistence": ("#dc2626", "persistence"),
-        "momentum": ("#eab308", "momentum"),
-        "majority": ("#7c3aed", "majority"),
-    }
-    for name, (color, label) in styles.items():
-        baseline = _record_dict(result.baseline_records[name])
-        values = np.concatenate(([0.0], _relative_close(_feature_array(baseline, "predicted_path")[:, 3], origin_close)))
-        axis.plot(forecast_x, values, color=color, linewidth=1.4, linestyle="--", label=label)
     for day_end in prepared.target_case.day_end_indices[:-1]:
         axis.axvline(pd.Timestamp(target["timestamps"].iloc[day_end]), color="#9ca3af", linewidth=0.9, linestyle=":")
     target_days = [day.strftime("%Y-%m-%d") for day in prepared.target_case.target_days]
@@ -1007,4 +998,3 @@ def write_forecast_artifacts(result: ThreeDayForecastResult, output_dir: str | P
     _write_json(paths["metrics_json"], result.metrics)
     plot_three_day_forecast(result, paths["plot"])
     return paths
-
