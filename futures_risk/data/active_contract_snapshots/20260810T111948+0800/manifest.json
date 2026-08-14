@@ -1,0 +1,1466 @@
+{
+  "active_contract_list_source": "user_supplied_active_contract_list",
+  "completed_at": "2026-08-10T11:20:42+08:00",
+  "contracts": [
+    {
+      "bars": "",
+      "contract_id": "rb2608",
+      "delivery_year_month": "2026-08",
+      "error": "rb2608: provider returned no K-line bars",
+      "error_type": "ActiveContractDataError",
+      "first_available_bar": "",
+      "last_available_bar": "",
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2608.json",
+      "raw_payload_sha256": "8aa2bd7713a28a007581d95628ce4f146532247d870c10567302daee86aa1d50",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "failed"
+    },
+    {
+      "bars": 1498,
+      "contract_id": "rb2609",
+      "delivery_year_month": "2026-09",
+      "first_available_bar": "2025-09-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2609.json",
+      "raw_payload_sha256": "f8202acc20cb90e0c47862718f2c630410a372c6338220a164e6a83f3e1fc728",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 7,
+        "7": 209
+      },
+      "trading_days": 216
+    },
+    {
+      "bars": 1388,
+      "contract_id": "rb2610",
+      "delivery_year_month": "2026-10",
+      "first_available_bar": "2025-10-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2610.json",
+      "raw_payload_sha256": "7fa54d1cdc65108467bd8e8a9e43fde636cd88c7e431855bfa0de319e97d19b0",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "7": 194
+      },
+      "trading_days": 200
+    },
+    {
+      "bars": 1218,
+      "contract_id": "rb2611",
+      "delivery_year_month": "2026-11",
+      "first_available_bar": "2025-11-17T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 1,
+          "trading_day": "2025-11-19"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-11-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-11-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-12-09"
+        }
+      ],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2611.json",
+      "raw_payload_sha256": "6189995d4ce6a8831646a6c620ee47633cb8e84de8890f6e39ab05107e72e57a",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "1": 1,
+        "5": 6,
+        "6": 3,
+        "7": 167
+      },
+      "trading_days": 177
+    },
+    {
+      "bars": 1074,
+      "contract_id": "rb2612",
+      "delivery_year_month": "2026-12",
+      "first_available_bar": "2025-12-16T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-01-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-15"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-12"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-23"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-10"
+        }
+      ],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2612.json",
+      "raw_payload_sha256": "4b57bca0465ecfe3da739c36b8438a457f47e4bba70994b7e472b766b71feb3d",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 10,
+        "6": 5,
+        "7": 142
+      },
+      "trading_days": 157
+    },
+    {
+      "bars": 942,
+      "contract_id": "rb2701",
+      "delivery_year_month": "2027-01",
+      "first_available_bar": "2026-01-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2701.json",
+      "raw_payload_sha256": "d3123795622ab23daca91fa050e85594139dd9b3f4d4b0251c664aa8b148c333",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 5,
+        "7": 131
+      },
+      "trading_days": 136
+    },
+    {
+      "bars": 769,
+      "contract_id": "rb2702",
+      "delivery_year_month": "2027-02",
+      "first_available_bar": "2026-02-24T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-02-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-31"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-28"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-08"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-29"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-15"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-16"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-29"
+        }
+      ],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2702.json",
+      "raw_payload_sha256": "d46df3167ae6f16ab8cd4ed82daa1f0201aecede39e8b9cb9a57d3bd2d686e60",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 9,
+        "6": 11,
+        "7": 94
+      },
+      "trading_days": 114
+    },
+    {
+      "bars": 683,
+      "contract_id": "rb2703",
+      "delivery_year_month": "2027-03",
+      "first_available_bar": "2026-03-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-03-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-01"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-27"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-11"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-15"
+        }
+      ],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2703.json",
+      "raw_payload_sha256": "35f1b40d91fc9a55d4ec3fd6ebdf43b8e2d9326188c729a06a4e3534ac99c8ac",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "6": 5,
+        "7": 89
+      },
+      "trading_days": 100
+    },
+    {
+      "bars": 540,
+      "contract_id": "rb2704",
+      "delivery_year_month": "2027-04",
+      "first_available_bar": "2026-04-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-04-20"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-15"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-16"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-17"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-06"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-13"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-27"
+        }
+      ],
+      "product": "rb",
+      "raw_payload_path": "raw/kline_rb2704.json",
+      "raw_payload_sha256": "324d05c17cfa915c43a19aa166683fcb7047fa720a65a5bf328ebaccd1e5286c",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 3,
+        "6": 7,
+        "7": 69
+      },
+      "trading_days": 79
+    },
+    {
+      "bars": "",
+      "contract_id": "i2608",
+      "delivery_year_month": "2026-08",
+      "error": "i2608: provider returned no K-line bars",
+      "error_type": "ActiveContractDataError",
+      "first_available_bar": "",
+      "last_available_bar": "",
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2608.json",
+      "raw_payload_sha256": "c2af1e3c9ac0b0c4bdfa6e880367bccb004bec1f5a9a36a0a963161b81165ccd",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "failed"
+    },
+    {
+      "bars": 1505,
+      "contract_id": "i2609",
+      "delivery_year_month": "2026-09",
+      "first_available_bar": "2025-09-12T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2609.json",
+      "raw_payload_sha256": "a33ffb8ac9b645b81226f96b880546572fa3348414dd8815760e47c3a13f5c10",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 7,
+        "7": 210
+      },
+      "trading_days": 217
+    },
+    {
+      "bars": 1353,
+      "contract_id": "i2610",
+      "delivery_year_month": "2026-10",
+      "first_available_bar": "2025-10-22T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2610.json",
+      "raw_payload_sha256": "bebfae8ea3c6314348a4ce0246a1572eb54178a94c1169dd20c2157a6366ebba",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "7": 189
+      },
+      "trading_days": 195
+    },
+    {
+      "bars": 1234,
+      "contract_id": "i2611",
+      "delivery_year_month": "2026-11",
+      "first_available_bar": "2025-11-14T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2611.json",
+      "raw_payload_sha256": "f706093cece69938cf7f40040036b5474bd4c07e624aa7d959c0ca3f4475c36e",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "7": 172
+      },
+      "trading_days": 178
+    },
+    {
+      "bars": 1094,
+      "contract_id": "i2612",
+      "delivery_year_month": "2026-12",
+      "first_available_bar": "2025-12-12T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2612.json",
+      "raw_payload_sha256": "2276be6e7b74f7dfcf027c558ea9a3d893b2288e45ccd2d273428cd37505e6ef",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "7": 152
+      },
+      "trading_days": 158
+    },
+    {
+      "bars": 935,
+      "contract_id": "i2701",
+      "delivery_year_month": "2027-01",
+      "first_available_bar": "2026-01-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2701.json",
+      "raw_payload_sha256": "60d3d309716d47881d5b201b4e3b96b4548bb90b4b3ac94b3ed944abb4b00062",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 5,
+        "7": 130
+      },
+      "trading_days": 135
+    },
+    {
+      "bars": 795,
+      "contract_id": "i2702",
+      "delivery_year_month": "2027-02",
+      "first_available_bar": "2026-02-24T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2702.json",
+      "raw_payload_sha256": "5ce16dc62e6a0e6d8bd295a98506526144783af4a156e9cf6c546ce7ac44acae",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 5,
+        "7": 110
+      },
+      "trading_days": 115
+    },
+    {
+      "bars": 699,
+      "contract_id": "i2703",
+      "delivery_year_month": "2027-03",
+      "first_available_bar": "2026-03-13T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2703.json",
+      "raw_payload_sha256": "ca28b002484c029b6fca4b31cb0b9720179e42570e34d0e760d9465f27cbd743",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 4,
+        "7": 97
+      },
+      "trading_days": 101
+    },
+    {
+      "bars": 547,
+      "contract_id": "i2704",
+      "delivery_year_month": "2027-04",
+      "first_available_bar": "2026-04-15T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "i",
+      "raw_payload_path": "raw/kline_i2704.json",
+      "raw_payload_sha256": "ca472a29ce0dba2fc4b7cd96005e644a04dbdd688ba38e079e628c03be8b68b6",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 3,
+        "7": 76
+      },
+      "trading_days": 79
+    },
+    {
+      "bars": 1648,
+      "contract_id": "jm2608",
+      "delivery_year_month": "2026-08",
+      "first_available_bar": "2025-08-14T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2025-08-15"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-08-07"
+        }
+      ],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2608.json",
+      "raw_payload_sha256": "b81a470df0c9c0e2393575e31c73eb55702f67d6f4c19abcfd84d0eceebf6ad9",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 8,
+        "6": 2,
+        "7": 228
+      },
+      "trading_days": 238
+    },
+    {
+      "bars": 1505,
+      "contract_id": "jm2609",
+      "delivery_year_month": "2026-09",
+      "first_available_bar": "2025-09-12T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2609.json",
+      "raw_payload_sha256": "e4179134d6a50f0e4c64477e5ad8cbd641c3a311ba53f9c5577c27392bcec724",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 7,
+        "7": 210
+      },
+      "trading_days": 217
+    },
+    {
+      "bars": 1349,
+      "contract_id": "jm2610",
+      "delivery_year_month": "2026-10",
+      "first_available_bar": "2025-10-23T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2610.json",
+      "raw_payload_sha256": "712b2f14565f7d2777d20c42268ce704831a382c4b1fa7c70c4216352fad8239",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 8,
+        "7": 187
+      },
+      "trading_days": 195
+    },
+    {
+      "bars": 1233,
+      "contract_id": "jm2611",
+      "delivery_year_month": "2026-11",
+      "first_available_bar": "2025-11-14T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-02-12"
+        }
+      ],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2611.json",
+      "raw_payload_sha256": "13875161d37efa5534ebb9955909a16f804cef7016339c1dd77afa9338b62f70",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "6": 1,
+        "7": 171
+      },
+      "trading_days": 178
+    },
+    {
+      "bars": 1088,
+      "contract_id": "jm2612",
+      "delivery_year_month": "2026-12",
+      "first_available_bar": "2025-12-12T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2025-12-15"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-12"
+        }
+      ],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2612.json",
+      "raw_payload_sha256": "b14878dd918b85b2f20bd5feaa605069a6577cc98420f306c8d4e6f832f852b6",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 8,
+        "6": 2,
+        "7": 148
+      },
+      "trading_days": 158
+    },
+    {
+      "bars": 935,
+      "contract_id": "jm2701",
+      "delivery_year_month": "2027-01",
+      "first_available_bar": "2026-01-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2701.json",
+      "raw_payload_sha256": "c66656fc5e0fa8990c891deb06471787e75a152424cb6d2cfcf89edec9ba3a12",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 5,
+        "7": 130
+      },
+      "trading_days": 135
+    },
+    {
+      "bars": 787,
+      "contract_id": "jm2702",
+      "delivery_year_month": "2027-02",
+      "first_available_bar": "2026-02-24T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-03-13"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-09"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-15"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-18"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-21"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-15"
+        }
+      ],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2702.json",
+      "raw_payload_sha256": "bfbfbcc96fe8964b6a1ba0bab935868342066445c25b560d3659658adf45b437",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 6,
+        "6": 6,
+        "7": 103
+      },
+      "trading_days": 115
+    },
+    {
+      "bars": 687,
+      "contract_id": "jm2703",
+      "delivery_year_month": "2027-03",
+      "first_available_bar": "2026-03-16T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 4,
+          "trading_day": "2026-03-18"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-20"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-02"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-07"
+        }
+      ],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2703.json",
+      "raw_payload_sha256": "f495944f623a6292b6d9105e6769b07df66beb12a1666d5df759504fd8a41fc0",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "4": 1,
+        "5": 7,
+        "6": 3,
+        "7": 90
+      },
+      "trading_days": 101
+    },
+    {
+      "bars": 533,
+      "contract_id": "jm2704",
+      "delivery_year_month": "2027-04",
+      "first_available_bar": "2026-04-16T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-06-12"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-17"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-26"
+        }
+      ],
+      "product": "jm",
+      "raw_payload_path": "raw/kline_jm2704.json",
+      "raw_payload_sha256": "44f53f0873c5b192de7f00a984db43d657638c5dcd42f71f2c34247f92c20ac5",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 5,
+        "6": 3,
+        "7": 70
+      },
+      "trading_days": 78
+    },
+    {
+      "bars": "",
+      "contract_id": "j2608",
+      "delivery_year_month": "2026-08",
+      "error": "j2608: provider returned no K-line bars",
+      "error_type": "ActiveContractDataError",
+      "first_available_bar": "",
+      "last_available_bar": "",
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2608.json",
+      "raw_payload_sha256": "bd292d58830b7ad7d08969cdee30330e074a6abba7b07c1407d8abc993470a3a",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "failed"
+    },
+    {
+      "bars": 1492,
+      "contract_id": "j2609",
+      "delivery_year_month": "2026-09",
+      "first_available_bar": "2025-09-12T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2025-09-15"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2025-09-25"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2025-09-30"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2609.json",
+      "raw_payload_sha256": "84e0c1bb5da6984e5afc563d1da90e29baf0f4a46d1361f47bb4c55a65dff033",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "2": 1,
+        "4": 1,
+        "5": 9,
+        "6": 1,
+        "7": 205
+      },
+      "trading_days": 217
+    },
+    {
+      "bars": 737,
+      "contract_id": "j2610",
+      "delivery_year_month": "2026-10",
+      "first_available_bar": "2025-10-24T13:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 2,
+          "trading_day": "2025-10-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-11-03"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2025-11-04"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2025-11-07"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2025-11-10"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2025-11-17"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-11-21"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2025-11-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-11-26"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-12-03"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2025-12-11"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-12-16"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2025-12-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-12-23"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2025-12-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-07"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-08"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-09"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-01-16"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-20"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-01-21"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-02-02"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-02-04"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-10"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-02-27"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-03-10"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-11"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-03-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-25"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-04-01"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-04-21"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-27"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-28"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-08"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-11"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-05-13"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-27"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-29"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-06-04"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-08"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-23"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-06-30"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-14"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-16"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2610.json",
+      "raw_payload_sha256": "08deb99d002f0c23c91d31ac47667eb56315d6037148bd944a34884e8971d752",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "1": 8,
+        "2": 6,
+        "3": 4,
+        "4": 6,
+        "5": 17,
+        "6": 20,
+        "7": 68
+      },
+      "trading_days": 129
+    },
+    {
+      "bars": 507,
+      "contract_id": "j2611",
+      "delivery_year_month": "2026-11",
+      "first_available_bar": "2025-11-27T21:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 1,
+          "trading_day": "2025-12-09"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2025-12-11"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2025-12-18"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2025-12-24"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2025-12-26"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2025-12-30"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-01-14"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-01-19"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-21"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-01-23"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-10"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-26"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-04-01"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-04-24"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-04-27"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-25"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-27"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-01"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-06-02"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-09"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-06-10"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-06-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-23"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2611.json",
+      "raw_payload_sha256": "e817560c4ac0e423f4b1dfac6f0d10b363ef6fe682ff47fddba1082894c1f55b",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "1": 6,
+        "2": 1,
+        "3": 1,
+        "4": 7,
+        "5": 6,
+        "6": 10,
+        "7": 54
+      },
+      "trading_days": 85
+    },
+    {
+      "bars": 542,
+      "contract_id": "j2612",
+      "delivery_year_month": "2026-12",
+      "first_available_bar": "2025-12-29T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2025-12-30"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-01-06"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-12"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-14"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-19"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-21"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-01-27"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-02-04"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-10"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-02-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-27"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-03-05"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-23"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-27"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-04-01"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-03"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-04-27"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-30"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-05-18"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-05-28"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-06-23"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-24"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-13"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-08-06"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2612.json",
+      "raw_payload_sha256": "30a910bae57a393025e951971d4754d92f6f9295619e6f05c08c350165df9f7f",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "1": 2,
+        "2": 1,
+        "3": 2,
+        "4": 5,
+        "5": 13,
+        "6": 15,
+        "7": 51
+      },
+      "trading_days": 89
+    },
+    {
+      "bars": 930,
+      "contract_id": "j2701",
+      "delivery_year_month": "2027-01",
+      "first_available_bar": "2026-01-16T22:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 6,
+          "trading_day": "2026-01-19"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-01-21"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-10"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-02-11"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-26"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2701.json",
+      "raw_payload_sha256": "fa8c210c31c1f2594b544ff135450b6ba650770370645ee6985c4cacd152d0f7",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "5": 5,
+        "6": 5,
+        "7": 125
+      },
+      "trading_days": 135
+    },
+    {
+      "bars": 329,
+      "contract_id": "j2702",
+      "delivery_year_month": "2027-02",
+      "first_available_bar": "2026-02-24T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 1,
+          "trading_day": "2026-03-03"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-03-06"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-03-16"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-03-19"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-03-31"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-08"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-04-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-27"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-06"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-07"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-05-18"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-27"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-06-01"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-06-05"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-06-08"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-06-09"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-06-12"
+        },
+        {
+          "bars": 2,
+          "trading_day": "2026-07-02"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-07-08"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-07-28"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2702.json",
+      "raw_payload_sha256": "98b8b3def4608af788e5ca8cd2eae5a668354b11c83ac95b7973ab9474c0796a",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "1": 4,
+        "2": 3,
+        "3": 1,
+        "4": 7,
+        "5": 11,
+        "6": 5,
+        "7": 29
+      },
+      "trading_days": 60
+    },
+    {
+      "bars": 213,
+      "contract_id": "j2703",
+      "delivery_year_month": "2027-03",
+      "first_available_bar": "2026-03-18T09:00:00",
+      "last_available_bar": "2026-08-10T11:00:00",
+      "non_standard_trading_days": [
+        {
+          "bars": 2,
+          "trading_day": "2026-04-22"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-04-24"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-05-11"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-05-12"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-05-25"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-04"
+        },
+        {
+          "bars": 6,
+          "trading_day": "2026-06-16"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-06-22"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-06-23"
+        },
+        {
+          "bars": 4,
+          "trading_day": "2026-07-01"
+        },
+        {
+          "bars": 1,
+          "trading_day": "2026-07-09"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-07-13"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-08-06"
+        },
+        {
+          "bars": 3,
+          "trading_day": "2026-08-10"
+        }
+      ],
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2703.json",
+      "raw_payload_sha256": "4f5d539c8e86d0fa926edd8b4b2b98397ffcc380b8d0c8be3aafb4980acae0a2",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "ok",
+      "trading_day_bar_count_distribution": {
+        "1": 2,
+        "2": 1,
+        "3": 5,
+        "4": 2,
+        "5": 10,
+        "6": 4,
+        "7": 16
+      },
+      "trading_days": 40
+    },
+    {
+      "bars": "",
+      "contract_id": "j2704",
+      "delivery_year_month": "2027-04",
+      "error": "j2704: provider returned no K-line bars",
+      "error_type": "ActiveContractDataError",
+      "first_available_bar": "",
+      "last_available_bar": "",
+      "product": "j",
+      "raw_payload_path": "raw/kline_j2704.json",
+      "raw_payload_sha256": "29e2601c279b9698ceb96dcc26acd496843e873b1d573e26ec94ea5358f3f2ef",
+      "snapshot_at": "2026-08-10T11:19:48+08:00",
+      "status": "failed"
+    }
+  ],
+  "panel_completeness": "partial_panel",
+  "query": {
+    "cutoff": {
+      "effective_at": "2026-08-10T11:19:48+08:00",
+      "provider_end_date": 20260810,
+      "provider_end_time": 111948,
+      "requested_at": "2026-08-10T11:19:48+08:00",
+      "was_clamped": false
+    },
+    "cycle_type": 2,
+    "process_timeout_seconds": 30.0,
+    "provider": {
+      "host": "192.168.1.40",
+      "port": 8891
+    },
+    "query_bars": 5000,
+    "request_isolation": "one fresh process and TCP connection per contract",
+    "retry_policy": "no automatic retry",
+    "socket_timeout_seconds": 15.0
+  },
+  "schema_version": 1,
+  "snapshot_at": "2026-08-10T11:19:48+08:00",
+  "status": "partial",
+  "timezone": "Asia/Shanghai"
+}
